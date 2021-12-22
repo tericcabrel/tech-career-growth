@@ -1,8 +1,8 @@
 {
   "name": "webapp",
-  "description": "A web application that allows developers to find useful resources for their growth in tech",
+  "description": "Core web application",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "author": "Eric Cabrel TIOGO <tericcabrel@yahoo.com> (@tericcabrel)",
   "license": "MIT",
   "keywords": [

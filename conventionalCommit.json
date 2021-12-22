@@ -1,72 +1,41 @@
 {
   "types": {
     "ci": {
-      "description": "Changes which affect CI configuration files and scripts",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which affect CI configuration files and scripts"
     },
     "chore": {
-      "description": "Changes which aren't user-facing",
-      "scopes": {
-        "app": {},
-        "db": {},
-        "logs": {},
-        "stats": {}
-      }
+      "description": "Changes which aren't user-facing"
     },
     "enh": {
-      "description": "Changes which improve a feature",
-      "scopes": {
-        "app": {},
-        "db": {}
-      }
+      "description": "Changes which improve a feature"
     },
     "docs": {
-      "description": "Changes which affect documentation",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which affect documentation"
     },
     "feat": {
-      "description": "Changes which introduce a new feature",
-      "scopes": {
-        "app": {},
-        "auth": {},
-        "logs": {}
-      }
+      "description": "Changes which introduce a new feature"
     },
     "fix": {
-      "description": "Changes which patch a bug",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which patch a bug"
     },
     "refactor": {
-      "description": "Changes which neither fix a bug nor add a feature",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which neither fix a bug nor add a feature"
     },
     "revert": {
-      "description": "Changes which revert a previous commit",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which revert a previous commit"
     },
     "style": {
-      "description": "Changes which don't affect code logic, such as white-spaces, formatting, missing semi-colons",
-      "scopes": {
-        "app": {}
-      }
+      "description": "Changes which don't affect code logic, such as white-spaces, formatting, missing semi-colons"
     },
     "test": {
-      "description": "Changes which add missing tests or correct existing tests",
-      "scopes": {
-        "app": {},
-        "db": {}
-      }
+      "description": "Changes which add missing tests or correct existing tests"
     }
   },
-  "scopes": {}
+  "scopes": {
+    "app": {},
+    "auth": {},
+    "db": {},
+    "logs": {},
+    "stats": {}
+  }
 }

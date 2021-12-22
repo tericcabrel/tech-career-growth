@@ -2,7 +2,7 @@
   "name": "tech-career-growth-navigator",
   "description": "A web application that allows developers to find useful resources for their growth in tech",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "author": "Eric Cabrel TIOGO <tericcabrel@yahoo.com> (@tericcabrel)",
   "license": "MIT",
   "keywords": [
