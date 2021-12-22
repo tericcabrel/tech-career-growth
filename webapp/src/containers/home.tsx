@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { withPublicLayout } from '@/components/hof/with-public-layout';
 
 const Home = () => {
   return (
@@ -22,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withPublicLayout(Home, { title: 'Home' });
