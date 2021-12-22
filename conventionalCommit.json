@@ -1,0 +1,72 @@
+{
+  "types": {
+    "ci": {
+      "description": "Changes which affect CI configuration files and scripts",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "chore": {
+      "description": "Changes which aren't user-facing",
+      "scopes": {
+        "app": {},
+        "db": {},
+        "logs": {},
+        "stats": {}
+      }
+    },
+    "enh": {
+      "description": "Changes which improve a feature",
+      "scopes": {
+        "app": {},
+        "db": {}
+      }
+    },
+    "docs": {
+      "description": "Changes which affect documentation",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "feat": {
+      "description": "Changes which introduce a new feature",
+      "scopes": {
+        "app": {},
+        "auth": {},
+        "logs": {}
+      }
+    },
+    "fix": {
+      "description": "Changes which patch a bug",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "refactor": {
+      "description": "Changes which neither fix a bug nor add a feature",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "revert": {
+      "description": "Changes which revert a previous commit",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "style": {
+      "description": "Changes which don't affect code logic, such as white-spaces, formatting, missing semi-colons",
+      "scopes": {
+        "app": {}
+      }
+    },
+    "test": {
+      "description": "Changes which add missing tests or correct existing tests",
+      "scopes": {
+        "app": {},
+        "db": {}
+      }
+    }
+  },
+  "scopes": {}
+}

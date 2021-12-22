@@ -19,7 +19,7 @@
     "type:check": "tsc --project webapp/tsconfig.json"
   },
   "lint-staged": {
-    "./src/**/*.{ts,js,jsx,tsx}": [
+    "./webapp/src/**/*.{ts,js,jsx,tsx}": [
       "yarn lint --fix",
       "yarn format"
     ]
