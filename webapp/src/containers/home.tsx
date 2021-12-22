@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Home = () => {
   return (
-    <div>
+    <div className="container p-8">
       <Head>
         <title>TypeScript starter for Next.js</title>
         <link rel="icon" href="/favicon.ico" />
