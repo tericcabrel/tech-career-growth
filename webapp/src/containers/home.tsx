@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="container p-8">
       <Head>
-        <title>TypeScript starter for Next.js</title>
+        <title>Tech Career Growth Navigator</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
