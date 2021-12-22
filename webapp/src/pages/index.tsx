@@ -53,7 +53,7 @@ export default function Home() {
         <a href="https://vercel.com?utm_source=typescript-nextjs-starter" target="_blank" rel="noopener noreferrer">
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image src="/assets/logo.jpg" alt="Vercel Logo" width={72} height={72} />
           </span>
         </a>
       </footer>
