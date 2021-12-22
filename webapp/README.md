@@ -16,7 +16,11 @@ yarn dev
 ```
 Open `http://localhost:5800` with your browser to see the result.
 
+### Run unit tests
+```shell
+yarn test
+```
+
 ### Scripts
-- `yarn dev` — Starts the application in development mode at `http://localhost:5800`.
 - `yarn build` — Creates an optimized production build of your application.
 - `yarn start` — Starts the application in production mode.
