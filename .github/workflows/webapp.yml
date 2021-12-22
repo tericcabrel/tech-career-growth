@@ -12,9 +12,6 @@ on:
 
 jobs:
   build:
-    defaults:
-      run:
-        working-directory: ./webapp
     name: build
     runs-on: ubuntu-latest
 
@@ -39,6 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
+
+      - name: Check types
+        run: yarn type:check
 
       - name: Lint project
         run: yarn lint
