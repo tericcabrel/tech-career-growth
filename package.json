@@ -1,0 +1,52 @@
+{
+  "name": "tech-career-growth-navigator",
+  "description": "A web application that allows developers to find useful resources for their growth in tech",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Eric Cabrel TIOGO <tericcabrel@yahoo.com> (@tericcabrel)",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "prisma",
+    "typescript",
+    "mysql"
+  ],
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore \"webapp/src/**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .gitignore \"webapp/src/**/*.+(ts|js|tsx)\" --write",
+    "postinstall": "husky install",
+    "commit": "cz",
+    "type:check": "tsc --project webapp/tsconfig.json"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,js,jsx,tsx}": [
+      "yarn lint --fix",
+      "yarn format"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "15.0.0",
+    "@commitlint/config-conventional": "15.0.0",
+    "@typescript-eslint/eslint-plugin": "5.7.0",
+    "@typescript-eslint/parser": "5.7.0",
+    "commitizen": "4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.5.0",
+    "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-import-resolver-typescript": "2.5.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "husky": "7.0.4",
+    "lint-staged": "12.1.3",
+    "prettier": "2.5.1",
+    "typescript": "4.5.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "next": "12.0.7"
+  }
+}

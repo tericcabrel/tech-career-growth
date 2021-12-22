@@ -1,0 +1,29 @@
+{
+  "name": "webapp",
+  "description": "A web application that allows developers to find useful resources for their growth in tech",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Eric Cabrel TIOGO <tericcabrel@yahoo.com> (@tericcabrel)",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "prisma",
+    "typescript",
+    "mysql"
+  ],
+  "scripts": {
+    "dev": "next -p 5800",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.14",
+    "@types/react": "17.0.37",
+    "@types/react-dom": "17.0.11"
+  }
+}
