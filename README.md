@@ -1,8 +1,10 @@
 # Tech Career Growth Navigator
 A web application that allows developers to find useful resources for their growth in tech.
 
-<img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=1d4ed8&labelColor=fff" alt="PRs welcome!" />
-<img src="https://img.shields.io/github/license/tericcabrel/tech-career-growth-navigator?label=License&message=License&color=1d4ed8&labelColor=fff" alt="License" />
+<div>
+  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=1d4ed8&labelColor=fff" alt="PRs welcome!" />
+  <img src="https://img.shields.io/github/license/tericcabrel/tech-career-growth-navigator?label=License&message=License&color=1d4ed8&labelColor=fff" alt="License" />
+</div>
 
 ## Features
 - **Find a tech resource - You can request resources to:**
@@ -27,3 +29,15 @@ yarn install
 - `yarn lint` — Runs ESLint for all files in the `src` directory.
 - `yarn format` — Runs Prettier for all files in the `src` directory.
 - `yarn commit` — Run commitizen. Alternative to `git commit`.
+
+## How to contribute
+
+- Create an issue where you explain clearly the problem you want to solve
+- Make a Pull Request
+- If it's relevant, we're going to merge it.
+  Yeah, it's simple as this!
+
+
+## License
+
+- [LICENSE: MIT](/LICENSE)
