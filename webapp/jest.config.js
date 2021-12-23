@@ -6,7 +6,7 @@ module.exports = {
     '^@/containers/(.*)$': '<rootDir>/src/containers/$1',
     '^@/hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^@/typings/(.*)$': '<rootDir>/src/typings/$1',
+    '^@/types/(.*)$': '<rootDir>/src/types/$1',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
