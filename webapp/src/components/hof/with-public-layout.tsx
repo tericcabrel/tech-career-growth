@@ -18,7 +18,9 @@ function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
         <Head>
           <title>{title} | Tech Career Growth</title>
         </Head>
-        <WrappedComponent {...wrappedComponentProps} />
+        <div className="min-h-[calc(100vh-144px)]">
+          <WrappedComponent {...wrappedComponentProps} />
+        </div>
       </PublicLayout>
     );
   };

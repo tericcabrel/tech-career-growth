@@ -3,12 +3,12 @@ const CallToAction = () => {
     <div className="bg-white dark:bg-gray-800 overflow-hidden relative mb-20">
       <div className="text-start w-1/2 py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
         <h2 className="font-extrabold text-black dark:text-white sm:text-4xl">
-          <span className="block text-3xl ">Want to grow in tech?</span>
-          <span className="block text-2xl text-green-500">It&#x27;s the perfect time.</span>
+          <span className="block text-3xl ">Want to be a better developer?</span>
+          <span className="block text-2xl text-green-500">It&#x27;s never too late.</span>
         </h2>
         <p className="text-xl mt-4 text-gray-400">
-          I had noticed that both in the very poor and very rich extremes of society the mad were often allowed to
-          mingle freely
+          We are a community of more than 10000 developers who the learn, share, and improve their skills to have more
+          impact in the tech industry.
         </p>
         <div className="lg:mt-0 lg:flex-shrink-0">
           <div className="mt-12 inline-flex rounded-md shadow">
