@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const PublicFooter = () => {
+const Footer = () => {
   return (
     <footer className="bg-white">
       <div className="mx-auto flex flex-wrap justify-between p-5 flex-col md:flex-row text-gray-800 text-sm h-16">
@@ -40,4 +40,4 @@ const PublicFooter = () => {
   );
 };
 
-export default PublicFooter;
+export default Footer;

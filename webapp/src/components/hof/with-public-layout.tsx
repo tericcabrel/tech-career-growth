@@ -1,14 +1,13 @@
 import { ComponentType } from 'react';
 import Head from 'next/head';
+import PublicLayout from '@/components/layout/public/layout';
 
-import PublicLayout from '../layout/public/layout';
-
-type WithPublicLayoutProps = {
+type Props = {
   title: string;
   path?: string;
 };
 
-function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: WithPublicLayoutProps) {
+function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
   // eslint-disable-next-line react/display-name
   return (wrappedComponentProps: T) => {
     // eslint-disable-next-line react/prop-types
@@ -25,4 +24,4 @@ function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: WithPubl
   };
 }
 
-export { withPublicLayout };
+export default withPublicLayout;
