@@ -1,10 +1,13 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 const PageNotFound = () => {
   return (
     <div className="bg-white py-6 sm:py-8 lg:py-12 h-screen flex items-center">
       <div className="max-w-screen-lg px-4 md:px-8 mx-auto">
         <div className="grid sm:grid-cols-2 gap-8">
           <div className="h-80 md:h-auto bg-gray-100 overflow-hidden shadow-lg rounded-lg">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1626790680787-de5e9a07bcf2?auto=format&q=75&fit=crop&w=600"
               loading="lazy"
               alt="Photo by Theo Crazzolara"
@@ -24,30 +27,27 @@ const PageNotFound = () => {
 
             <nav className="flex sm:block gap-4 sm:space-y-1 md:space-y-2">
               <div>
-                <a
-                  href="/"
-                  className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100"
-                >
-                  Home
-                </a>
+                <Link href="/">
+                  <a className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100">
+                    Home
+                  </a>
+                </Link>
               </div>
 
               <div>
-                <a
-                  href="/"
-                  className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100"
-                >
-                  Search
-                </a>
+                <Link href="/resources">
+                  <a className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100">
+                    Browse resources
+                  </a>
+                </Link>
               </div>
 
               <div>
-                <a
-                  href="/"
-                  className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100"
-                >
-                  Help
-                </a>
+                <Link href="/resources/request">
+                  <a className="inline-block text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm md:text-base transition duration-100">
+                    Request resource
+                  </a>
+                </Link>
               </div>
             </nav>
           </div>
