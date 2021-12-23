@@ -2,10 +2,11 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/__mocks__/fileMock.js',
-    '^@components/(.*)$': '<rootDir>/components/$1',
-    '^@hooks/(.*)$': '<rootDir>/hooks/$1',
-    '^@utils/(.*)$': '<rootDir>/utils/$1',
-    '^@typings/(.*)$': '<rootDir>/typings/$1',
+    '^@/components/(.*)$': '<rootDir>/src/components/$1',
+    '^@/containers/(.*)$': '<rootDir>/src/containers/$1',
+    '^@/hooks/(.*)$': '<rootDir>/src/hooks/$1',
+    '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@/typings/(.*)$': '<rootDir>/src/typings/$1',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
