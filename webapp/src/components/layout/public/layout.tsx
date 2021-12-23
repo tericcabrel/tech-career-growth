@@ -1,14 +1,14 @@
 import { PropsWithChildren } from 'react';
-import PublicHeader from './header';
-import PublicFooter from './footer';
+import Header from './header';
+import Footer from './footer';
 
 const PublicLayout = ({ children }: PropsWithChildren<unknown>) => {
   return (
-    <div className="container mx-auto">
-      <PublicHeader />
-      <div className="relative top-[65px]">
+    <div className="container max-w-screen-xl mx-auto">
+      <Header />
+      <div className="relative">
         {children}
-        <PublicFooter />
+        <Footer />
       </div>
     </div>
   );
