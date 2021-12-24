@@ -15,10 +15,16 @@
     "dev": "next -p 5800",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "yarn generate && prisma generate",
+    "gen:migration": "prisma migrate dev",
+    "db:dev": "pscale connect tech-career dev --port 3308",
+    "db:shadow": "pscale connect tech-career shadow --port 3309",
+    "db:view": "prisma studio"
   },
   "dependencies": {
     "@hookform/resolvers": "2.8.5",
+    "@prisma/client": "3.7.0",
     "classnames": "2.3.1",
     "framer-motion": "5.5.5",
     "next": "12.0.7",
@@ -41,6 +47,7 @@
     "babel-jest": "27.4.5",
     "jest": "27.4.5",
     "postcss": "8.4.5",
+    "prisma": "3.7.0",
     "tailwindcss": "2.2.19"
   }
 }
