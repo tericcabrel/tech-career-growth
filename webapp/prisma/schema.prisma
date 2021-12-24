@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider               = "mysql"
+  url                    = env("DATABASE_URL")
+  shadowDatabaseUrl      = env("SHADOW_DATABASE_URL")
+  referentialIntegrity   = "prisma"
+}
+
+model Role {
+  id               BigInt    @id @default(autoincrement())
+  name             String    @db.VarChar(50) @unique
+  level            Int       @db.Int
+  description      String?   @db.VarChar(200)
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  @@map("roles")
+}
