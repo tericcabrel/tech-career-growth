@@ -2,24 +2,40 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider               = "mysql"
-  url                    = env("DATABASE_URL")
-  shadowDatabaseUrl      = env("SHADOW_DATABASE_URL")
-  referentialIntegrity   = "prisma"
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model Role {
-  id               BigInt    @id @default(autoincrement())
-  name             String    @db.VarChar(50) @unique
-  level            Int       @db.Int
-  description      String?   @db.VarChar(200)
-  createdAt        DateTime  @default(now()) @map("created_at")
-  updatedAt        DateTime  @updatedAt @map("updated_at")
+  id          BigInt   @id @default(autoincrement())
+  name        String   @unique @db.VarChar(50)
+  level       Int      @db.Int
+  description String?  @db.VarChar(200)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  User User[]
 
   @@map("roles")
+}
+
+model User {
+  id        BigInt   @id @default(autoincrement())
+  firstName String   @db.VarChar(50) @map("first_name")
+  lastName  String   @db.VarChar(50) @map("last_name")
+  email     String   @unique @db.VarChar(100)
+  password  String   @db.VarChar(100)
+  isEnabled Boolean  @default(true) @map("is_enabled") @db.TinyInt
+  roleId    BigInt   @map("role_id")
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
 }

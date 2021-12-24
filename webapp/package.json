@@ -17,10 +17,11 @@
     "start": "next start",
     "test": "jest",
     "postinstall": "yarn generate && prisma generate",
-    "gen:migration": "prisma migrate dev",
+    "db:migrate:dev": "prisma migrate dev",
     "db:dev": "pscale connect tech-career dev --port 3308",
     "db:shadow": "pscale connect tech-career shadow --port 3309",
-    "db:view": "prisma studio"
+    "db:view": "prisma studio",
+    "db:format": "prisma format"
   },
   "dependencies": {
     "@hookform/resolvers": "2.8.5",
