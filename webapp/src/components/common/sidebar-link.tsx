@@ -7,9 +7,8 @@ const SidebarLink = ({ children, href }: PropsWithChildren<{ href: string }>) =>
   const router = useRouter();
 
   const linkClasses = classNames({
-    'inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200':
-      true,
-    'text-gray-800': router.asPath === href,
+    'inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800': true,
+    'text-green-500': router.asPath === href,
   });
 
   return (
