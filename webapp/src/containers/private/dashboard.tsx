@@ -1,3 +1,5 @@
+import { withPrivateLayout } from '@/components/hof/with-private-layout';
+
 const Dashboard = () => {
   return (
     <div className="py-5">
@@ -6,4 +8,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withPrivateLayout(Dashboard, { title: 'Dashboard' });
