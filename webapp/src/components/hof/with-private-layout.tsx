@@ -1,29 +1,27 @@
 import { ComponentType } from 'react';
 import Head from 'next/head';
-import PublicLayout from '@/components/layout/public/layout';
+
+import Layout from '@/components/layout/private/layout';
 
 type Props = {
   title: string;
-  path?: string;
 };
 
-function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
+function withPrivateLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
   // eslint-disable-next-line react/display-name
   return (wrappedComponentProps: T) => {
     // eslint-disable-next-line react/prop-types
     const { title } = props;
 
     return (
-      <PublicLayout>
+      <Layout>
         <Head>
           <title>{title} | Tech Career Growth Navigator</title>
         </Head>
-        <div className="min-h-[calc(100vh-144px)]">
-          <WrappedComponent {...wrappedComponentProps} />
-        </div>
-      </PublicLayout>
+        <WrappedComponent {...wrappedComponentProps} />
+      </Layout>
     );
   };
 }
 
-export default withPublicLayout;
+export { withPrivateLayout };
