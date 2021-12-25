@@ -19,8 +19,11 @@
     "postinstall": "prisma generate",
     "db:dev": "pscale connect tech-career dev --port 3308",
     "db:shadow": "pscale connect tech-career shadow --port 3309",
+    "db:deploy": "pscale deploy-request create tech-career dev",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
+    "db:reset:dev": "prisma migrate reset --skip-seed",
+    "db:reset:dev:seed": "prisma migrate reset",
     "db:view": "prisma studio",
     "db:format": "prisma format",
     "db:seed": "prisma db seed"

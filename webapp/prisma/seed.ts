@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ errorFormat: 'pretty' });
 
 type CreateRoleInput = {
   name: string;
@@ -10,34 +10,62 @@ type CreateRoleInput = {
 };
 
 type CreateUserInput = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   password: string;
   isEnabled: boolean;
-  roleId: bigint;
+  roleId: string;
+  emailVerified: Date;
+};
+
+type CreateAccountInput = {
+  userId: string;
+  type: string;
+  provider: string;
+  providerAccountId: string;
 };
 
 const createRole = async (input: CreateRoleInput) => {
-  const roleExist = await prisma.role.findFirst({ where: { name: input.name } });
-  if (roleExist) {
-    return roleExist;
+  const role = await prisma.role.findFirst({ where: { name: input.name } });
+
+  if (role) {
+    return role;
   }
 
-  return await prisma.role.create({
+  return prisma.role.create({
+    data: input,
+  });
+};
+
+const createAccount = async (input: CreateAccountInput) => {
+  const account = await prisma.account.findFirst({ where: { userId: input.userId } });
+
+  if (account) {
+    return account;
+  }
+
+  return await prisma.account.create({
     data: input,
   });
 };
 
 const createUser = async (input: CreateUserInput) => {
-  const userExist = await prisma.user.findFirst({ where: { email: input.email } });
-  if (userExist) {
-    return userExist;
+  let user = await prisma.user.findFirst({ where: { email: input.email } });
+
+  if (!user) {
+    user = await prisma.user.create({
+      data: input,
+    });
   }
 
-  return await prisma.user.create({
-    data: input,
+  await createAccount({
+    userId: user.id,
+    type: 'credentials',
+    provider: 'Credentials',
+    providerAccountId: user.id,
   });
+
+  return user;
 };
 
 const main = async () => {
@@ -54,18 +82,18 @@ const main = async () => {
   });
 
   await createUser({
-    firstName: 'Rahul',
-    lastName: 'Pandey',
+    name: 'Rahul Pandey',
     email: 'rahul@email.com',
+    emailVerified: new Date(),
     isEnabled: true,
     roleId: roleAdmin.id,
     password: bcrypt.hashSync('qwerty'),
   });
 
   await createUser({
-    firstName: 'Alex',
-    lastName: 'Chiou',
+    name: 'Alex Chiou',
     email: 'alex@email.com',
+    emailVerified: new Date(),
     isEnabled: true,
     roleId: roleAdmin.id,
     password: bcrypt.hashSync('qwerty'),
