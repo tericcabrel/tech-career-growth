@@ -9,7 +9,7 @@ const PrivateLayout = ({ children }: PropsWithChildren<unknown>) => {
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Header />
-        <main className="h-full pb-16 overflow-y-auto relative">{children}</main>
+        <main className="h-full px-6 overflow-y-auto relative">{children}</main>
       </div>
     </div>
   );
