@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { GetServerSidePropsContext } from 'next';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { filter } from 'lodash';
+import { getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react';
 
 import { FORM_ERRORS } from '@/utils/constants';
 import FormInput from '@/components/common/form-input';
@@ -10,18 +14,45 @@ import withPublicLayout from '@/components/hof/with-public-layout';
 const loginSchema = yup.object().shape({
   email: yup.string().required(FORM_ERRORS.fieldRequired).email(FORM_ERRORS.emailInvalid),
   password: yup.string().required(FORM_ERRORS.fieldRequired),
+  csrfToken: yup.string().required(FORM_ERRORS.fieldRequired),
 });
+
+const MINIMUM_ACTIVITY_TIMEOUT = 850;
 
 type LoginFormValues = yup.InferType<typeof loginSchema>;
 
-const Login = () => {
+type Props = {
+  csrfToken?: string;
+};
+
+const Login = ({ csrfToken }: Props) => {
+  const [isSubmitting, setSubmitting] = useState(false);
+
   const formMethods = useForm<LoginFormValues>({
-    defaultValues: {},
+    // @ts-ignore
+    defaultValues: {
+      csrfToken,
+    },
     resolver: yupResolver(loginSchema),
   });
 
   const handleLogin = async (values: LoginFormValues) => {
     console.log(values);
+    setSubmitting(true);
+    try {
+      signIn('app-login', {
+        callbackUrl: '/private/dashboard',
+        email: values.email,
+        password: values.password,
+      });
+
+      setTimeout(() => {
+        setSubmitting(false);
+      }, MINIMUM_ACTIVITY_TIMEOUT);
+    } catch (error) {
+      console.error(error);
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -32,6 +63,7 @@ const Login = () => {
             <h1 className="mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200">Log into Admin area</h1>
             <FormProvider {...formMethods}>
               <form onSubmit={formMethods.handleSubmit(handleLogin)}>
+                <FormInput label="" type="hidden" name="csrfToken" hidden />
                 <FormInput
                   label="Email address"
                   name="email"
@@ -44,7 +76,7 @@ const Login = () => {
                 <Button
                   text="Log in"
                   className="w-full justify-center mt-12"
-                  loading={false}
+                  loading={isSubmitting}
                   data-testid="btn-submit"
                 />
               </form>
