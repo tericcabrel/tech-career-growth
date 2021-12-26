@@ -1,28 +1,44 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import useBooleanState from '@/hooks/use-boolean-state';
 import { withPrivateLayout } from '@/components/hof/with-private-layout';
 import CategoryTree from '@/components/category/category-tree';
 import { CategoryProvider, useCategoryTree } from '@/components/category/category-context';
 import ConfirmDialog from '@/components/common/confirm-dialog';
 import CategoryFormDialog from '@/components/category/category-form-dialog';
-import { useRetrieveCategories } from '@/hooks/request/use-retrieve-categories';
+import { useRetrieveCategories } from '@/hooks/request/query/use-retrieve-categories';
 import Loader from '@/components/common/loader';
 import Button from '@/components/common/button';
+import { useCreateCategory } from '@/hooks/request/mutation/use-create-category';
+import { CATEGORY_CREATED_MESSAGE, NETWORK_ERROR_MESSAGE } from '@/utils/constants';
+import { getErrorMessage } from '@/utils/axios';
 
-const CategoryView = () => {
+type Props = {
+  onCategoryUpdateSuccess: () => Promise<void>;
+};
+
+const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-  const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
+  const [isDialogOpen, openConfirmDialog, closeConfirmDialog] = useBooleanState(false);
   const [isFormDialogOpen, openFormDialog, closeFormDialog] = useBooleanState(false);
   const { rootCategories } = useCategoryTree();
+  const createCategoryMutation = useCreateCategory();
 
   const handleDeleteCategory = () => {
     console.log('Cat Id: ', selectedCategoryId);
-    closeDialog();
+    closeConfirmDialog();
   };
 
   const triggerDeleteCategory = (categoryId: string) => {
     setSelectedCategoryId(categoryId);
-    openDialog();
+    openConfirmDialog();
+  };
+
+  const triggerAddCategory = (categoryId?: string) => {
+    if (categoryId) {
+      setSelectedCategoryId(categoryId);
+    }
+    openFormDialog();
   };
 
   const triggerEditCategory = (categoryId?: string) => {
@@ -33,7 +49,19 @@ const CategoryView = () => {
   };
 
   const handleSubmitAddCategory = (values: { name: string; description?: string }) => {
-    console.log('Submit => ', values);
+    const input = { ...values, parentId: selectedCategoryId ?? null };
+
+    createCategoryMutation.mutate(input, {
+      onError: (error) => {
+        closeFormDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await onCategoryUpdateSuccess();
+        closeFormDialog();
+        toast.success(CATEGORY_CREATED_MESSAGE);
+      },
+    });
   };
 
   return (
@@ -47,10 +75,11 @@ const CategoryView = () => {
             <CategoryTree
               items={rootCategories}
               isRootLevel={true}
+              triggerAddCategory={triggerAddCategory}
               triggerEditCategory={triggerEditCategory}
               triggerDeleteCategory={triggerDeleteCategory}
             />
-            <Button text="Add category" className="text-gray-500 bg-gray-500" onClick={() => triggerEditCategory()} />
+            <Button text="Add category" className="text-gray-500 bg-gray-500" onClick={() => triggerAddCategory()} />
           </div>
         </div>
       </div>
@@ -59,7 +88,7 @@ const CategoryView = () => {
         messageText="Are you sure you want to delete this category?"
         open={isDialogOpen}
         onConfirmButtonClick={handleDeleteCategory}
-        onCancelButtonClick={closeDialog}
+        onCancelButtonClick={closeConfirmDialog}
       />
       {isFormDialogOpen && (
         <CategoryFormDialog closeDialog={closeFormDialog} handleSubmit={handleSubmitAddCategory} defaultValues={{}} />
@@ -69,9 +98,13 @@ const CategoryView = () => {
 };
 
 const CategoriesList = () => {
-  const { data, isLoading } = useRetrieveCategories();
+  const { data, isLoading, refetch } = useRetrieveCategories();
 
   console.log(data);
+
+  const refetchCategories = async () => {
+    await refetch();
+  };
 
   if (isLoading || !data) {
     return <Loader />;
@@ -79,7 +112,7 @@ const CategoriesList = () => {
 
   return (
     <CategoryProvider value={data}>
-      <CategoryView />
+      <CategoryView onCategoryUpdateSuccess={refetchCategories} />
     </CategoryProvider>
   );
 };
