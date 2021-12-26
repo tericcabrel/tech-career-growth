@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { useClickOutside } from '@/hooks/use-click-outside';
 
 type ProfileMenuProps = {
   closeModal: () => void;

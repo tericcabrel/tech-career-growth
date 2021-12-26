@@ -1,49 +1,13 @@
 import { useState } from 'react';
-import { Category } from '@/types/model';
-import useBooleanState from '@/hooks/useBooleanState';
+import useBooleanState from '@/hooks/use-boolean-state';
 import { withPrivateLayout } from '@/components/hof/with-private-layout';
 import CategoryTree from '@/components/category/category-tree';
 import { CategoryProvider, useCategoryTree } from '@/components/category/category-context';
 import ConfirmDialog from '@/components/common/confirm-dialog';
 import CategoryFormDialog from '@/components/category/category-form-dialog';
-
-const data: Category[] = [
-  {
-    parentId: null,
-    id: '1',
-    name: 'Cat One',
-    value: 'cat-one',
-    description: 'Desc cat one',
-  },
-  {
-    parentId: null,
-    id: '2',
-    name: 'Cat Two',
-    value: 'cat-two',
-    description: 'Desc cat two',
-  },
-  {
-    parentId: null,
-    id: '3',
-    name: 'Cat Three',
-    value: 'cat-three',
-    description: 'Desc cat three',
-  },
-  {
-    parentId: '1',
-    id: '11',
-    name: 'Cat One One',
-    value: 'cat-one-one',
-    description: 'Desc cat one one',
-  },
-  {
-    parentId: '3',
-    id: '31',
-    name: 'Cat Three One',
-    value: 'cat-three-one',
-    description: 'Desc cat three one',
-  },
-];
+import { useRetrieveCategories } from '@/hooks/request/use-retrieve-categories';
+import Loader from '@/components/common/loader';
+import Button from '@/components/common/button';
 
 const CategoryView = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
@@ -86,6 +50,7 @@ const CategoryView = () => {
               triggerEditCategory={triggerEditCategory}
               triggerDeleteCategory={triggerDeleteCategory}
             />
+            <Button text="Add category" className="text-gray-500 bg-gray-500" onClick={() => triggerEditCategory()} />
           </div>
         </div>
       </div>
@@ -104,6 +69,14 @@ const CategoryView = () => {
 };
 
 const CategoriesList = () => {
+  const { data, isLoading } = useRetrieveCategories();
+
+  console.log(data);
+
+  if (isLoading || !data) {
+    return <Loader />;
+  }
+
   return (
     <CategoryProvider value={data}>
       <CategoryView />
