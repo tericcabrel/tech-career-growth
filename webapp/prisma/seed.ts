@@ -26,19 +26,17 @@ type CreateAccountInput = {
 };
 
 const createRole = async (input: CreateRoleInput) => {
-  const role = await prisma.role.findFirst({ where: { name: input.name } });
-
-  if (role) {
-    return role;
-  }
-
-  return prisma.role.create({
-    data: input,
+  return prisma.role.upsert({
+    create: input,
+    where: {
+      name: input.name,
+    },
+    update: input,
   });
 };
 
 const createAccount = async (input: CreateAccountInput) => {
-  const account = await prisma.account.findFirst({ where: { userId: input.userId } });
+  const account = await prisma.account.findFirst({ where: { userId: input.userId, type: 'credentials' } });
 
   if (account) {
     return account;
@@ -50,13 +48,11 @@ const createAccount = async (input: CreateAccountInput) => {
 };
 
 const createUser = async (input: CreateUserInput) => {
-  let user = await prisma.user.findFirst({ where: { email: input.email } });
-
-  if (!user) {
-    user = await prisma.user.create({
-      data: input,
-    });
-  }
+  const user = await prisma.user.upsert({
+    create: input,
+    where: { email: input.email },
+    update: input,
+  });
 
   await createAccount({
     userId: user.id,

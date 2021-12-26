@@ -27,10 +27,10 @@ model Role {
 
 model Account {
   id                 String  @id @default(cuid())
-  userId             String
+  userId             String  @map("user_id")
   type               String
   provider           String
-  providerAccountId  String
+  providerAccountId  String  @map("provider_account_id")
   refresh_token      String?
   access_token       String?
   expires_at         Int?
@@ -44,14 +44,18 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+
+  @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model User {
@@ -59,13 +63,13 @@ model User {
   name          String?
   email         String?   @unique
   password      String?   @db.VarChar(100)
-  isEnabled     Boolean  @default(true) @map("is_enabled") @db.TinyInt
-  emailVerified DateTime?
+  isEnabled     Boolean   @default(true) @map("is_enabled") @db.TinyInt
+  emailVerified DateTime? @map("email_verified")
   image         String?
-  roleId        String   @map("role_id")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
-  role          Role     @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  roleId        String    @map("role_id")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  role          Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
   accounts      Account[]
   sessions      Session[]
 
@@ -78,4 +82,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+
+  @@map("verification_tokens")
 }
