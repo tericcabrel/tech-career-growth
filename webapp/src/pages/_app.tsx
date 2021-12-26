@@ -1,10 +1,12 @@
 import { SessionProvider } from 'next-auth/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import '@/styles/global.css';
 import MainLayout from '@/components/layout/main';
 import type { ExtendedAppProps } from '@/types/app';
 import AuthGuard from '@/components/auth/auth-guard';
+
+import 'react-toastify/dist/ReactToastify.css';
+import '@/styles/global.css';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } });
 

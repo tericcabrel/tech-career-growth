@@ -13,7 +13,7 @@ export enum UserRoleEnum {
 
 export type BgColorVariants = 'primary' | 'red' | 'whiteGray';
 
-export type CategoryFormInput = {
+export type CreateCategoryInput = {
   name: string;
   description?: string;
   parentId: string | null;
@@ -23,5 +23,6 @@ type HttpResponse<T> = {
   data: T;
 };
 
+export type CommonResponseData = { message: string };
 export type CategoryResponseData = HttpResponse<Category>;
 export type CategoryResponseListData = HttpResponse<Category[]>;
