@@ -10,3 +10,9 @@ export enum UserRoleEnum {
 }
 
 export type BgColorVariants = 'primary' | 'red' | 'whiteGray';
+
+export type CategoryFormInput = {
+  name: string;
+  description?: string;
+  parentId: string | null;
+};
