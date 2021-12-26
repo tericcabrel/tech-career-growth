@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { GetServerSidePropsContext } from 'next';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { filter } from 'lodash';
-import { getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 import { FORM_ERRORS } from '@/utils/constants';
 import FormInput from '@/components/common/form-input';

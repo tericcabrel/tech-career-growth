@@ -9,9 +9,10 @@ type Props = {
   items: Category[];
   isRootLevel: boolean;
   triggerDeleteCategory: (categoryId: string) => void;
+  triggerEditCategory: (categoryId?: string) => void;
 };
 
-const CategoryTree = ({ items, isRootLevel, triggerDeleteCategory }: Props) => {
+const CategoryTree = ({ items, isRootLevel, triggerEditCategory, triggerDeleteCategory }: Props) => {
   const { findChildren } = useCategoryTree();
 
   const ulClassName = classNames({
@@ -32,11 +33,11 @@ const CategoryTree = ({ items, isRootLevel, triggerDeleteCategory }: Props) => {
               {item.name}
               <div className="flex ml-8 space-x-2">
                 {!item.parentId && (
-                  <button>
+                  <button onClick={() => triggerEditCategory()}>
                     <PlusIcon width={22} height={22} className="text-green-500" />
                   </button>
                 )}
-                <button>
+                <button onClick={() => triggerEditCategory(item.id)}>
                   <PencilIcon width={16} height={16} className="text-blue-500" />
                 </button>
                 <button onClick={() => triggerDeleteCategory(item.id)}>
@@ -47,6 +48,7 @@ const CategoryTree = ({ items, isRootLevel, triggerDeleteCategory }: Props) => {
             <CategoryTree
               items={findChildren(item.id)}
               isRootLevel={false}
+              triggerEditCategory={triggerEditCategory}
               triggerDeleteCategory={triggerDeleteCategory}
             />
           </li>

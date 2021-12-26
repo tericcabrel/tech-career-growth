@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { Category } from '@/types/model';
+import useBooleanState from '@/hooks/useBooleanState';
 import { withPrivateLayout } from '@/components/hof/with-private-layout';
 import CategoryTree from '@/components/category/category-tree';
 import { CategoryProvider, useCategoryTree } from '@/components/category/category-context';
-import { useState } from 'react';
 import ConfirmDialog from '@/components/common/confirm-dialog';
-import useBooleanState from '@/hooks/useBooleanState';
+import CategoryFormDialog from '@/components/category/category-form-dialog';
 
 const data: Category[] = [
   {
@@ -47,6 +48,7 @@ const data: Category[] = [
 const CategoryView = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
+  const [isFormDialogOpen, openFormDialog, closeFormDialog] = useBooleanState(false);
   const { rootCategories } = useCategoryTree();
 
   const handleDeleteCategory = () => {
@@ -55,8 +57,19 @@ const CategoryView = () => {
   };
 
   const triggerDeleteCategory = (categoryId: string) => {
-    openDialog();
     setSelectedCategoryId(categoryId);
+    openDialog();
+  };
+
+  const triggerEditCategory = (categoryId?: string) => {
+    if (categoryId) {
+      setSelectedCategoryId(categoryId);
+    }
+    openFormDialog();
+  };
+
+  const handleSubmitAddCategory = (values: { name: string; description?: string }) => {
+    console.log('Submit => ', values);
   };
 
   return (
@@ -67,7 +80,12 @@ const CategoryView = () => {
             <h1 className="text-3xl font-medium text-gray-900">Categories Tree</h1>
           </div>
           <div className="p-4 w-full border-t border-gray-100">
-            <CategoryTree items={rootCategories} isRootLevel={true} triggerDeleteCategory={triggerDeleteCategory} />
+            <CategoryTree
+              items={rootCategories}
+              isRootLevel={true}
+              triggerEditCategory={triggerEditCategory}
+              triggerDeleteCategory={triggerDeleteCategory}
+            />
           </div>
         </div>
       </div>
@@ -78,6 +96,9 @@ const CategoryView = () => {
         onConfirmButtonClick={handleDeleteCategory}
         onCancelButtonClick={closeDialog}
       />
+      {isFormDialogOpen && (
+        <CategoryFormDialog closeDialog={closeFormDialog} handleSubmit={handleSubmitAddCategory} defaultValues={{}} />
+      )}
     </>
   );
 };
