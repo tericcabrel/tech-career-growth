@@ -15,12 +15,12 @@ datasource db {
 
 model Role {
   id          String   @id @default(cuid())
-  name        String   @db.VarChar(50) @unique
+  name        String   @unique @db.VarChar(50)
   level       Int      @db.Int
   description String?  @db.VarChar(200)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
-  User User[]
+  User        User[]
 
   @@map("roles")
 }
@@ -43,8 +43,8 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
 
+  @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
@@ -81,7 +81,21 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
 
-  @@unique([identifier, token])
 
+  @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model Category {
+  id            String     @id @default(cuid())
+  name          String     @db.VarChar(50)
+  value         String     @unique @db.VarChar(50)
+  description   String?    @db.VarChar(255)
+  parentId      String?    @map("parent_id")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+  parent        Category?  @relation(name: "parent_category", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  subCategories Category[] @relation("parent_category")
+
+  @@map("categories")
 }
