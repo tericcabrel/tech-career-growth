@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext, useState } from 'react';
+import React, { PropsWithChildren, useContext } from 'react';
 import { Category } from '@/types/model';
 
 export const CategoryContext = React.createContext<Category[]>([]);

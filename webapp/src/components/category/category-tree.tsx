@@ -1,13 +1,17 @@
 import classNames from 'classnames';
 import { Category } from '@/types/model';
 import { useCategoryTree } from '@/components/category/category-context';
+import PlusIcon from '@/components/icons/plus';
+import PencilIcon from '@/components/icons/pencil';
+import CrossIcon from '@/components/icons/cross';
 
 type Props = {
   items: Category[];
   isRootLevel: boolean;
+  triggerDeleteCategory: (categoryId: string) => void;
 };
 
-const CategoryTree = ({ items, isRootLevel }: Props) => {
+const CategoryTree = ({ items, isRootLevel, triggerDeleteCategory }: Props) => {
   const { findChildren } = useCategoryTree();
 
   const ulClassName = classNames({
@@ -20,14 +24,35 @@ const CategoryTree = ({ items, isRootLevel }: Props) => {
   }
 
   return (
-    <ul className={ulClassName}>
-      {items.map((item) => (
-        <li className="text-left py-1" key={item.value}>
-          <div>{item.name}</div>
-          <CategoryTree items={findChildren(item.id)} isRootLevel={false} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={ulClassName}>
+        {items.map((item) => (
+          <li className="text-left py-1" key={item.value}>
+            <div className="flex">
+              {item.name}
+              <div className="flex ml-8 space-x-2">
+                {!item.parentId && (
+                  <button>
+                    <PlusIcon width={22} height={22} className="text-green-500" />
+                  </button>
+                )}
+                <button>
+                  <PencilIcon width={16} height={16} className="text-blue-500" />
+                </button>
+                <button onClick={() => triggerDeleteCategory(item.id)}>
+                  <CrossIcon width={20} height={20} className="text-red-500" />
+                </button>
+              </div>
+            </div>
+            <CategoryTree
+              items={findChildren(item.id)}
+              isRootLevel={false}
+              triggerDeleteCategory={triggerDeleteCategory}
+            />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
