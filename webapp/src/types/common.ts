@@ -1,4 +1,9 @@
-import { Category } from '@/types/model';
+import { Category, Resource } from '@/types/model';
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
 
 export type IconProps = {
   className?: string;
@@ -32,3 +37,30 @@ type HttpResponse<T> = {
 export type CommonResponseData = { message: string };
 export type CategoryResponseData = HttpResponse<Category>;
 export type CategoryResponseListData = HttpResponse<Category[]>;
+
+export type PaginationChangeEventData = {
+  currentPage: number;
+  totalPages: number;
+  pageLimit: number;
+  totalRecords: number;
+};
+
+export type ResourceSearchParams = {
+  category?: string;
+  page: number;
+  search?: string;
+};
+
+type PaginatedList = {
+  currentPage: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+};
+
+export type ResourceList = PaginatedList & {
+  items: Resource[];
+};
+export type ResourceResponseData = HttpResponse<Resource>;
+export type ResourceListResponseData = HttpResponse<ResourceList>;
+export type ResourcesResponseData = HttpResponse<Resource[]>;
