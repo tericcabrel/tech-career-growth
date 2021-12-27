@@ -19,6 +19,12 @@ export type CreateCategoryInput = {
   parentId: string | null;
 };
 
+export type UpdateCategoryInput = {
+  id: string;
+  name: string;
+  description?: string;
+};
+
 type HttpResponse<T> = {
   data: T;
 };

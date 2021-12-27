@@ -16,9 +16,14 @@ const useCategoryTree = () => {
     return categories.filter((category) => category.parentId === categoryParentId);
   };
 
+  const findCategory = (categoryId: string) => {
+    return categories.find((category) => category.id === categoryId);
+  };
+
   return {
     rootCategories,
     findChildren,
+    findCategory,
   };
 };
 

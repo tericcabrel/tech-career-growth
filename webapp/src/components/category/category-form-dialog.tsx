@@ -11,6 +11,7 @@ import Button from '@/components/common/button';
 type Props = {
   closeDialog: () => void;
   handleSubmit: (values: any) => void;
+  isEditing: boolean;
   defaultValues: {
     name?: string;
     description?: string;
@@ -24,7 +25,7 @@ const categoryFormSchema = yup.object().shape({
 
 type CategoryFormValues = yup.InferType<typeof categoryFormSchema>;
 
-const CategoryFormDialog = ({ closeDialog, defaultValues, handleSubmit }: Props) => {
+const CategoryFormDialog = ({ closeDialog, defaultValues, handleSubmit, isEditing }: Props) => {
   const formMethods = useForm<CategoryFormValues>({
     // @ts-ignore
     defaultValues,
@@ -65,7 +66,7 @@ const CategoryFormDialog = ({ closeDialog, defaultValues, handleSubmit }: Props)
                 <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Add a category
+                      {isEditing ? 'Edit' : 'Add'} a category
                     </Dialog.Title>
                     <div className="my-6">
                       <FormInput label="Name" name="name" type="text" placeholder="Eg.: Improve resume" isRequired />

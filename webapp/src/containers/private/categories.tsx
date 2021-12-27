@@ -10,28 +10,37 @@ import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories
 import Loader from '@/components/common/loader';
 import Button from '@/components/common/button';
 import useCreateCategory from '@/hooks/request/mutation/use-create-category';
-import { CATEGORY_CREATED_MESSAGE, CATEGORY_DELETED_MESSAGE, NETWORK_ERROR_MESSAGE } from '@/utils/constants';
+import {
+  CATEGORY_CREATED_MESSAGE,
+  CATEGORY_DELETED_MESSAGE,
+  CATEGORY_UPDATED_MESSAGE,
+  NETWORK_ERROR_MESSAGE,
+} from '@/utils/constants';
 import { getErrorMessage } from '@/utils/axios';
 import useDeleteCategory from '@/hooks/request/mutation/use-delete-category';
+import { Category } from '@/types/model';
+import { useUpdateCategory } from '@/hooks/request/mutation/use-update-category';
 
 type Props = {
   onCategoryUpdateSuccess: () => Promise<void>;
 };
 
 const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [isDialogOpen, openConfirmDialog, closeConfirmDialog] = useBooleanState(false);
   const [isFormDialogOpen, openFormDialog, closeFormDialog] = useBooleanState(false);
-  const { rootCategories } = useCategoryTree();
+  const [isEditing, setIsEditing] = useState(false);
+  const { rootCategories, findCategory } = useCategoryTree();
   const createCategoryMutation = useCreateCategory();
   const deleteCategoryMutation = useDeleteCategory();
+  const updateCategoryMutation = useUpdateCategory();
 
   const handleDeleteCategory = () => {
-    if (!selectedCategoryId) {
+    if (!selectedCategory) {
       return;
     }
 
-    deleteCategoryMutation.mutate(selectedCategoryId, {
+    deleteCategoryMutation.mutate(selectedCategory.id, {
       onError: (error) => {
         closeConfirmDialog();
         toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
@@ -45,27 +54,35 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
   };
 
   const triggerDeleteCategory = (categoryId: string) => {
-    setSelectedCategoryId(categoryId);
+    const category = findCategory(categoryId);
+    if (!category) {
+      return;
+    }
+    setSelectedCategory(category);
     openConfirmDialog();
   };
 
   const triggerAddCategory = (categoryId?: string) => {
-    if (categoryId) {
-      setSelectedCategoryId(categoryId);
-    }
+    const category = categoryId ? findCategory(categoryId) : null;
+
+    setSelectedCategory(category || null);
+    setIsEditing(false);
+
     openFormDialog();
   };
 
   const triggerEditCategory = (categoryId?: string) => {
-    if (categoryId) {
-      setSelectedCategoryId(categoryId);
-      // TODO find selected category
+    const category = categoryId ? findCategory(categoryId) : null;
+
+    if (category) {
+      setSelectedCategory(category);
+      setIsEditing(true);
+      openFormDialog();
     }
-    openFormDialog();
   };
 
   const handleSubmitAddCategory = (values: { name: string; description?: string }) => {
-    const input = { ...values, parentId: selectedCategoryId ?? null };
+    const input = { ...values, parentId: selectedCategory?.id ?? null };
 
     createCategoryMutation.mutate(input, {
       onError: (error) => {
@@ -80,6 +97,29 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
     });
   };
 
+  const handleSubmitEditCategory = (values: { name: string; description?: string }) => {
+    if (!selectedCategory) {
+      return;
+    }
+    const input = { ...values, id: selectedCategory.id };
+
+    updateCategoryMutation.mutate(input, {
+      onError: (error) => {
+        closeFormDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await onCategoryUpdateSuccess();
+        closeFormDialog();
+        toast.success(CATEGORY_UPDATED_MESSAGE);
+      },
+    });
+  };
+
+  const formDefaultValues = isEditing
+    ? { name: selectedCategory?.name, description: selectedCategory?.description || undefined }
+    : {};
+
   return (
     <>
       <div className="py-5 w-3/5 mx-auto">
@@ -87,7 +127,7 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
           <div className="px-4 py-5 sm:px-6 border-b w-full">
             <h1 className="text-3xl font-medium text-gray-900">Categories Tree</h1>
           </div>
-          <div className="p-4 w-full border-t border-gray-100">
+          <div className="py-4 px-7 w-full border-t border-gray-100">
             <CategoryTree
               items={rootCategories}
               isRootLevel={true}
@@ -107,7 +147,12 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
         onCancelButtonClick={closeConfirmDialog}
       />
       {isFormDialogOpen && (
-        <CategoryFormDialog closeDialog={closeFormDialog} handleSubmit={handleSubmitAddCategory} defaultValues={{}} />
+        <CategoryFormDialog
+          closeDialog={closeFormDialog}
+          handleSubmit={isEditing ? handleSubmitEditCategory : handleSubmitAddCategory}
+          isEditing={isEditing}
+          defaultValues={formDefaultValues}
+        />
       )}
     </>
   );
