@@ -7,3 +7,17 @@ export type Category = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Resource = {
+  id: string;
+  name: string;
+  type: ResourceType;
+  link: string;
+  description: string;
+  picture: string;
+  categoryId: string;
+  extra: Prisma.JsonValue;
+  clickCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
