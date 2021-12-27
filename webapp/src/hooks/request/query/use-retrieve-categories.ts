@@ -4,7 +4,7 @@ import { CategoryResponseListData } from '@/types/common';
 import useHttpClient from '@/hooks/use-http-client';
 import { QUERY_KEYS } from '@/utils/constants';
 
-export const useRetrieveCategories = () => {
+const useRetrieveCategories = () => {
   const httpClient = useHttpClient();
 
   return useQuery(QUERY_KEYS.getCategories, async () => {
@@ -13,3 +13,5 @@ export const useRetrieveCategories = () => {
     return response.data.data;
   });
 };
+
+export default useRetrieveCategories;
