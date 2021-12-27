@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
+import { nanoid } from 'nanoid';
 
 const prisma = new PrismaClient({ errorFormat: 'pretty' });
 
@@ -24,6 +25,71 @@ type CreateAccountInput = {
   provider: string;
   providerAccountId: string;
 };
+
+type CategoryInput = {
+  name: string;
+  description: string;
+  children: CategoryInput[];
+};
+
+const categories: CategoryInput[] = [
+  {
+    name: 'Improving my resume',
+    description: '',
+    children: [],
+  },
+  {
+    name: 'Interviewing',
+    description: '',
+    children: [
+      {
+        name: 'Data structures and algorithms',
+        description: '',
+        children: [],
+      },
+      {
+        name: 'Behavioral',
+        description: '',
+        children: [],
+      },
+      {
+        name: 'System design',
+        description: '',
+        children: [],
+      },
+      {
+        name: 'Nerves and anxiety',
+        description: '',
+        children: [],
+      },
+      {
+        name: 'Studying in general',
+        description: '',
+        children: [],
+      },
+    ],
+  },
+  {
+    name: 'Productivity',
+    description: '',
+    children: [],
+  },
+  {
+    name: 'Moving up the career ladder',
+    description: '',
+    children: [],
+  },
+  {
+    name: 'Building projects',
+    description: '',
+    children: [],
+  },
+  {
+    name: 'General Growth and Learning',
+    description: '',
+    children: [],
+  },
+];
 
 const createRole = async (input: CreateRoleInput) => {
   return prisma.role.upsert({
@@ -64,6 +130,27 @@ const createUser = async (input: CreateUserInput) => {
   return user;
 };
 
+const createCategory = async (input: CategoryInput, parentId: string | null) => {
+  const parentCategory = await prisma.category.upsert({
+    create: {
+      name: input.name,
+      value: nanoid(),
+      description: input.description,
+      parentId,
+    },
+    where: {
+      value: input.name,
+    },
+    update: {
+      name: input.name,
+    },
+  });
+
+  const promises = input.children.map((child) => createCategory(child, parentCategory.id));
+
+  await Promise.all(promises);
+};
+
 const main = async () => {
   const roleAdmin = await createRole({
     name: 'admin',
@@ -94,6 +181,10 @@ const main = async () => {
     roleId: roleAdmin.id,
     password: bcrypt.hashSync('qwerty'),
   });
+
+  const promiseCategories = categories.map((category) => createCategory(category, null));
+
+  await Promise.all(promiseCategories);
 };
 
 main()

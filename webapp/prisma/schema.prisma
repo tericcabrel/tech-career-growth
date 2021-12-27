@@ -88,8 +88,8 @@ model VerificationToken {
 
 model Category {
   id            String     @id @default(cuid())
-  name          String     @db.VarChar(50)
-  value         String     @unique @db.VarChar(50)
+  name          String     @db.VarChar(50) @unique
+  value         String     @db.VarChar(50) @unique
   description   String?    @db.VarChar(255)
   parentId      String?    @map("parent_id")
   createdAt     DateTime   @default(now()) @map("created_at")
@@ -97,5 +97,6 @@ model Category {
   parent        Category?  @relation(name: "parent_category", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   subCategories Category[] @relation("parent_category")
 
+  @@index([name])
   @@map("categories")
 }
