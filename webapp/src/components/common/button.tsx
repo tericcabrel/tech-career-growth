@@ -15,8 +15,8 @@ const Button = forwardRef<HTMLButtonElement, Props>((props: Props, ref) => {
   const { className, loading, text, textAlign = 'left', bgColor = 'primary', ...buttonProps } = props;
   const buttonClasses = classNames(
     'flex items-center px-4 py-2 text-sm font-medium leading-5 text-white border border-transparent rounded-lg transition-colors duration-150 focus:outline-none',
-    className,
     backgroundColors[bgColor],
+    className,
     {
       'cursor-not-allowed': Boolean(buttonProps.disabled),
       'justify-center': textAlign === 'center',

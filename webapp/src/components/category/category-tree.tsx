@@ -4,6 +4,8 @@ import { useCategoryTree } from '@/components/category/category-context';
 import PlusIcon from '@/components/icons/plus';
 import PencilIcon from '@/components/icons/pencil';
 import CrossIcon from '@/components/icons/cross';
+import useHover from '@/hooks/use-hover';
+import CategoryTreeAction from '@/components/category/category-tree-action';
 
 type Props = {
   items: Category[];
@@ -36,22 +38,12 @@ const CategoryTree = ({
       <ul className={ulClassName}>
         {items.map((item) => (
           <li className="text-left py-1" key={item.value}>
-            <div className="flex">
-              {item.name}
-              <div className="flex ml-8 space-x-2">
-                {!item.parentId && (
-                  <button onClick={() => triggerAddCategory(item.id)}>
-                    <PlusIcon width={22} height={22} className="text-green-500" />
-                  </button>
-                )}
-                <button onClick={() => triggerEditCategory(item.id)}>
-                  <PencilIcon width={16} height={16} className="text-blue-500" />
-                </button>
-                <button onClick={() => triggerDeleteCategory(item.id)}>
-                  <CrossIcon width={20} height={20} className="text-red-500" />
-                </button>
-              </div>
-            </div>
+            <CategoryTreeAction
+              item={item}
+              onAddCategoryClick={triggerAddCategory}
+              onDeleteCategoryClick={triggerDeleteCategory}
+              onEditCategoryClick={triggerEditCategory}
+            />
             <CategoryTree
               items={findChildren(item.id)}
               isRootLevel={false}

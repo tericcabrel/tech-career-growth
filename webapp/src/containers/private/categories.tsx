@@ -128,6 +128,13 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
             <h1 className="text-3xl font-medium text-gray-900">Categories Tree</h1>
           </div>
           <div className="py-4 px-7 w-full border-t border-gray-100">
+            <Button
+              text="Add a category"
+              bgColor="primary"
+              className="!py-1 !text-sm mb-4"
+              onClick={() => triggerAddCategory()}
+            />
+
             <CategoryTree
               items={rootCategories}
               isRootLevel={true}
@@ -135,7 +142,6 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
               triggerEditCategory={triggerEditCategory}
               triggerDeleteCategory={triggerDeleteCategory}
             />
-            <Button text="Add category" className="text-gray-500 bg-gray-500" onClick={() => triggerAddCategory()} />
           </div>
         </div>
       </div>
