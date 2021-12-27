@@ -1,3 +1,5 @@
+import { ResourceType } from '@/types/common';
+
 export type Category = {
   id: string;
   name: string;
@@ -13,10 +15,10 @@ export type Resource = {
   name: string;
   type: ResourceType;
   link: string;
-  description: string;
-  picture: string;
+  description: string | null;
+  picture: string | null;
   categoryId: string;
-  extra: Prisma.JsonValue;
+  extra: any;
   clickCount: number;
   createdAt: Date;
   updatedAt: Date;

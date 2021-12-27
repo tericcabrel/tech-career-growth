@@ -115,11 +115,11 @@ model Resource {
   name        String       @unique @db.VarChar(50)
   type        ResourceType @default(WEBPAGE)
   link        String       @db.VarChar(255)
-  description String       @db.Text
-  picture     String       @db.VarChar(255)
+  description String?      @db.Text
+  picture     String?      @db.VarChar(255)
   categoryId  String       @map("category_id")
-  extra       Json         @db.Json
-  clickCount  Int          @map("click_count") @db.Int
+  extra       Json?        @db.Json
+  clickCount  Int          @map("click_count") @db.Int @default(0)
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
   category    Category     @relation(fields: [categoryId], references: [id], onDelete: Restrict)

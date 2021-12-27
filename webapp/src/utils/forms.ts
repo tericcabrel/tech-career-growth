@@ -17,3 +17,7 @@ export const formatCategoryOption = (resources: Category[]) => {
 
   return [DEFAULT_RESOURCE].concat(resourceOptions);
 };
+
+export const formatOptions = <T extends { id: string; name: string }>(data: T[]) => {
+  return data.map((item): SelectOption => ({ label: item.name, value: item.id }));
+};
