@@ -12,7 +12,7 @@
     "mysql"
   ],
   "scripts": {
-    "lint": "eslint --ignore-path .gitignore \"webapp/src/**/*.+(ts|js|tsx)\"",
+    "lint": "eslint --ignore-path .gitignore \"webapp/src/**/*.+(ts|js|tsx)\" --cache",
     "format": "prettier --ignore-path .gitignore \"webapp/src/**/*.+(ts|js|tsx)\" --write",
     "postinstall": "husky install",
     "commit": "cz",
