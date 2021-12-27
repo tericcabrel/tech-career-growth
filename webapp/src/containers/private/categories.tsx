@@ -6,12 +6,13 @@ import CategoryTree from '@/components/category/category-tree';
 import { CategoryProvider, useCategoryTree } from '@/components/category/category-context';
 import ConfirmDialog from '@/components/common/confirm-dialog';
 import CategoryFormDialog from '@/components/category/category-form-dialog';
-import { useRetrieveCategories } from '@/hooks/request/query/use-retrieve-categories';
+import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories';
 import Loader from '@/components/common/loader';
 import Button from '@/components/common/button';
-import { useCreateCategory } from '@/hooks/request/mutation/use-create-category';
-import { CATEGORY_CREATED_MESSAGE, NETWORK_ERROR_MESSAGE } from '@/utils/constants';
+import useCreateCategory from '@/hooks/request/mutation/use-create-category';
+import { CATEGORY_CREATED_MESSAGE, CATEGORY_DELETED_MESSAGE, NETWORK_ERROR_MESSAGE } from '@/utils/constants';
 import { getErrorMessage } from '@/utils/axios';
+import useDeleteCategory from '@/hooks/request/mutation/use-delete-category';
 
 type Props = {
   onCategoryUpdateSuccess: () => Promise<void>;
@@ -23,10 +24,24 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
   const [isFormDialogOpen, openFormDialog, closeFormDialog] = useBooleanState(false);
   const { rootCategories } = useCategoryTree();
   const createCategoryMutation = useCreateCategory();
+  const deleteCategoryMutation = useDeleteCategory();
 
   const handleDeleteCategory = () => {
-    console.log('Cat Id: ', selectedCategoryId);
-    closeConfirmDialog();
+    if (!selectedCategoryId) {
+      return;
+    }
+
+    deleteCategoryMutation.mutate(selectedCategoryId, {
+      onError: (error) => {
+        closeConfirmDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await onCategoryUpdateSuccess();
+        closeConfirmDialog();
+        toast.success(CATEGORY_DELETED_MESSAGE);
+      },
+    });
   };
 
   const triggerDeleteCategory = (categoryId: string) => {
@@ -44,6 +59,7 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
   const triggerEditCategory = (categoryId?: string) => {
     if (categoryId) {
       setSelectedCategoryId(categoryId);
+      // TODO find selected category
     }
     openFormDialog();
   };
