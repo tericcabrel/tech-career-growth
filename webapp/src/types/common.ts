@@ -64,3 +64,15 @@ export type ResourceList = PaginatedList & {
 export type ResourceResponseData = HttpResponse<Resource>;
 export type ResourceListResponseData = HttpResponse<ResourceList>;
 export type ResourcesResponseData = HttpResponse<Resource[]>;
+
+export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'TEXT' | 'OTHER';
+
+export type CreateResourceInput = {
+  name: string;
+  link: string;
+  categoryId: string;
+  type: ResourceType;
+  description: string | null;
+  picture: string | null;
+  extra?: any;
+};

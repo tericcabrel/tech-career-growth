@@ -1,3 +1,5 @@
+import { SelectOption } from '@/types/common';
+
 export const FORM_ERRORS = {
   emailInvalid: 'The email address is invalid.',
   fieldRequired: 'This field is required.',
@@ -22,3 +24,26 @@ export const QUERY_KEYS = {
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };
+
+export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
+  {
+    label: 'Web page',
+    value: 'WEBPAGE',
+  },
+  {
+    label: 'Video',
+    value: 'VIDEO',
+  },
+  {
+    label: 'Picture',
+    value: 'PICTURE',
+  },
+  {
+    label: 'Plain Text',
+    value: 'TEXT',
+  },
+  {
+    label: 'Other',
+    value: 'OTHER',
+  },
+];
