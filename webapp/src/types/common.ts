@@ -76,3 +76,20 @@ export type CreateResourceInput = {
   picture: string | null;
   extra?: any;
 };
+
+export type PartialCategory = {
+  id: string;
+  name: string;
+  value: string;
+  description: string | null;
+  parentId: string | null;
+};
+
+export type CategoryChoice = PartialCategory & {
+  isSelected: boolean;
+  hasChildren: boolean;
+};
+
+export type CategoryTree = CategoryChoice & {
+  children: CategoryTree[];
+};
