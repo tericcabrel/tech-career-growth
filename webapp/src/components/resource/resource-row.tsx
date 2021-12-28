@@ -12,21 +12,16 @@ const ResourceRow = ({ item, triggerDeleteDialog }: Props) => {
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="flex items-center">
-          <div className="flex-shrink-0 h-10 w-10">#</div>
-          <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">{item.name}</div>
-          </div>
-        </div>
+        <div className="text-sm font-medium text-gray-900">{item.name}</div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="text-sm font-medium text-gray-900">{item.category.name}</div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="text-sm font-medium text-gray-900">{item.type}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm font-medium text-gray-900">{item.link}</div>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{item.categoryId}</div>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{item.clickCount || 'none'}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm font-medium text-gray-900">{item.createdAt}</div>
