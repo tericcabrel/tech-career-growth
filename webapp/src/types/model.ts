@@ -22,4 +22,8 @@ export type Resource = {
   clickCount: number;
   createdAt: Date;
   updatedAt: Date;
+  category: {
+    id: string;
+    name: string;
+  };
 };

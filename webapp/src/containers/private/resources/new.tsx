@@ -22,6 +22,9 @@ const NewResource = ({ categories }: Props) => {
   const categoryOptions = useMemo(() => formatOptions(categories), [categories]);
 
   const initialValues: Partial<unknown> = {
+    name: '',
+    description: '',
+    link: '',
     type: RESOURCE_TYPE_OPTIONS[0],
     category: categoryOptions[0],
   };
