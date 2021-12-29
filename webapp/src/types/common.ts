@@ -85,11 +85,7 @@ export type PartialCategory = {
   parentId: string | null;
 };
 
-export type CategoryChoice = PartialCategory & {
-  isSelected: boolean;
-  hasChildren: boolean;
-};
-
-export type CategoryTree = CategoryChoice & {
+export type CategoryTree = PartialCategory & {
   children: CategoryTree[];
+  isChecked: boolean;
 };

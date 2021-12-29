@@ -1,4 +1,4 @@
-import { CategoryChoice, CategoryTree, PartialCategory, SelectOption } from '@/types/common';
+import { CategoryTree, PartialCategory, SelectOption } from '@/types/common';
 import { Category } from '@/types/model';
 import { DEFAULT_RESOURCE } from '@/utils/constants';
 
@@ -25,13 +25,12 @@ export const formatOptions = <T extends { id: string; name: string }>(data: T[])
 export const formatCategoryToCategoryChoice = (categories: PartialCategory[]): CategoryTree[] => {
   return categories.map((category) => ({
     ...category,
-    isSelected: false,
-    hasChildren: false,
+    isChecked: false,
     children: [],
   }));
 };
 
-export const buildCategoryTree = (categories: CategoryChoice[], parentId?: string | null): CategoryTree[] => {
+export const buildCategoryTree = (categories: CategoryTree[], parentId?: string | null): CategoryTree[] => {
   const result: CategoryTree[] = [];
 
   if (parentId) {
