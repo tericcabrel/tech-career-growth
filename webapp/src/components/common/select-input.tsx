@@ -20,7 +20,7 @@ const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>((props: SelectI
     return classNames({
       'cursor-default select-none relative py-2 pl-10 pr-4': true,
       'text-gray-900': !isActive,
-      'text-purple-900 bg-purple-100': isActive,
+      'text-green-900 bg-green-100': isActive,
     });
   };
 
@@ -54,7 +54,7 @@ const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>((props: SelectI
                     <>
                       <span className={generateOptionLabelClasses(selected)}>{option.label}</span>
                       {selected ? (
-                        <span className={'text-amber-600 absolute inset-y-0 left-0 flex items-center pl-3'}>
+                        <span className="text-green-600 absolute inset-y-0 left-0 flex items-center pl-3">
                           <CheckIcon className="w-5 h-5" />
                         </span>
                       ) : null}

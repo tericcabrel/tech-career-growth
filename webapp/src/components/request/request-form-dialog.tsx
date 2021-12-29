@@ -9,6 +9,7 @@ import FormInput from '@/components/common/form-input';
 import TextAreaInput from '@/components/common/textarea-input';
 import Button from '@/components/common/button';
 import SelectInput from '@/components/common/select-input';
+import InfoIcon from '@/components/icons/info';
 
 type Props = {
   closeDialog: () => void;
@@ -73,6 +74,10 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                       Ask a resource
                     </Dialog.Title>
                     <div className="my-6">
+                      <div className="flex pb-3 items-center text-green-700 text-sm">
+                        <InfoIcon className="mr-1" /> You will receive an email with a link when the resource will be
+                        available.
+                      </div>
                       <FormInput
                         label="What is your last name?"
                         name="name"
