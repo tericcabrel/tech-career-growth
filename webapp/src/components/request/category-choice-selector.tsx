@@ -26,7 +26,7 @@ const CategoryChoiceSelector = ({ choices, onChoiceChange, isRoot = true, name =
               <input
                 type="radio"
                 onChange={() => onChoiceChange(choice.id)}
-                checked={choice.isSelected}
+                checked={choice.isChecked}
                 id={`category-${choice.id}`}
                 name={name}
                 className="text-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
@@ -34,7 +34,7 @@ const CategoryChoiceSelector = ({ choices, onChoiceChange, isRoot = true, name =
               <span className="text-sm">{choice.name}</span>
             </label>
           </div>
-          {choice.isSelected && choice.children.length > 0 && (
+          {choice.isChecked && choice.children.length > 0 && (
             <CategoryChoiceSelector
               choices={choice.children}
               onChoiceChange={onChoiceChange}
