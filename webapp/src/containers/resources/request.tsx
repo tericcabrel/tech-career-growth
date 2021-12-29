@@ -5,74 +5,28 @@ import withPublicLayout from '@/components/hof/with-public-layout';
 import Button from '@/components/common/button';
 import CategoryChoiceSelector from '@/components/request/category-choice-selector';
 import { CATEGORY_CHOICE_NOT_SELECTED } from '@/utils/constants';
+import { findCheckedCategoryChoice, updateCategoryChoices } from '@/utils/resource-request';
 
 type Props = {
   categories: CategoryTree[];
 };
 
-const findCheckedCategoryChoice = (categoryChoices: CategoryTree[]) => {
-  const checkedCategoryChoices = categoryChoices.filter((category) => category.isChecked);
-  const checkedCategoryChoicesLength = checkedCategoryChoices.length;
-
-  if (checkedCategoryChoicesLength === 0) {
-    return;
-  }
-
-  if (checkedCategoryChoicesLength === 1) {
-    const [checkedCategory] = checkedCategoryChoices;
-    const hasChildren = categoryChoices.some((category) => category.parentId === checkedCategory.id);
-
-    if (!hasChildren) {
-      return checkedCategory;
-    }
-
-    return;
-  }
-
-  return checkedCategoryChoices.find((category) => Boolean(category.parentId));
-};
-
 const RequestResource = ({ categories }: Props) => {
-  const [choices, setChoices] = useState(categories);
+  const [categoryChoices, setCategoryChoices] = useState(categories);
   const [error, setError] = useState<string | null>(null);
 
   const handleCategoryChoiceChange = (categoryId: string) => {
-    const selectedCategory = choices.find((choice) => choice.id === categoryId);
+    const updatedCategoryChoices = updateCategoryChoices(categoryChoices, categoryId);
 
-    if (!selectedCategory) {
+    if (!updatedCategoryChoices) {
       return;
     }
 
-    const updatedChoices = choices.slice().map((choice) => {
-      if (choice.id === categoryId) {
-        return {
-          ...choice,
-          isSelected: !choice.isChecked,
-        };
-      }
-
-      if (choice.parentId === selectedCategory.parentId) {
-        return {
-          ...choice,
-          isSelected: false,
-        };
-      }
-
-      if (choice.parentId === selectedCategory.id && choice.isChecked) {
-        return {
-          ...choice,
-          isSelected: false,
-        };
-      }
-
-      return choice;
-    });
-
-    setChoices(updatedChoices);
+    setCategoryChoices(updatedCategoryChoices);
   };
 
   const handleSearchResource = () => {
-    const checkedCategoryChoice = findCheckedCategoryChoice(choices);
+    const checkedCategoryChoice = findCheckedCategoryChoice(categoryChoices);
 
     if (!checkedCategoryChoice) {
       setError(CATEGORY_CHOICE_NOT_SELECTED);
@@ -98,7 +52,10 @@ const RequestResource = ({ categories }: Props) => {
         )}
         <h2 className="font-bold mt-6 mb-2">What do you need help with?</h2>
 
-        <CategoryChoiceSelector choices={buildCategoryTree(choices)} onChoiceChange={handleCategoryChoiceChange} />
+        <CategoryChoiceSelector
+          choices={buildCategoryTree(categoryChoices)}
+          onChoiceChange={handleCategoryChoiceChange}
+        />
 
         <div className="flex justify-between mt-8 space-x-10">
           <Button text="Search" className="w-56 justify-center" loading={false} onClick={handleSearchResource} />
