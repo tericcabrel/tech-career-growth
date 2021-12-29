@@ -8,6 +8,9 @@ import { CATEGORY_CHOICE_NOT_SELECTED } from '@/utils/constants';
 import { findCheckedCategoryChoice, updateCategoryChoices } from '@/utils/resource-request';
 import useBooleanState from '@/hooks/use-boolean-state';
 import RequestFormDialog from '@/components/request/request-form-dialog';
+import useLookupResources from '@/hooks/request/query/use-lookup-resources';
+import RequestResourceResult from '@/components/request/request-resource-result';
+import { Resource } from '@/types/model';
 
 type Props = {
   categories: CategoryTree[];
@@ -17,9 +20,25 @@ const RequestResource = ({ categories }: Props) => {
   const [categoryChoices, setCategoryChoices] = useState(categories);
   const [error, setError] = useState<string | null>(null);
   const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
+  const [search, setSearch] = useState<string | null>(null);
+  const [searchResult, setSearchResult] = useState<Resource[] | null>(null);
+
+  const { isLoading } = useLookupResources(
+    { search },
+    {
+      enabled: Boolean(search),
+      keepPreviousData: false,
+      cacheTime: 0,
+      onSuccess: (data) => {
+        setSearchResult(data);
+      },
+    },
+  );
 
   const handleCategoryChoiceChange = (categoryId: string) => {
     const updatedCategoryChoices = updateCategoryChoices(categoryChoices, categoryId);
+
+    setSearch(null);
 
     if (!updatedCategoryChoices) {
       return;
@@ -37,7 +56,8 @@ const RequestResource = ({ categories }: Props) => {
     }
 
     setError(null);
-    console.log(checkedCategoryChoice);
+    setSearchResult(null);
+    setSearch(checkedCategoryChoice.id);
   };
 
   return (
@@ -61,8 +81,10 @@ const RequestResource = ({ categories }: Props) => {
             onChoiceChange={handleCategoryChoiceChange}
           />
 
+          {Boolean(search) && searchResult && <RequestResourceResult data={searchResult} />}
+
           <div className="flex justify-between mt-8 space-x-10">
-            <Button text="Search" className="w-56 justify-center" loading={false} onClick={handleSearchResource} />
+            <Button text="Search" className="w-56 justify-center" loading={isLoading} onClick={handleSearchResource} />
             <Button
               text="I didn't find a resource"
               className="bg-gray-500 text-white w-56 hover:bg-gray-600 justify-center"

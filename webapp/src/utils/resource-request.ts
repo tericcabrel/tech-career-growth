@@ -22,6 +22,30 @@ export const findCheckedCategoryChoice = (categoryChoices: CategoryTree[]) => {
   return checkedCategoryChoices.find((category) => Boolean(category.parentId));
 };
 
+const uncheckSiblingsAndChildren = (
+  currentCategoryChoices: CategoryTree[],
+  selectedCategoryParentId: string | null,
+) => {
+  const siblingCategoryChoice = currentCategoryChoices.find(
+    (category) => category.parentId === selectedCategoryParentId && category.isChecked,
+  );
+
+  if (!siblingCategoryChoice) {
+    return currentCategoryChoices;
+  }
+
+  return currentCategoryChoices.slice().map((categoryChoice) => {
+    if (siblingCategoryChoice.id === categoryChoice.id || categoryChoice.parentId === siblingCategoryChoice.id) {
+      return {
+        ...categoryChoice,
+        isChecked: false,
+      };
+    }
+
+    return categoryChoice;
+  });
+};
+
 export const updateCategoryChoices = (currentCategoryChoices: CategoryTree[], selectedCategoryId: string) => {
   const selectedCategory = currentCategoryChoices.find((categoryChoice) => categoryChoice.id === selectedCategoryId);
 
@@ -29,25 +53,13 @@ export const updateCategoryChoices = (currentCategoryChoices: CategoryTree[], se
     return;
   }
 
-  return currentCategoryChoices.slice().map((categoryChoice) => {
+  const updatedCategoriesChoice = uncheckSiblingsAndChildren(currentCategoryChoices, selectedCategory.parentId);
+
+  return updatedCategoriesChoice.map((categoryChoice) => {
     if (categoryChoice.id === selectedCategoryId) {
       return {
         ...categoryChoice,
         isChecked: !categoryChoice.isChecked,
-      };
-    }
-
-    if (categoryChoice.parentId === selectedCategory.parentId) {
-      return {
-        ...categoryChoice,
-        isChecked: false,
-      };
-    }
-
-    if (categoryChoice.parentId === selectedCategory.id && categoryChoice.isChecked) {
-      return {
-        ...categoryChoice,
-        isChecked: false,
       };
     }
 
