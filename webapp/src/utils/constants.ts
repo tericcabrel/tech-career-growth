@@ -23,6 +23,7 @@ export const CATEGORY_CHOICE_NOT_SELECTED = 'Please select a category to search 
 export const QUERY_KEYS = {
   getCategories: 'getCategories',
   getResources: 'getResources',
+  lookupResources: 'lookupResources',
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };
