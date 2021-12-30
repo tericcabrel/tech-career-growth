@@ -97,6 +97,7 @@ model Category {
   parent        Category?  @relation(name: "parent_category", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   subCategories Category[] @relation("parent_category")
   resources     Resource[]
+  requests      Request[]
 
   @@index([name])
   @@map("categories")
@@ -119,10 +120,43 @@ model Resource {
   picture     String?      @db.VarChar(255)
   categoryId  String       @map("category_id")
   extra       Json?        @db.Json
-  clickCount  Int          @map("click_count") @db.Int @default(0)
+  clickCount  Int          @default(0) @map("click_count") @db.Int
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
   category    Category     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@map("resources")
+}
+
+enum RequestStatus {
+  PENDING
+  IN_PROGRESS
+  DONE
+  ARCHIVED
+}
+
+model Request {
+  id          String        @id @default(cuid())
+  name        String        @unique @db.VarChar(50)
+  email       String        @unique @db.VarChar(50)
+  type        RequestStatus @default(PENDING)
+  description String?       @db.Text
+  categoryId  String?       @map("category_id")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  category    Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  replies     Reply[]
+
+  @@map("requests")
+}
+
+model Reply {
+  id        String   @id @default(cuid())
+  message   String   @db.Text
+  requestId String   @map("request_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
+
+  @@map("replies")
 }
