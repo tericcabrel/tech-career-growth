@@ -34,11 +34,15 @@ export type Request = {
   id: string;
   userName: string;
   userEmail: string;
-  type: RequestStatus;
+  status: RequestStatus;
   description: string | null;
   categoryId: string | null;
   createdAt: Date;
   updatedAt: Date;
+  category: {
+    id: string;
+    name: string;
+  } | null;
 };
 
 export type Reply = {

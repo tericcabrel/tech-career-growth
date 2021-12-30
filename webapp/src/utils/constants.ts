@@ -27,6 +27,7 @@ export const QUERY_KEYS = {
   getCategories: 'getCategories',
   getResources: 'getResources',
   lookupResources: 'lookupResources',
+  getRequests: 'getRequests',
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };
@@ -51,5 +52,28 @@ export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
   {
     label: 'Other',
     value: 'OTHER',
+  },
+];
+
+export const REQUEST_STATUS_OPTIONS: SelectOption[] = [
+  {
+    label: 'None',
+    value: '',
+  },
+  {
+    label: 'Pending',
+    value: 'PENDING',
+  },
+  {
+    label: 'In progress',
+    value: 'IN_PROGRESS',
+  },
+  {
+    label: 'Done',
+    value: 'DONE',
+  },
+  {
+    label: 'Archived',
+    value: 'ARCHIVED',
   },
 ];
