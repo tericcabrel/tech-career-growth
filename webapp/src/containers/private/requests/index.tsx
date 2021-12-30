@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Request } from '@/types/model';
+import { Request, RequestStatus } from '@/types/model';
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
 import useBooleanState from '@/hooks/use-boolean-state';
 import { NETWORK_ERROR_MESSAGE, REQUEST_DELETED_MESSAGE, REQUEST_STATUS_OPTIONS } from '@/utils/constants';
@@ -33,7 +33,7 @@ const RequestsList = () => {
   const { data, refetch } = useRetrieveRequests(
     {
       page: searchParams.page,
-      status: searchParams.status?.value,
+      status: searchParams.status?.value as RequestStatus,
     },
     { keepPreviousData: true, refetchOnWindowFocus: false },
   );
