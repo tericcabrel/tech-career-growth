@@ -22,6 +22,7 @@ export const CATEGORY_CHOICE_NOT_SELECTED = 'Please select a category to search 
 
 export const REQUEST_CREATED_MESSAGE = 'The request created successfully.';
 export const REQUEST_DELETED_MESSAGE = 'The request deleted successfully.';
+export const REQUEST_UPDATED_MESSAGE = 'The request deleted successfully.';
 
 export const QUERY_KEYS = {
   getCategories: 'getCategories',
