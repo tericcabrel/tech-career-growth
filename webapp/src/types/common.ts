@@ -1,4 +1,4 @@
-import { Category, Resource } from '@/types/model';
+import { Category, Resource, ResourceType, Request } from '@/types/model';
 
 export type SelectOption = {
   label: string;
@@ -65,8 +65,6 @@ export type ResourceResponseData = HttpResponse<Resource>;
 export type ResourceListResponseData = HttpResponse<ResourceList>;
 export type ResourcesResponseData = HttpResponse<Resource[]>;
 
-export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'TEXT' | 'OTHER';
-
 export type CreateResourceInput = {
   name: string;
   link: string;
@@ -89,3 +87,13 @@ export type CategoryTree = PartialCategory & {
   children: CategoryTree[];
   isChecked: boolean;
 };
+
+export type CreateRequestInput = {
+  userName: string;
+  userEmail: string;
+  description?: string;
+  categoryId: string | null;
+};
+
+export type RequestResponseData = HttpResponse<Request>;
+export type RequestResponseListData = HttpResponse<Request[]>;

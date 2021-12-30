@@ -3,13 +3,16 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Dialog, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 import { SelectOption } from '@/types/common';
-import { FORM_ERRORS } from '@/utils/constants';
+import { FORM_ERRORS, NETWORK_ERROR_MESSAGE, REQUEST_CREATED_MESSAGE } from '@/utils/constants';
 import FormInput from '@/components/common/form-input';
 import TextAreaInput from '@/components/common/textarea-input';
 import Button from '@/components/common/button';
 import SelectInput from '@/components/common/select-input';
 import InfoIcon from '@/components/icons/info';
+import useCreateRequest from '@/hooks/request/mutation/use-create-request';
+import { getErrorMessage } from '@/utils/axios';
 
 type Props = {
   closeDialog: () => void;
@@ -17,8 +20,8 @@ type Props = {
 };
 
 const requestFormSchema = yup.object().shape({
-  name: yup.string().required(FORM_ERRORS.fieldRequired),
-  email: yup.string().required(FORM_ERRORS.fieldRequired).email(FORM_ERRORS.emailInvalid),
+  userName: yup.string().required(FORM_ERRORS.fieldRequired),
+  userEmail: yup.string().required(FORM_ERRORS.fieldRequired).email(FORM_ERRORS.emailInvalid),
   description: yup.string(),
   category: yup.object().required(FORM_ERRORS.fieldRequired),
 });
@@ -26,9 +29,7 @@ const requestFormSchema = yup.object().shape({
 type CategoryFormValues = yup.InferType<typeof requestFormSchema>;
 
 const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
-  const handleSubmitRequest = (values: CategoryFormValues) => {
-    console.log(values);
-  };
+  const createRequestMutation = useCreateRequest();
 
   const formMethods = useForm<any>({
     defaultValues: {
@@ -36,6 +37,29 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
     },
     resolver: yupResolver(requestFormSchema),
   });
+
+  const handleSubmitRequest = (values: CategoryFormValues) => {
+    console.log(values);
+
+    createRequestMutation.mutate(
+      {
+        userName: values.userName,
+        userEmail: values.userEmail,
+        description: values.description,
+        categoryId: values.category.value,
+      },
+      {
+        onError: (error) => {
+          toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+        },
+        onSuccess: async () => {
+          toast.success(REQUEST_CREATED_MESSAGE);
+          formMethods.reset();
+          closeDialog();
+        },
+      },
+    );
+  };
 
   return (
     <Transition.Root show as={Fragment}>
@@ -80,14 +104,14 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                       </div>
                       <FormInput
                         label="What is your last name?"
-                        name="name"
+                        name="userName"
                         type="text"
                         placeholder="Eg.: John"
                         isRequired
                       />
                       <FormInput
                         label="Email address"
-                        name="email"
+                        name="userEmail"
                         type="text"
                         placeholder="Eg.: john.doe@email.com"
                         isRequired

@@ -1,5 +1,3 @@
-import { ResourceType } from '@/types/common';
-
 export type Category = {
   id: string;
   name: string;
@@ -9,6 +7,8 @@ export type Category = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'TEXT' | 'OTHER';
 
 export type Resource = {
   id: string;
@@ -26,4 +26,25 @@ export type Resource = {
     id: string;
     name: string;
   };
+};
+
+export type RequestStatus = 'PENDING' | 'IN_PROGRESS' | 'DONE' | 'ARCHIVED';
+
+export type Request = {
+  id: string;
+  userName: string;
+  userEmail: string;
+  type: RequestStatus;
+  description: string | null;
+  categoryId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Reply = {
+  id: string;
+  message: string;
+  requestId: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
