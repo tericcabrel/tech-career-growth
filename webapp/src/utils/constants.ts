@@ -20,6 +20,9 @@ export const RESOURCE_UPDATED_MESSAGE = 'The resource updated successfully.';
 
 export const CATEGORY_CHOICE_NOT_SELECTED = 'Please select a category to search into.';
 
+export const REQUEST_CREATED_MESSAGE = 'The request created successfully.';
+export const REQUEST_DELETED_MESSAGE = 'The request deleted successfully.';
+
 export const QUERY_KEYS = {
   getCategories: 'getCategories',
   getResources: 'getResources',

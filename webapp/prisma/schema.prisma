@@ -137,8 +137,8 @@ enum RequestStatus {
 
 model Request {
   id          String        @id @default(cuid())
-  name        String        @unique @db.VarChar(50)
-  email       String        @unique @db.VarChar(50)
+  userName    String        @db.VarChar(50) @map("user_name")
+  userEmail   String        @db.VarChar(50) @map("user_email")
   type        RequestStatus @default(PENDING)
   description String?       @db.Text
   categoryId  String?       @map("category_id")
