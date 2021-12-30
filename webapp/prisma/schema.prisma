@@ -139,7 +139,7 @@ model Request {
   id          String        @id @default(cuid())
   userName    String        @db.VarChar(50) @map("user_name")
   userEmail   String        @db.VarChar(50) @map("user_email")
-  type        RequestStatus @default(PENDING)
+  status      RequestStatus @default(PENDING)
   description String?       @db.Text
   categoryId  String?       @map("category_id")
   createdAt   DateTime      @default(now()) @map("created_at")
