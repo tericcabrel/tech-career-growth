@@ -22,7 +22,7 @@ export type Resource = {
   clickCount: number;
   createdAt: Date;
   updatedAt: Date;
-  category: {
+  category?: {
     id: string;
     name: string;
   };
@@ -39,7 +39,7 @@ export type Request = {
   categoryId: string | null;
   createdAt: Date;
   updatedAt: Date;
-  category: {
+  category?: {
     id: string;
     name: string;
   } | null;
