@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { Request } from '@/types/model';
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
 import useBooleanState from '@/hooks/use-boolean-state';
 import { NETWORK_ERROR_MESSAGE, REQUEST_DELETED_MESSAGE, REQUEST_STATUS_OPTIONS } from '@/utils/constants';
@@ -13,6 +14,7 @@ import Pagination from '@/components/pagination/pagination';
 import ConfirmDialog from '@/components/common/confirm-dialog';
 import useRetrieveRequests from '@/hooks/request/query/use-retrieve-requests';
 import useDeleteRequest from '@/hooks/request/mutation/use-delete-request';
+import RequestReplyFormDialog from '@/components/request/request-reply-form-dialog';
 
 type RequestParams = {
   status: SelectOption;
@@ -20,8 +22,9 @@ type RequestParams = {
 };
 
 const RequestsList = () => {
-  const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
-  const [selectedId, setSelectedId] = useState<string | null>();
+  const [isConfirmDialogOpen, openConfirmDialog, closeConfirmDialog] = useBooleanState(false);
+  const [isEditingRequest, setEditingRequest] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<Request | null>();
   const [searchParams, setSearchParams] = useState<RequestParams>({
     page: 1,
     status: REQUEST_STATUS_OPTIONS[0],
@@ -35,24 +38,29 @@ const RequestsList = () => {
     { keepPreviousData: true, refetchOnWindowFocus: false },
   );
 
-  const onDeleteRequestClick = (id: string) => {
-    setSelectedId(id);
-    openDialog();
+  const onDeleteRequestClick = (item: Request) => {
+    setSelectedRequest(item);
+    openConfirmDialog();
+  };
+
+  const onEditRequestClick = (item: Request) => {
+    setSelectedRequest(item);
+    setEditingRequest(true);
   };
 
   const handleDeleteRequestClick = async () => {
-    if (!selectedId) {
+    if (!selectedRequest) {
       return;
     }
 
-    deleteMutation.mutate(selectedId, {
+    deleteMutation.mutate(selectedRequest.id, {
       onError: (error) => {
-        closeDialog();
+        closeConfirmDialog();
         toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
       },
       onSuccess: async () => {
         await refetch();
-        closeDialog();
+        closeConfirmDialog();
         toast.success(REQUEST_DELETED_MESSAGE);
       },
     });
@@ -103,7 +111,8 @@ const RequestsList = () => {
                         <RequestRow
                           key={item.id}
                           item={item}
-                          triggerDeleteDialog={() => onDeleteRequestClick(item.id)}
+                          triggerDeleteDialog={() => onDeleteRequestClick(item)}
+                          triggerEditDialog={() => onEditRequestClick(item)}
                         />
                       ))}
 
@@ -127,10 +136,14 @@ const RequestsList = () => {
       </div>
       <ConfirmDialog
         isLoading={false}
-        open={isDialogOpen}
+        open={isConfirmDialogOpen}
         onConfirmButtonClick={handleDeleteRequestClick}
-        onCancelButtonClick={closeDialog}
+        onCancelButtonClick={closeConfirmDialog}
       />
+
+      {isEditingRequest && selectedRequest && (
+        <RequestReplyFormDialog closeDialog={() => setEditingRequest(false)} request={selectedRequest} />
+      )}
     </div>
   );
 };
