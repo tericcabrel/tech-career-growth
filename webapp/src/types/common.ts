@@ -1,4 +1,4 @@
-import { Category, Resource, ResourceType, Request } from '@/types/model';
+import { Category, Resource, ResourceType, Request, RequestStatus } from '@/types/model';
 
 export type SelectOption = {
   label: string;
@@ -105,3 +105,9 @@ export type RequestList = PaginatedList & {
   items: Request[];
 };
 export type RequestListResponseData = HttpResponse<RequestList>;
+
+export type RequestReplyInput = {
+  id: string;
+  status: RequestStatus;
+  message: string | null;
+};

@@ -4,10 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Dialog, Transition } from '@headlessui/react';
 import { Request } from '@/types/model';
-import { FORM_ERRORS, REQUEST_STATUS_OPTIONS } from '@/utils/constants';
+import { FORM_ERRORS, NETWORK_ERROR_MESSAGE, REQUEST_STATUS_OPTIONS, REQUEST_UPDATED_MESSAGE } from '@/utils/constants';
 import TextAreaInput from '@/components/common/textarea-input';
 import Button from '@/components/common/button';
 import SelectInput from '@/components/common/select-input';
+import { useRequestReply } from '@/hooks/request/mutation/use-request-reply';
+import { toast } from 'react-toastify';
+import { getErrorMessage } from '@/utils/axios';
 
 type Props = {
   closeDialog: () => void;
@@ -22,6 +25,8 @@ const requestReplyFormSchema = yup.object().shape({
 type RequestReplyFormValues = yup.InferType<typeof requestReplyFormSchema>;
 
 const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
+  const requestReplyMutation = useRequestReply();
+
   const formMethods = useForm<any>({
     defaultValues: {
       status: REQUEST_STATUS_OPTIONS.find((option) => option.value === request.status) || REQUEST_STATUS_OPTIONS[0],
@@ -29,8 +34,26 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
     resolver: yupResolver(requestReplyFormSchema),
   });
 
+  const hasReply = request.replies.length > 0;
+
   const handleSubmitRequest = (values: RequestReplyFormValues) => {
-    console.log(values);
+    requestReplyMutation.mutate(
+      {
+        id: request.id,
+        message: values.message || null,
+        status: values.status.value,
+      },
+      {
+        onError: (error) => {
+          closeDialog();
+          toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+        },
+        onSuccess: async () => {
+          closeDialog();
+          toast.success(REQUEST_UPDATED_MESSAGE);
+        },
+      },
+    );
   };
 
   return (
@@ -70,15 +93,15 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                       Edit a request
                     </Dialog.Title>
                     <div className="my-6">
-                      <div className="w-full mb-6 space-y-2">
+                      <div className="w-full mb-6 space-y-2 text-sm">
                         <div>
-                          <b>User name:</b> {request.userName}
+                          <span className="font-bold text-gray-700">User name:</span> {request.userName}
                         </div>
                         <div>
-                          <b>User email:</b> {request.userEmail}
+                          <span className="font-bold text-gray-700">User email:</span> {request.userEmail}
                         </div>
                         <div>
-                          <b>Message:</b>
+                          <span className="font-bold text-gray-700">Message:</span>
                           <p>{request.description || 'No message'}</p>
                         </div>
                       </div>
@@ -94,12 +117,22 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                           />
                         </label>
                       </div>
+
                       <div className="w-full">
-                        <TextAreaInput
-                          label="Reply to the user"
-                          name="message"
-                          placeholder={`Hi! ${request.userName} here is the link that will help you to improve...`}
-                        />
+                        {hasReply ? (
+                          <div className="text-sm">
+                            <div className="font-bold text-gray-700 flex justify-between">
+                              Your reply: <div>{request.replies[0].createdAt}</div>
+                            </div>
+                            <p className="mt-3">{request.replies[0].message || 'No message'}</p>
+                          </div>
+                        ) : (
+                          <TextAreaInput
+                            label="Reply to the user"
+                            name="message"
+                            placeholder={`Hi! ${request.userName} here is the link that will help you to improve...`}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -109,7 +142,7 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                       className="sm:ml-3 sm:w-auto sm:text-sm"
                       type="submit"
                       text="Save"
-                      loading={formMethods.formState.isSubmitting}
+                      loading={formMethods.formState.isSubmitting || requestReplyMutation.isLoading}
                     />
                     <Button
                       bgColor="whiteGray"
