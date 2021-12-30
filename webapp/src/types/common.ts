@@ -98,7 +98,7 @@ export type CreateRequestInput = {
 export type RequestResponseData = HttpResponse<Request>;
 export type RequestResponseListData = HttpResponse<Request[]>;
 export type RequestListParams = {
-  status?: string;
+  status?: RequestStatus;
   page: number;
 };
 export type RequestList = PaginatedList & {

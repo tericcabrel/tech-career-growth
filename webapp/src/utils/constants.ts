@@ -56,6 +56,8 @@ export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
   },
 ];
 
+export const PAGE_LIMIT = 15;
+
 export const REQUEST_STATUS_OPTIONS: SelectOption[] = [
   {
     label: 'None',
