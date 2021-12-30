@@ -70,7 +70,7 @@ const ResourcesList = () => {
     });
   };
 
-  const handleYearGroupChange = (value: SelectOption) => {
+  const handleCategoryChange = (value: SelectOption) => {
     setSearchParams((prevValue) => ({
       ...prevValue,
       page: 1,
@@ -103,7 +103,7 @@ const ResourcesList = () => {
               <div className="relative mr-6 text-gray-500 focus-within:text-green-600 dark:focus-within:text-green-400">
                 <input
                   className="block w-full pl-10 mt-1 text-sm text-black border-gray-300 shadow-sm rounded-md focus:border-green-400 focus:outline-none focus:shadow-outline-green"
-                  placeholder="Jane Doe"
+                  placeholder="search by name..."
                   type="search"
                   value={searchParams.search}
                   onChange={handleSearchChange}
@@ -114,9 +114,10 @@ const ResourcesList = () => {
               </div>
 
               <SelectInput
+                className="w-72"
                 options={formatCategoryOption(categoryListData || [])}
                 value={searchParams.category}
-                onChange={handleYearGroupChange}
+                onChange={handleCategoryChange}
               />
             </div>
 

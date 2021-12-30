@@ -12,8 +12,8 @@ export const getInputErrorMessage = (formErrors: Record<string, any>, inputName?
   }
 };
 
-export const formatCategoryOption = (resources: Category[]) => {
-  const resourceOptions = resources.map((resource): SelectOption => ({ label: resource.name, value: resource.name }));
+export const formatCategoryOption = (categories: Category[]) => {
+  const resourceOptions = categories.map((category): SelectOption => ({ label: category.name, value: category.id }));
 
   return [DEFAULT_RESOURCE].concat(resourceOptions);
 };
