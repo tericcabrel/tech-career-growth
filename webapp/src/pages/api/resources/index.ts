@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/prisma';
+import prisma, { Prisma } from '@/lib/prisma';
 import { ResourceListResponseData, ResourceSearchParams } from '@/types/common';
 import { PAGE_LIMIT } from '@/utils/constants';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResourceListResponseData>) {
   const { search, page, category } = req.query as unknown as ResourceSearchParams;
-  const filter: any = {
+  const filter: Prisma.ResourceWhereInput = {
     name: { contains: search },
     categoryId: { equals: category },
   };
