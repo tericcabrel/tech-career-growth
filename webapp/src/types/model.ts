@@ -43,7 +43,7 @@ export type Request = {
     id: string;
     name: string;
   } | null;
-  replies: Reply[];
+  replies?: Reply[];
 };
 
 export type Reply = {

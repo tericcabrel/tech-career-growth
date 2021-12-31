@@ -35,7 +35,6 @@ const Login = ({ csrfToken }: Props) => {
   });
 
   const handleLogin = async (values: LoginFormValues) => {
-    console.log(values);
     setSubmitting(true);
     try {
       signIn('app-login', {
@@ -48,7 +47,6 @@ const Login = ({ csrfToken }: Props) => {
         setSubmitting(false);
       }, MINIMUM_ACTIVITY_TIMEOUT);
     } catch (error) {
-      console.error(error);
       setSubmitting(false);
     }
   };

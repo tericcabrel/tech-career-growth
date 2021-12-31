@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Category, Resource } from '@/types/model';
 import { formatOptions } from '@/utils/forms';
 import { NETWORK_ERROR_MESSAGE, RESOURCE_TYPE_OPTIONS, RESOURCE_UPDATED_MESSAGE } from '@/utils/constants';
-import { getErrorMessage } from '@/utils/axios';
+import { getErrorMessage } from '@/utils/http-client';
 import { ResourceFormValues, resourceFormSchema } from '@/components/resource/form-schema';
 import ResourceForm from '@/components/resource/resource-form';
 import useUpdateResource from '@/hooks/request/mutation/use-update-resource';
@@ -59,7 +59,7 @@ const UpdateResource = ({ categories, resource }: Props) => {
 
   return (
     <div className="py-5">
-      <h1 className="text-4xl font-bold mb-10">Update resource</h1>
+      <h1 className="text-2xl font-bold mb-10">Update resource</h1>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleUpdateResource)}>
           <ResourceForm

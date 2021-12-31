@@ -14,7 +14,7 @@ type SelectInputProps = {
 };
 
 const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>((props: SelectInputProps, ref) => {
-  const { className = 'w-40', onChange, options, value: selectedValue } = props;
+  const { className = 'w-44', onChange, options, value: selectedValue } = props;
 
   const generateOptionClasses = (isActive: boolean) => {
     return classNames({
@@ -55,7 +55,7 @@ const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>((props: SelectI
                       <span className={generateOptionLabelClasses(selected)}>{option.label}</span>
                       {selected ? (
                         <span className="text-green-600 absolute inset-y-0 left-0 flex items-center pl-3">
-                          <CheckIcon className="w-5 h-5" />
+                          <CheckIcon />
                         </span>
                       ) : null}
                     </>

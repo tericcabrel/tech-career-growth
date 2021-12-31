@@ -6,12 +6,9 @@ import { toast } from 'react-toastify';
 import { Category } from '@/types/model';
 import { formatOptions } from '@/utils/forms';
 import { NETWORK_ERROR_MESSAGE, RESOURCE_CREATED_MESSAGE, RESOURCE_TYPE_OPTIONS } from '@/utils/constants';
-import { getErrorMessage } from '@/utils/axios';
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
-import ResourceForm from '@/components/resource/resource-form';
-import Loader from '@/components/common/loader';
+import { getErrorMessage } from '@/utils/http-client';
 import { ResourceFormValues, resourceFormSchema } from '@/components/resource/form-schema';
-import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories';
+import ResourceForm from '@/components/resource/resource-form';
 import useCreateResource from '@/hooks/request/mutation/use-create-resource';
 
 type Props = {
@@ -61,7 +58,7 @@ const NewResource = ({ categories }: Props) => {
 
   return (
     <div className="py-5">
-      <h1 className="text-4xl font-bold">Add new resource</h1>
+      <h1 className="text-2xl font-bold mb-10">Add new resource</h1>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleCreateResource)}>
           <ResourceForm
@@ -74,18 +71,4 @@ const NewResource = ({ categories }: Props) => {
   );
 };
 
-const NewResourceLoader = () => {
-  const { data, isLoading } = useRetrieveCategories();
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (!isLoading && data) {
-    return <NewResource categories={data} />;
-  }
-
-  return null;
-};
-
-export default withPrivateLayout(NewResourceLoader, { title: 'New resource' });
+export default NewResource;

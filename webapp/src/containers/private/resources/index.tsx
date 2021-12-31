@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
+import withPrivateLayout from '@/components/hof/with-private-layout';
 import ConfirmDialog from '@/components/common/confirm-dialog';
 import useBooleanState from '@/hooks/use-boolean-state';
 import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories';
 import { DEFAULT_RESOURCE, NETWORK_ERROR_MESSAGE, RESOURCE_DELETED_MESSAGE } from '@/utils/constants';
-import { getErrorMessage } from '@/utils/axios';
+import { getErrorMessage } from '@/utils/http-client';
 import PlusIcon from '@/components/icons/plus';
 import SelectInput from '@/components/common/select-input';
 import { formatCategoryOption } from '@/utils/forms';
@@ -95,8 +95,8 @@ const ResourcesList = () => {
 
   return (
     <div className="py-5">
-      <div className="container px-6 mx-auto grid">
-        <h1 className="text-4xl font-bold">Resources List</h1>
+      <div>
+        <h1 className="text-2xl font-bold">Resources List</h1>
         <div className="flex flex-col">
           <div className="py-4 flex justify-between">
             <div className="flex w-auto">

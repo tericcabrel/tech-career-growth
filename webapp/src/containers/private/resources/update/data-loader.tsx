@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
+import withPrivateLayout from '@/components/hof/with-private-layout';
 import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories';
 import Loader from '@/components/common/loader';
 import useRetrieveResource from '@/hooks/request/query/use-retrieve-resource';
