@@ -113,7 +113,7 @@ enum ResourceType {
 
 model Resource {
   id          String       @id @default(cuid())
-  name        String       @unique @db.VarChar(50)
+  name        String       @unique @db.VarChar(255)
   type        ResourceType @default(WEBPAGE)
   link        String       @db.VarChar(255)
   description String?      @db.Text

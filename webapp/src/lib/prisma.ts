@@ -2,7 +2,7 @@
 // exhausting your database connection limit.
 // Learn more: https://pris.ly/d/help/next-js-best-practices
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 declare global {
   // eslint-disable-next-line no-var
@@ -20,4 +20,5 @@ if (process.env.NODE_ENV === 'production') {
   prisma = global.prisma;
 }
 
+export { Prisma };
 export default prisma;
