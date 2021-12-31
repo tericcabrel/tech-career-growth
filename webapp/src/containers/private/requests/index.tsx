@@ -4,8 +4,8 @@ import { Request, RequestStatus } from '@/types/model';
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
 import useBooleanState from '@/hooks/use-boolean-state';
 import { NETWORK_ERROR_MESSAGE, REQUEST_DELETED_MESSAGE, REQUEST_STATUS_OPTIONS } from '@/utils/constants';
-import { getErrorMessage } from '@/utils/axios';
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
+import { getErrorMessage } from '@/utils/http-client';
+import withPrivateLayout from '@/components/hof/with-private-layout';
 import SelectInput from '@/components/common/select-input';
 import TableRowHeader from '@/components/table/table-row-header';
 import RequestRow from '@/components/request/request-row';
@@ -83,8 +83,8 @@ const RequestsList = () => {
 
   return (
     <div className="py-5">
-      <div className="container px-6 mx-auto grid">
-        <h1 className="text-4xl font-bold">Requests List</h1>
+      <div>
+        <h1 className="text-2xl font-bold">Requests List</h1>
         <div className="flex flex-col">
           <div className="py-4 flex justify-between">
             <SelectInput options={REQUEST_STATUS_OPTIONS} value={searchParams.status} onChange={handleStatusChange} />

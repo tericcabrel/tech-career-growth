@@ -24,4 +24,4 @@ function withPrivateLayout<T>(WrappedComponent: ComponentType<T>, props: Props) 
   };
 }
 
-export { withPrivateLayout };
+export default withPrivateLayout;

@@ -3,8 +3,8 @@ import { Controller, useFormContext } from 'react-hook-form';
 import SelectInput from '@/components/common/select-input';
 import FormInput from '@/components/common/form-input';
 import Button from '@/components/common/button';
-import { SelectOption } from '@/types/common';
 import TextAreaInput from '@/components/common/textarea-input';
+import { SelectOption } from '@/types/common';
 import { RESOURCE_TYPE_OPTIONS } from '@/utils/constants';
 
 type Props = {
@@ -19,23 +19,23 @@ const ResourceForm = ({ categoryOptions, isSubmitting, isEditMode = false }: Pro
   return (
     <div className="px-8 py-8 w-1/2 mx-auto bg-white rounded-lg shadow-md">
       <div className="w-full flex justify-between">
-        <div className="wp-45">
+        <div>
           <label className="block text-sm mb-6">
             <span className="font-bold text-gray-700">Category*</span>
             <Controller
               name="category"
               control={control}
-              render={({ field }) => <SelectInput className="w-full" options={categoryOptions} {...field} />}
+              render={({ field }) => <SelectInput className="w-72" options={categoryOptions} {...field} />}
             />
           </label>
         </div>
-        <div className="wp-45">
+        <div>
           <label className="block text-sm mb-6">
             <span className="font-bold text-gray-700">Resource type*</span>
             <Controller
               name="type"
               control={control}
-              render={({ field }) => <SelectInput className="w-full" options={RESOURCE_TYPE_OPTIONS} {...field} />}
+              render={({ field }) => <SelectInput className="w-44" options={RESOURCE_TYPE_OPTIONS} {...field} />}
             />
           </label>
         </div>

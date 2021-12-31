@@ -12,7 +12,7 @@ import Button from '@/components/common/button';
 import SelectInput from '@/components/common/select-input';
 import InfoIcon from '@/components/icons/info';
 import useCreateRequest from '@/hooks/request/mutation/use-create-request';
-import { getErrorMessage } from '@/utils/axios';
+import { getErrorMessage } from '@/utils/http-client';
 
 type Props = {
   closeDialog: () => void;
@@ -26,7 +26,7 @@ const requestFormSchema = yup.object().shape({
   category: yup.object().required(FORM_ERRORS.fieldRequired),
 });
 
-type CategoryFormValues = yup.InferType<typeof requestFormSchema>;
+type RequestFormValues = yup.InferType<typeof requestFormSchema>;
 
 const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
   const createRequestMutation = useCreateRequest();
@@ -38,9 +38,7 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
     resolver: yupResolver(requestFormSchema),
   });
 
-  const handleSubmitRequest = (values: CategoryFormValues) => {
-    console.log(values);
-
+  const handleSubmitRequest = (values: RequestFormValues) => {
     createRequestMutation.mutate(
       {
         userName: values.userName,

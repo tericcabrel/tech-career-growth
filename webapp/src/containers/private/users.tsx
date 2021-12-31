@@ -1,9 +1,9 @@
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
+import withPrivateLayout from '@/components/hof/with-private-layout';
 
 const UsersList = () => {
   return (
     <div className="py-5">
-      <h1 className="text-4xl font-bold">Users List</h1>
+      <h1 className="text-2xl font-bold">Users List</h1>
     </div>
   );
 };

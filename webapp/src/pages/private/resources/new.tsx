@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic';
 
-const NewResource = dynamic(() => import('@/containers/private/resources/new'));
+const NewDataLoaderResource = dynamic(() => import('@/containers/private/resources/new/data-loader'));
 
 const NewResourcePage = () => {
-  return <NewResource />;
+  return <NewDataLoaderResource />;
 };
 
 NewResourcePage.auth = {

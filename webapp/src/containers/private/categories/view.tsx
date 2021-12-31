@@ -1,25 +1,22 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { Category } from '@/types/model';
 import useBooleanState from '@/hooks/use-boolean-state';
-import { withPrivateLayout } from '@/components/hof/with-private-layout';
-import CategoryTree from '@/components/category/category-tree';
-import { CategoryProvider, useCategoryTree } from '@/components/category/category-context';
-import ConfirmDialog from '@/components/common/confirm-dialog';
-import CategoryFormDialog from '@/components/category/category-form-dialog';
-import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories';
-import Loader from '@/components/common/loader';
-import Button from '@/components/common/button';
+import { useCategoryTree } from '@/components/category/category-context';
 import useCreateCategory from '@/hooks/request/mutation/use-create-category';
+import useDeleteCategory from '@/hooks/request/mutation/use-delete-category';
+import { useUpdateCategory } from '@/hooks/request/mutation/use-update-category';
+import { getErrorMessage } from '@/utils/http-client';
 import {
   CATEGORY_CREATED_MESSAGE,
   CATEGORY_DELETED_MESSAGE,
   CATEGORY_UPDATED_MESSAGE,
   NETWORK_ERROR_MESSAGE,
 } from '@/utils/constants';
-import { getErrorMessage } from '@/utils/axios';
-import useDeleteCategory from '@/hooks/request/mutation/use-delete-category';
-import { Category } from '@/types/model';
-import { useUpdateCategory } from '@/hooks/request/mutation/use-update-category';
+import Button from '@/components/common/button';
+import CategoryTree from '@/components/category/category-tree';
+import ConfirmDialog from '@/components/common/confirm-dialog';
+import CategoryFormDialog from '@/components/category/category-form-dialog';
 
 type Props = {
   onCategoryUpdateSuccess: () => Promise<void>;
@@ -164,24 +161,4 @@ const CategoryView = ({ onCategoryUpdateSuccess }: Props) => {
   );
 };
 
-const CategoriesList = () => {
-  const { data, isLoading, refetch } = useRetrieveCategories();
-
-  console.log(data);
-
-  const refetchCategories = async () => {
-    await refetch();
-  };
-
-  if (isLoading || !data) {
-    return <Loader />;
-  }
-
-  return (
-    <CategoryProvider value={data}>
-      <CategoryView onCategoryUpdateSuccess={refetchCategories} />
-    </CategoryProvider>
-  );
-};
-
-export default withPrivateLayout(CategoriesList, { title: 'Categories List' });
+export default CategoryView;

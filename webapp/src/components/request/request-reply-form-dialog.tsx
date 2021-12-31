@@ -10,7 +10,7 @@ import Button from '@/components/common/button';
 import SelectInput from '@/components/common/select-input';
 import { useRequestReply } from '@/hooks/request/mutation/use-request-reply';
 import { toast } from 'react-toastify';
-import { getErrorMessage } from '@/utils/axios';
+import { getErrorMessage } from '@/utils/http-client';
 
 type Props = {
   closeDialog: () => void;
@@ -34,7 +34,7 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
     resolver: yupResolver(requestReplyFormSchema),
   });
 
-  const hasReply = request.replies.length > 0;
+  const replies = request.replies ?? [];
 
   const handleSubmitRequest = (values: RequestReplyFormValues) => {
     requestReplyMutation.mutate(
@@ -119,12 +119,12 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                       </div>
 
                       <div className="w-full">
-                        {hasReply ? (
+                        {replies.length > 0 ? (
                           <div className="text-sm">
                             <div className="font-bold text-gray-700 flex justify-between">
-                              Your reply: <div>{request.replies[0].createdAt}</div>
+                              Your reply: <div>{replies[0].createdAt}</div>
                             </div>
-                            <p className="mt-3">{request.replies[0].message || 'No message'}</p>
+                            <p className="mt-3">{replies[0].message || 'No message'}</p>
                           </div>
                         ) : (
                           <TextAreaInput
