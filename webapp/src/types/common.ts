@@ -111,3 +111,14 @@ export type RequestReplyInput = {
   status: RequestStatus;
   message: string | null;
 };
+
+export type UpdateResourceInput = {
+  id: string;
+  name: string;
+  link: string;
+  categoryId: string;
+  type: ResourceType;
+  description: string | null;
+  picture: string | null;
+  extra?: any;
+};

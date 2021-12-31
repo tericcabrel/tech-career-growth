@@ -29,6 +29,7 @@ export const QUERY_KEYS = {
   getResources: 'getResources',
   lookupResources: 'lookupResources',
   getRequests: 'getRequests',
+  getResource: 'getResource',
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };
