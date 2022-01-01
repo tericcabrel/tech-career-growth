@@ -53,3 +53,12 @@ export const buildCategoryTree = (categories: CategoryTree[], parentId?: string 
 
   return result;
 };
+
+export const excludeCategoryWithChildren = <T extends { id: string; parentId: string | null }>(categories: T[]) => {
+  return categories.filter((category) => {
+    return (
+      category.parentId ||
+      (!category.parentId && !categories.some((subCategory) => subCategory.parentId === category.id))
+    );
+  });
+};

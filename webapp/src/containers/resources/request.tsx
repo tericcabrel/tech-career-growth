@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CategoryTree } from '@/types/common';
-import { buildCategoryTree, formatOptions } from '@/utils/forms';
+import { buildCategoryTree, excludeCategoryWithChildren, formatOptions } from '@/utils/forms';
 import withPublicLayout from '@/components/hof/with-public-layout';
 import Button from '@/components/common/button';
 import CategoryChoiceSelector from '@/components/request/category-choice-selector';
@@ -93,7 +93,12 @@ const RequestResource = ({ categories }: Props) => {
           </div>
         </div>
       </div>
-      {isDialogOpen && <RequestFormDialog closeDialog={closeDialog} categoryOptions={formatOptions(categoryChoices)} />}
+      {isDialogOpen && (
+        <RequestFormDialog
+          closeDialog={closeDialog}
+          categoryOptions={formatOptions(excludeCategoryWithChildren(categoryChoices))}
+        />
+      )}
     </>
   );
 };

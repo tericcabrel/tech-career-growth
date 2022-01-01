@@ -11,7 +11,7 @@ import { DEFAULT_RESOURCE, NETWORK_ERROR_MESSAGE, RESOURCE_DELETED_MESSAGE } fro
 import { getErrorMessage } from '@/utils/http-client';
 import PlusIcon from '@/components/icons/plus';
 import SelectInput from '@/components/common/select-input';
-import { formatCategoryOption } from '@/utils/forms';
+import { excludeCategoryWithChildren, formatCategoryOption } from '@/utils/forms';
 import Pagination from '@/components/pagination/pagination';
 import SearchIcon from '@/components/icons/search';
 import TableRowHeader from '@/components/table/table-row-header';
@@ -115,7 +115,7 @@ const ResourcesList = () => {
 
               <SelectInput
                 className="w-72"
-                options={formatCategoryOption(categoryListData || [])}
+                options={formatCategoryOption(excludeCategoryWithChildren(categoryListData || []))}
                 value={searchParams.category}
                 onChange={handleCategoryChange}
               />

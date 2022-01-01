@@ -8,7 +8,7 @@ export type Category = {
   updatedAt: Date;
 };
 
-export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'TEXT' | 'OTHER';
+export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'SLIDE' | 'TEXT' | 'OTHER';
 
 export type Resource = {
   id: string;
@@ -28,7 +28,7 @@ export type Resource = {
   };
 };
 
-export type RequestStatus = 'PENDING' | 'IN_PROGRESS' | 'DONE' | 'ARCHIVED';
+export type RequestStatus = 'PENDING' | 'DONE' | 'ARCHIVED';
 
 export type Request = {
   id: string;

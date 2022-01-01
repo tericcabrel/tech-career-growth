@@ -107,6 +107,7 @@ enum ResourceType {
   WEBPAGE
   VIDEO
   PICTURE
+  SLIDE
   TEXT
   OTHER
 }
@@ -130,7 +131,6 @@ model Resource {
 
 enum RequestStatus {
   PENDING
-  IN_PROGRESS
   DONE
   ARCHIVED
 }
