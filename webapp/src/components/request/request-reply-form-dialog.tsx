@@ -35,6 +35,7 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
   });
 
   const replies = request.replies ?? [];
+  const requestStatusOptions = REQUEST_STATUS_OPTIONS.filter((option) => option.value.length > 0);
 
   const handleSubmitRequest = (values: RequestReplyFormValues) => {
     requestReplyMutation.mutate(
@@ -93,17 +94,23 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                       Edit a request
                     </Dialog.Title>
                     <div className="my-6">
-                      <div className="w-full mb-6 space-y-2 text-sm">
-                        <div>
-                          <span className="font-bold text-gray-700">User name:</span> {request.userName}
-                        </div>
-                        <div>
-                          <span className="font-bold text-gray-700">User email:</span> {request.userEmail}
-                        </div>
-                        <div>
-                          <span className="font-bold text-gray-700">Message:</span>
-                          <p>{request.description || 'No message'}</p>
-                        </div>
+                      <div className="my-6">
+                        <dl>
+                          <div className="bg-white py-3 sm:grid sm:grid-cols-3 sm:gap-4 ">
+                            <dt className="text-sm font-bold text-gray-700">User name</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{request.userName}</dd>
+                          </div>
+                          <div className="bg-white py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-sm font-bold text-gray-700">User email</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{request.userEmail}</dd>
+                          </div>
+                          <div className="bg-white py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-sm font-bold text-gray-700">Message</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              {request.description || 'No message'}
+                            </dd>
+                          </div>
+                        </dl>
                       </div>
                       <div className="w-full">
                         <label className="block text-sm mb-6">
@@ -112,7 +119,7 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                             name="status"
                             control={formMethods.control}
                             render={({ field }) => (
-                              <SelectInput className="w-full" options={REQUEST_STATUS_OPTIONS} {...field} />
+                              <SelectInput className="w-full" options={requestStatusOptions} {...field} />
                             )}
                           />
                         </label>

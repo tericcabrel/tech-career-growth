@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import SidebarLink from '@/components/common/sidebar-link';
 import DashboardIcon from '@/components/icons/dashboard';
 import CategoryIcon from '@/components/icons/category';
@@ -39,9 +40,13 @@ const Sidebar = () => {
     <>
       <aside className="z-20 hidden w-64 overflow-y-auto bg-gray-600 md:block flex-shrink-0">
         <div className="py-4">
-          <div className="flex ml-6 text-lg font-bold text-white items-center">
-            <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
-            <div className="ml-4">TECH CAREER</div>
+          <div className="ml-6 text-lg font-bold text-white">
+            <Link href="/">
+              <a className="flex items-center" target="_blank">
+                <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
+                <div className="ml-4">TECH CAREER</div>
+              </a>
+            </Link>
           </div>
           <ul className="mt-6 text-white">
             {menus.map((menu) => {

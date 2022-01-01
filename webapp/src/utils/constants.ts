@@ -48,6 +48,10 @@ export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
     value: 'PICTURE',
   },
   {
+    label: 'Slide',
+    value: 'SLIDE',
+  },
+  {
     label: 'Plain Text',
     value: 'TEXT',
   },
@@ -67,10 +71,6 @@ export const REQUEST_STATUS_OPTIONS: SelectOption[] = [
   {
     label: 'Pending',
     value: 'PENDING',
-  },
-  {
-    label: 'In progress',
-    value: 'IN_PROGRESS',
   },
   {
     label: 'Done',
