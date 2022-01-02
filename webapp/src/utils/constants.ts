@@ -3,6 +3,9 @@ import { SelectOption } from '@/types/common';
 export const FORM_ERRORS = {
   emailInvalid: 'The email address is invalid.',
   fieldRequired: 'This field is required.',
+  maxCharacters: (numChar: number) => `Must be at most ${numChar} characters`,
+  minCharacters: (numChar: number) => `Must be at least ${numChar} characters`,
+  passwordNotMatch: "The confirm password doesn't match the password",
 };
 
 export const BAD_LOGIN_MESSAGE = 'The credential is invalid.';
@@ -86,4 +89,9 @@ export const REQUEST_STATUS_OPTIONS: SelectOption[] = [
     label: 'Archived',
     value: 'ARCHIVED',
   },
+];
+
+export const USER_ROLE_OPTION: SelectOption[] = [
+  { label: 'User', value: 'user' },
+  { label: 'Admin', value: 'admin' },
 ];
