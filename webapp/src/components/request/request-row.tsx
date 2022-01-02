@@ -1,6 +1,8 @@
 import { Request } from '@/types/model';
+import dayjs from '@/utils/date';
 import PencilIcon from '@/components/icons/pencil';
 import CrossIcon from '@/components/icons/cross';
+import RequestStatusPill from '@/components/request/request-status-pill';
 
 type Props = {
   item: Request;
@@ -21,10 +23,12 @@ const RequestRow = ({ item, triggerDeleteDialog, triggerEditDialog }: Props) => 
         <div className="text-sm font-medium text-gray-900">{item.category?.name || 'Not defined'}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{item.status}</div>
+        <RequestStatusPill value={item.status} />
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{item.createdAt}</div>
+        <div className="text-sm font-medium text-gray-900">
+          {dayjs(item.createdAt).format('DD MMM YYYY [at] HH:mm')}
+        </div>
       </td>
       <td className="flex justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button

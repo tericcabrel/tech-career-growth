@@ -17,7 +17,7 @@ export const extractHostNameFromURL = (websiteURL: string) => {
 
 export const formatDate = (date: Date) => {
   const humanDate = dayjs(date).fromNow();
-  const dateString = dayjs(date).format('DD MMMM YYYY at HH:mm');
+  const dateString = dayjs(date).format('DD MMMM YYYY [at] HH:mm');
 
   return { humanDate, dateString };
 };
