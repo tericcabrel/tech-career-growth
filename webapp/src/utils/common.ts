@@ -21,3 +21,5 @@ export const formatDate = (date: Date) => {
 
   return { humanDate, dateString };
 };
+
+export const padZero = (value: number) => (value < 10 ? `0${value}` : value.toString());

@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     orderBy: { createdAt: 'desc' },
     where: {
       status: {
-        in: status ? [status] : ['DONE', 'PENDING', 'IN_PROGRESS', 'ARCHIVED'],
+        in: status ? [status] : ['DONE', 'PENDING', 'ARCHIVED'],
       },
     },
     take: PAGE_LIMIT,
@@ -26,5 +26,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     },
   });
 
-  res.status(200).json({ data: { limit: PAGE_LIMIT, currentPage: page, items, totalItems, totalPages } });
+  return res.status(200).json({
+    data: {
+      limit: PAGE_LIMIT,
+      currentPage: page,
+      items,
+      totalItems,
+      totalPages,
+    },
+  });
 }

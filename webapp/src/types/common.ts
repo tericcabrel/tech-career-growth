@@ -122,3 +122,12 @@ export type UpdateResourceInput = {
   picture: string | null;
   extra?: any;
 };
+
+export type DashboardSummary = {
+  resource: number;
+  category: number;
+  pendingRequest: number;
+  totalRequest: number;
+};
+
+export type DashboardSummaryData = HttpResponse<DashboardSummary>;
