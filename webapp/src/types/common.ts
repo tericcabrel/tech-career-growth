@@ -11,10 +11,7 @@ export type IconProps = {
   height?: number;
 };
 
-export enum UserRoleEnum {
-  ADMIN = 'admin',
-  USER = 'user',
-}
+export type UserRole = 'admin' | 'user';
 
 export type BgColorVariants = 'primary' | 'red' | 'whiteGray';
 
@@ -129,5 +126,37 @@ export type DashboardSummary = {
   pendingRequest: number;
   totalRequest: number;
 };
+
+export type User = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  password: string | null;
+  isEnabled: boolean;
+  emailVerified: Date | null;
+  image: string | null;
+  roleId: string;
+  role: {
+    id: string;
+    name: string;
+    level: number;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type SessionData = {
+  expires: Date;
+  user: {
+    name: string;
+    email: string;
+    id: string;
+  };
+  role: 'user' | 'admin';
+};
+
+export type UserResponseData = HttpResponse<User>;
+
+export type UserResponseListData = HttpResponse<User[]>;
 
 export type DashboardSummaryData = HttpResponse<DashboardSummary>;

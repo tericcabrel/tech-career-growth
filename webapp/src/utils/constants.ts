@@ -24,6 +24,10 @@ export const REQUEST_CREATED_MESSAGE = 'The request created successfully.';
 export const REQUEST_DELETED_MESSAGE = 'The request deleted successfully.';
 export const REQUEST_UPDATED_MESSAGE = 'The request deleted successfully.';
 
+export const USER_DELETED_MESSAGE = 'The user deleted successfully.';
+export const USER_UPDATED_MESSAGE = 'The user updated successfully.';
+export const USER_CREATED_MESSAGE = 'The user created successfully.';
+
 export const QUERY_KEYS = {
   getCategories: 'getCategories',
   getResources: 'getResources',
@@ -31,6 +35,7 @@ export const QUERY_KEYS = {
   getRequests: 'getRequests',
   getResource: 'getResource',
   dashboardSummary: 'dashboardSummary',
+  getUsers: 'getUsers',
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };
