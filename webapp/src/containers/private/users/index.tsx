@@ -52,13 +52,13 @@ const UsersList = () => {
   };
 
   return (
-    <>
+    <div className="py-5">
       <div className="container px-6 mx-auto grid">
         <h1 className="text-2xl font-bold">Users List</h1>
 
         <div className="flex flex-col">
           <div className="py-4 flex justify-end">
-            <Link href="/users/new">
+            <Link href="/private/users/new">
               <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
                 <span className="mr-2" aria-hidden="true">
                   <PlusIcon className="w-5 h-5" />
@@ -107,7 +107,7 @@ const UsersList = () => {
         onConfirmButtonClick={handleDeleteUserClick}
         onCancelButtonClick={closeDialog}
       />
-    </>
+    </div>
   );
 };
 

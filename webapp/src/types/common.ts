@@ -160,3 +160,17 @@ export type UserResponseData = HttpResponse<User>;
 export type UserResponseListData = HttpResponse<User[]>;
 
 export type DashboardSummaryData = HttpResponse<DashboardSummary>;
+
+export type CreateUserInput = {
+  email: string;
+  name: string;
+  password: string;
+  role: string;
+};
+
+export type UpdateUserInput = {
+  email?: string;
+  name?: string;
+  password?: string;
+  role?: string;
+};
