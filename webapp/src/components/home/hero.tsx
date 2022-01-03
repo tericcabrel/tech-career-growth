@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const Hero = () => {
   return (
     <div className="flex flex-col lg:flex-row lg:items-center max-w-screen-xl mx-auto py-20 md:py-24">
@@ -10,9 +12,11 @@ const Hero = () => {
           database of resources curated by established engineers is there for you.
         </p>
         <div className="relative max-w-md text-center mx-auto lg:mx-0">
-          <button className="bg-green-500 text-gray-100 font-bold mr-2 my-4 sm:my-2 rounded-full py-4 flex items-center justify-center sm:w-40 sm:leading-none focus:outline-none hover:bg-primary-900 transition duration-300">
-            Get started
-          </button>
+          <Link href="/resources">
+            <a className="bg-green-500 text-gray-100 font-bold mr-2 my-4 sm:my-2 rounded-full py-4 flex items-center justify-center sm:w-40 sm:leading-none focus:outline-none hover:bg-primary-900 transition duration-300">
+              Get started
+            </a>
+          </Link>
         </div>
       </div>
       <div className="relative mt-12 lg:mt-0 flex-1 flex flex-col justify-center lg:self-end">

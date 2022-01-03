@@ -30,25 +30,25 @@ const About = () => {
           If you want to stay connected with us, you can join us at the following channels:
           <br />
           <br />
-          <ul>
+          <ul className="space-y-2">
             <li>
-              <b>Mailing list: </b>
-              <Link href="https://learn.rkpandey.com">
+              <b>LinkedIn: </b>
+              <Link href="https://www.linkedin.com/company/techcareergrowth">
                 <a target="_blank" className="text-green-500 underline">
-                  https://learn.rkpandey.com
+                  https://www.linkedin.com/company/techcareergrowth
                 </a>
               </Link>
             </li>
             <li>
               <b>Slack: </b>
-              <Link href="https://join.slack.com/t/techcareergrowth/shared_invite/zt-It2tbjcn-LOAVINGPI-nkuc4woHDLg">
+              <Link href="https://join.slack.com/t/techcareergrowth/shared_invite/zt-lt2tbjcn-LOAVIDuGPI~nkuc4woHDLg">
                 <a target="_blank" className="text-green-500 underline">
-                  https://join.slack.com/t/techcareergrowth/shared_invite/zt-It2tbjcn-LOAVINGPI-nkuc4woHDLg
+                  https://join.slack.com/t/techcareergrowth/shared_invite/zt-lt2tbjcn-LOAVIDuGPI~nkuc4woHDLg
                 </a>
               </Link>
             </li>
             <li>
-              <b>Email list: </b>
+              <b>Mailing list: </b>
               <Link href="https://learn.rkpandey.com">
                 <a target="_blank" className="text-green-500 underline">
                   https://learn.rkpandey.com
@@ -152,10 +152,9 @@ const About = () => {
 
                       <Link href="https://www.youtube.com/rpandey1234">
                         <a target="_blank">
-                          <YoutubeIcon width={20} height={20} />
+                          <YoutubeIcon width={24} height={24} />
                         </a>
                       </Link>
-                      {/*<!-- rpandey1234@gmail.com -->*/}
                     </div>
                   </div>
                 </div>

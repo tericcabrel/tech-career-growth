@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import ArrowLeftIcon from '@/components/icons/arrow-left';
 
 const Header = () => {
   return (
@@ -25,20 +26,15 @@ const Header = () => {
             </a>
           </Link>
         </nav>
-        <button className="inline-flex items-center bg-green-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-green-400 rounded">
-          Join us
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
+        <Link href="https://join.slack.com/t/techcareergrowth/shared_invite/zt-lt2tbjcn-LOAVIDuGPI~nkuc4woHDLg">
+          <a
+            className="inline-flex items-center bg-green-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-green-400 rounded"
+            target="_blank"
           >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </button>
+            Join us
+            <ArrowLeftIcon />
+          </a>
+        </Link>
       </div>
     </header>
   );
