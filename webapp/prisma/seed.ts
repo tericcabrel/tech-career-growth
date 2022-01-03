@@ -521,7 +521,7 @@ const createCategoryAndRelatedResources = async (input: CategoryInput, parentId:
   }
 };
 
-const main = async () => {
+export const main = async () => {
   const roleAdmin = await createRole({
     name: 'admin',
     description: 'can do everything in the application',
