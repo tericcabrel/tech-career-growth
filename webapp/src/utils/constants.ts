@@ -39,6 +39,8 @@ export const QUERY_KEYS = {
   getResource: 'getResource',
   dashboardSummary: 'dashboardSummary',
   getUsers: 'getUsers',
+  getUser: 'getUser',
+  getRoles: 'getRoles',
 };
 
 export const DEFAULT_RESOURCE = { label: 'All', value: '' };

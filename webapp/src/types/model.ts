@@ -53,3 +53,12 @@ export type Reply = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Role = {
+  id: string;
+  name: string;
+  level: number;
+  description: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};

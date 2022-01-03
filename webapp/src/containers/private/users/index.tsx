@@ -88,8 +88,8 @@ const UsersList = () => {
                           key={item.id}
                           item={item}
                           triggerDeleteDialog={() => onDeleteUserClick(item.id)}
-                          canEdit={true}
-                          canDelete={userData?.role === 'admin'}
+                          canEdit={userData?.user?.role === 'admin'}
+                          canDelete={userData?.user?.role === 'admin'}
                         />
                       ))}
 

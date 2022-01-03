@@ -29,18 +29,18 @@ const UserRow = ({ canDelete, canEdit, item, triggerDeleteDialog }: Props) => {
         <div className="text-sm font-medium text-gray-900">{item.email}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-          {item.role.name === 'user' ? 'User' : 'Admin'}
+        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+          {item.role?.name === 'user' ? 'User' : 'Admin'}
         </span>
       </td>
       <td className="flex justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         {canEdit && (
-          <Link href={`/users/${item.id}`}>
+          <Link href={`/private/users/${item.id}/edit`}>
             <a
-              className="flex items-center justify-between px-1.5 py-1.5 text-lg font-medium leading-5 bg-white border border-transparent rounded-lg hover:border-purple-600 hover:text-purple-700 focus:outline-none"
+              className="flex items-center justify-between px-1.5 py-1.5 text-lg font-medium leading-5 bg-white border border-transparent rounded-lg hover:border-green-600 hover:text-green-700 focus:outline-none"
               aria-label="Edit"
             >
-              <PencilIcon className="h-5 w-5 text-purple-600" />
+              <PencilIcon className="h-5 w-5 text-green-600" />
             </a>
           </Link>
         )}
