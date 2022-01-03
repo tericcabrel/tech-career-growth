@@ -8,7 +8,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const input: { token: string } = req.body;
 
     if (input.token === process.env.SEED_TOKEN) {
-      await main();
+      try {
+        await main();
+      } catch (e: any) {
+        return res.status(500).json({ message: e.stack ? JSON.stringify(e.stack) : e.message });
+      }
 
       return res.status(200).json({ message: 'Done' });
     }
