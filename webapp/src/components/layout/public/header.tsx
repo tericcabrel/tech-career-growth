@@ -10,7 +10,7 @@ const Header = () => {
             <div className="border border-green-400 h-10 w-10 flex justify-center items-center rounded">
               <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
             </div>
-            <span className="ml-3 text-xl">Tech Career</span>
+            <span className="ml-3 text-xl">Tech Career Growth Navigator</span>
           </a>
         </Link>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
