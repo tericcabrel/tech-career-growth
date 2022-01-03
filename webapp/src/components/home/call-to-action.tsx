@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const CallToAction = () => {
   return (
     <div className="bg-white overflow-hidden relative my-20">
@@ -12,12 +14,14 @@ const CallToAction = () => {
         </p>
         <div className="lg:mt-0 lg:flex-shrink-0">
           <div className="mt-12 inline-flex rounded-md shadow">
-            <button
-              type="button"
-              className="py-4 px-6 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-            >
-              Join the community
-            </button>
+            <Link href="https://join.slack.com/t/techcareergrowth/shared_invite/zt-lt2tbjcn-LOAVIDuGPI~nkuc4woHDLg">
+              <a
+                className="py-4 px-6 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                target="_blank"
+              >
+                Join the community
+              </a>
+            </Link>
           </div>
         </div>
       </div>
