@@ -37,6 +37,7 @@ const avatarStyle = (size: number, colorIndex: number): CSSProperties => ({
   textAlign: 'center',
   textTransform: 'uppercase',
   width: size,
+  cursor: 'default',
 });
 
 const first = (word: string) => word.charAt(0);

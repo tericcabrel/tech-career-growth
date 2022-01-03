@@ -22,10 +22,21 @@ export type UserFormValues = yup.InferType<typeof userFormSchema> & {
   role: SelectOption;
 };
 
-export type UpdateUserFormValues = {
+export const updateUserFormSchema = yup.object().shape({
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], FORM_ERRORS.passwordNotMatch),
+  email: yup.string().optional().email(FORM_ERRORS.emailInvalid),
+  name: yup.string().optional(),
+  password: yup.string().optional(),
+});
+
+export type UpdateUserFormValues = yup.InferType<typeof updateUserFormSchema> & {
+  role: SelectOption;
+};
+
+/*export type UpdateUserFormValues = {
   confirmPassword?: string;
   email?: string;
   name?: string;
   password?: string;
   role?: SelectOption;
-};
+};*/

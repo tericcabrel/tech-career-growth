@@ -3,14 +3,15 @@ import { Controller, useFormContext } from 'react-hook-form';
 import SelectInput from '@/components/common/select-input';
 import FormInput from '@/components/common/form-input';
 import Button from '@/components/common/button';
-import { USER_ROLE_OPTION } from '@/utils/constants';
+import { SelectOption } from '@/types/common';
 
 type Props = {
   isSubmitting?: boolean;
   isEditMode?: boolean;
+  roleOptions: SelectOption[];
 };
 
-const UserForm = ({ isSubmitting, isEditMode = false }: Props) => {
+const UserForm = ({ isSubmitting, isEditMode = false, roleOptions }: Props) => {
   const { control } = useFormContext();
 
   return (
@@ -21,7 +22,7 @@ const UserForm = ({ isSubmitting, isEditMode = false }: Props) => {
           <Controller
             name="role"
             control={control}
-            render={({ field }) => <SelectInput className="wp-45" options={USER_ROLE_OPTION} {...field} />}
+            render={({ field }) => <SelectInput options={roleOptions} {...field} />}
           />
         </label>
       </div>

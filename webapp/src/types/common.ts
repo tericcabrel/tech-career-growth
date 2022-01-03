@@ -1,4 +1,4 @@
-import { Category, Resource, ResourceType, Request, RequestStatus } from '@/types/model';
+import { Category, Resource, ResourceType, Request, RequestStatus, Role } from '@/types/model';
 
 export type SelectOption = {
   label: string;
@@ -136,23 +136,13 @@ export type User = {
   emailVerified: Date | null;
   image: string | null;
   roleId: string;
-  role: {
+  role?: {
     id: string;
     name: string;
     level: number;
   };
   createdAt: Date;
   updatedAt: Date;
-};
-
-type SessionData = {
-  expires: Date;
-  user: {
-    name: string;
-    email: string;
-    id: string;
-  };
-  role: 'user' | 'admin';
 };
 
 export type UserResponseData = HttpResponse<User>;
@@ -165,12 +155,14 @@ export type CreateUserInput = {
   email: string;
   name: string;
   password: string;
-  role: string;
+  roleId: string;
 };
 
 export type UpdateUserInput = {
   email?: string;
   name?: string;
   password?: string;
-  role?: string;
+  roleId?: string;
 };
+
+export type RoleResponseListData = HttpResponse<Role[]>;

@@ -2,19 +2,25 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { userFormSchema, UserFormValues } from '@/components/user/form-schema';
-import useCreateUser from '@/hooks/request/mutation/use-create-user';
-import { NETWORK_ERROR_MESSAGE, USER_CREATED_MESSAGE, USER_ROLE_OPTION } from '@/utils/constants';
+import { Role } from '@/types/model';
 import { getErrorMessage } from '@/utils/http-client';
-import { UserRole } from '@/types/common';
+import { formatOptions } from '@/utils/forms';
+import { NETWORK_ERROR_MESSAGE, USER_CREATED_MESSAGE } from '@/utils/constants';
+import useCreateUser from '@/hooks/request/mutation/use-create-user';
+import { userFormSchema, UserFormValues } from '@/components/user/form-schema';
 import { UserForm } from '@/components/user/user-form';
-import withPrivateLayout from '@/components/hof/with-private-layout';
 
-const NewUser = () => {
+type Props = {
+  roles: Role[];
+};
+
+const NewUser = ({ roles }: Props) => {
+  const rolesOptions = formatOptions(roles);
+
   const formMethods = useForm<UserFormValues>({
     // @ts-ignore
     defaultValues: {
-      role: USER_ROLE_OPTION[0],
+      role: rolesOptions[0],
     },
     resolver: yupResolver(userFormSchema),
   });
@@ -27,7 +33,7 @@ const NewUser = () => {
         email: data.email,
         name: data.name,
         password: data.password,
-        role: data.role?.value as UserRole,
+        roleId: data.role?.value,
       },
       {
         onError: (error) => {
@@ -46,11 +52,14 @@ const NewUser = () => {
       <h1 className="text-2xl font-bold">New user</h1>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleCreateUser)}>
-          <UserForm isSubmitting={formMethods.formState.isSubmitting || createUserMutation.isLoading} />
+          <UserForm
+            isSubmitting={formMethods.formState.isSubmitting || createUserMutation.isLoading}
+            roleOptions={rolesOptions}
+          />
         </form>
       </FormProvider>
     </div>
   );
 };
 
-export default withPrivateLayout(NewUser, { title: 'New user' });
+export default NewUser;
