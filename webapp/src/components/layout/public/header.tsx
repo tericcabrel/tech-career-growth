@@ -16,12 +16,12 @@ const Header = () => {
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/resources">
             <a className="mr-10 hover:text-gray-900 tracking-wide transition duration-300 pb-1 border-b-2 border-transparent hover:border-green-500 hover:text-green-500">
-              Browse resources
+              Find resources
             </a>
           </Link>
-          <Link href="/resources/request">
+          <Link href="/about">
             <a className="mr-5 hover:text-gray-900 tracking-wide transition duration-300 pb-1 border-b-2 border-transparent hover:border-green-500 hover:text-green-500">
-              Request resource
+              About us
             </a>
           </Link>
         </nav>
@@ -36,7 +36,7 @@ const Header = () => {
             className="w-4 h-4 ml-1"
             viewBox="0 0 24 24"
           >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
       </div>

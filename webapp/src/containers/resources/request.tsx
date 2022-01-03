@@ -64,7 +64,7 @@ const RequestResource = ({ categories }: Props) => {
     <>
       <div className="py-2">
         <div className="w-2/3 p-6 mx-auto">
-          <h1 className="text-4xl font-bold">Request a resource</h1>
+          <h1 className="text-4xl font-bold">Find a resource</h1>
           <div className="mt-4 text-xl">
             Tell us what kind of resources you currently need in your career growth journey and we&apos;ll provide you
             with the relevant resources.
