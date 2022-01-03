@@ -83,8 +83,9 @@ export default NextAuth({
 
       return token;
     },
+    // @ts-ignore
     async session({ session, token, user }) {
-      const sess: Session = {
+      const newSession: Session = {
         ...session,
         user: {
           ...session.user,
@@ -93,7 +94,7 @@ export default NextAuth({
         },
       };
 
-      return sess;
+      return newSession;
     },
   },
 });
