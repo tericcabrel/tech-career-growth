@@ -38,7 +38,7 @@ const AuthGuard = ({ children, options }: Props) => {
   // If no user, useEffect() will redirect.
   return (
     <div className="h-screen w-screen flex flex-col justify-center content-center items-center">
-      <Loader className="h-6 w-6" />
+      <Loader scope="page" />
     </div>
   );
 };

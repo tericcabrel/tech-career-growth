@@ -14,8 +14,7 @@ export default NextAuth({
   },
   pages: {
     signIn: '/login',
-    // signOut: "/auth/logout",
-    // error: "/auth/error", // Error code passed in query string as ?error=
+    error: '/login',
   },
   providers: [
     CredentialsProvider({
@@ -73,7 +72,7 @@ export default NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      return `${baseUrl}/private/dashboard`;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
