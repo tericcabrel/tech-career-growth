@@ -8,6 +8,7 @@ import { FORM_ERRORS } from '@/utils/constants';
 import FormInput from '@/components/common/form-input';
 import Button from '@/components/common/button';
 import withPublicLayout from '@/components/hof/with-public-layout';
+import { useRouter } from 'next/router';
 
 const loginSchema = yup.object().shape({
   email: yup.string().required(FORM_ERRORS.fieldRequired).email(FORM_ERRORS.emailInvalid),
@@ -24,6 +25,7 @@ type Props = {
 };
 
 const Login = ({ csrfToken }: Props) => {
+  const { query } = useRouter();
   const [isSubmitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<LoginFormValues>({
@@ -57,6 +59,10 @@ const Login = ({ csrfToken }: Props) => {
         <div className="flex items-center justify-center p-6 sm:p-12 md:w-full">
           <div className="w-full">
             <h1 className="mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200">Log into Admin area</h1>
+
+            {query.error && (
+              <div className="w-full border border-red-600 text-red-500 text-center py-2 rounded">{query.error}</div>
+            )}
             <FormProvider {...formMethods}>
               <form onSubmit={formMethods.handleSubmit(handleLogin)}>
                 <FormInput label="" type="hidden" name="csrfToken" hidden />
