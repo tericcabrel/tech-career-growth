@@ -1,6 +1,8 @@
 import { ComponentType } from 'react';
 import Head from 'next/head';
+import { useHotkeys } from 'react-hotkeys-hook';
 import PublicLayout from '@/components/layout/public/layout';
+import { useRouter } from 'next/router';
 
 type Props = {
   title: string;
@@ -10,6 +12,11 @@ type Props = {
 function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
   // eslint-disable-next-line react/display-name
   return (wrappedComponentProps: T) => {
+    const router = useRouter();
+
+    useHotkeys('ctrl+l', () => {
+      router.push('/login');
+    });
     // eslint-disable-next-line react/prop-types
     const { title } = props;
 
