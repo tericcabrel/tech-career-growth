@@ -1,8 +1,8 @@
 import { ComponentType } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import PublicLayout from '@/components/layout/public/layout';
-import { useRouter } from 'next/router';
 
 type Props = {
   title: string;
