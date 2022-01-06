@@ -31,7 +31,7 @@ const StepSection = () => {
         <div className={'md:w-6/12 mt-16 md:mt-0 md:ml-12 lg:ml-16 md:order-last'}>
           <div className="lg:py-8 text-center md:text-left">
             <h2 className="text-4xl tracking-wide text-center mt-4 text-left font-black text-center md:text-left leading-tight">
-              How it works?
+              How does this website work?
             </h2>
             <ul className="mt-12">
               {steps.map((step, index) => (

@@ -5,7 +5,7 @@ const Hero = () => {
     <div className="flex flex-col lg:flex-row lg:items-center max-w-screen-xl mx-auto py-20 md:py-24">
       <div className="relative lg:w-5/12 text-center max-w-lg mx-auto lg:max-w-none lg:text-left">
         <h1 className="font-bold text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight">
-          Find the right resource to <span className="text-green-500">grow your career.</span>
+          Find the right resource to <span className="text-green-500">grow your career in tech</span>
         </h1>
         <p className="my-5 lg:my-8 text-base xl:text-lg">
           You want to improve your resume? Be better at interviewing? Find how to build high quality projects? Our
