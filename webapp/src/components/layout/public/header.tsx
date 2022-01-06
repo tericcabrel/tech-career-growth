@@ -22,7 +22,7 @@ const Header = () => {
           </Link>
           <Link href="/about">
             <a className="mr-5 hover:text-gray-900 tracking-wide transition duration-300 pb-1 border-b-2 border-transparent hover:border-green-500 hover:text-green-500">
-              About us
+              About Alex & Rahul
             </a>
           </Link>
         </nav>
@@ -31,7 +31,7 @@ const Header = () => {
             className="inline-flex items-center bg-green-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-green-400 rounded"
             target="_blank"
           >
-            Join us
+            Join the community
             <ArrowLeftIcon />
           </a>
         </Link>
