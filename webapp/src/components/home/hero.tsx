@@ -38,7 +38,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="relative mt-12 lg:mt-0 flex-1 flex flex-col justify-center lg:self-end">
+      <div className="relative mt-12 lg:mt-0 flex-1 flex flex-col justify-center lg:self-end py-20">
         <div className="flex justify-center lg:justify-end items-center">
           <img
             className="min-w-0 w-full max-w-lg xl:max-w-3xl"
