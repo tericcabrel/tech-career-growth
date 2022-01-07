@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Hero = () => {
   return (
@@ -8,15 +9,33 @@ const Hero = () => {
           Find the right resource to <span className="text-green-500">grow your career in tech</span>
         </h1>
         <p className="my-5 lg:my-8 text-base xl:text-lg">
-          You want to improve your resume? Be better at interviewing? Find how to build high quality projects? Our
-          database of resources curated by established engineers is there for you.
+          This database only holds official resources from Tech Career Growth Community (TCGC), a 100% free online
+          learning community.
+          <br />
+          TCGC is run by Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who have 15+ years of experience
+          combined, spending many of those years working at top tech companies like Pinterest, Facebook, and Robinhood.
         </p>
-        <div className="relative max-w-md text-center mx-auto lg:mx-0">
-          <Link href="/resources">
-            <a className="bg-green-500 text-gray-100 font-bold mr-2 my-4 sm:my-2 rounded-full py-4 flex items-center justify-center sm:w-40 sm:leading-none focus:outline-none hover:bg-primary-900 transition duration-300">
-              Get started
-            </a>
-          </Link>
+        <div className="flex justify-center relative text-center mx-auto">
+          <div className="w-20 h-20 rounded-full overflow-hidden mr-4">
+            <Image
+              src="/assets/alex.jpg"
+              loading="lazy"
+              alt="Picture of Alex Chiou"
+              className="w-full h-full object-cover object-center"
+              width={128}
+              height={128}
+            />
+          </div>
+          <div className="w-20 h-20 rounded-full overflow-hidden ml-4">
+            <Image
+              src="/assets/rahul.jpg"
+              loading="lazy"
+              alt="Picture of Rahul Pandey"
+              className="w-full h-full object-cover object-center"
+              width={128}
+              height={128}
+            />
+          </div>
         </div>
       </div>
       <div className="relative mt-12 lg:mt-0 flex-1 flex flex-col justify-center lg:self-end">
