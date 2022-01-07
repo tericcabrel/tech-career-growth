@@ -8,7 +8,7 @@ const Header = () => {
       <div className="mx-auto flex flex-wrap py-5 flex-col md:flex-row items-center">
         <Link href="/">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <div className="border border-green-400 h-10 w-10 flex justify-center items-center rounded">
+            <div className="h-10 w-10 flex justify-center items-center">
               <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
             </div>
             <span className="ml-3 text-xl">Tech Career Growth Navigator</span>

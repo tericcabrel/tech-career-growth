@@ -10,8 +10,8 @@ const steps = [
     description: "If you don't find a resource that suits your needs, you can submit a request to the team.",
   },
   {
-    heading: 'Enjoy',
-    description: 'We receive your request, proceed, then notify you in your email inbox with the link to the resource.',
+    heading: 'Verify',
+    description: 'Check out the website from time to time to see if your requested resource is available.',
   },
 ];
 
