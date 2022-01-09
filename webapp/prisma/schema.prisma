@@ -108,6 +108,7 @@ enum ResourceType {
   PICTURE
   SLIDE
   TEXT
+  ARTICLE
   OTHER
 }
 

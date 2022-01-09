@@ -67,6 +67,10 @@ export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
     value: 'TEXT',
   },
   {
+    label: 'Article',
+    value: 'ARTICLE',
+  },
+  {
     label: 'Other',
     value: 'OTHER',
   },
