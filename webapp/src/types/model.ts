@@ -8,7 +8,7 @@ export type Category = {
   updatedAt: Date;
 };
 
-export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'SLIDE' | 'TEXT' | 'ARTICLE' | 'OTHER';
+export type ResourceType = 'WEBPAGE' | 'VIDEO' | 'PICTURE' | 'SLIDE' | 'ARTICLE' | 'OTHER';
 
 export type Resource = {
   id: string;

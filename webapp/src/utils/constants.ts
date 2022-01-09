@@ -63,10 +63,6 @@ export const RESOURCE_TYPE_OPTIONS: SelectOption[] = [
     value: 'SLIDE',
   },
   {
-    label: 'Plain Text',
-    value: 'TEXT',
-  },
-  {
     label: 'Article',
     value: 'ARTICLE',
   },
