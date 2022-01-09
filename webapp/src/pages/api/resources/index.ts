@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma, { Prisma } from '@/lib/prisma';
 import { ResourceListResponseData, ResourceSearchParams } from '@/types/common';
 import { PAGE_LIMIT } from '@/utils/constants';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ResourceListResponseData>) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<ResourceListResponseData>) => {
   const { search, page, category } = req.query as unknown as ResourceSearchParams;
   const filter: Prisma.ResourceWhereInput = {
     name: { contains: search },
@@ -24,4 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   });
 
   return res.status(200).json({ data: { limit: PAGE_LIMIT, currentPage: page, items, totalItems, totalPages } });
-}
+};
+
+export default withSentry(handler);

@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma from '@/lib/prisma';
 import { CreateUserInput, UserResponseData, CommonResponseData } from '@/types/common';
 import { METHOD_NOT_ALLOWED_MESSAGE } from '@/utils/constants';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<UserResponseData | CommonResponseData>,
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<UserResponseData | CommonResponseData>) => {
   if (req.method === 'POST') {
     const input: CreateUserInput = req.body;
 
@@ -29,4 +27,6 @@ export default async function handler(
   }
 
   return res.status(405).json({ message: METHOD_NOT_ALLOWED_MESSAGE });
-}
+};
+
+export default withSentry(handler);

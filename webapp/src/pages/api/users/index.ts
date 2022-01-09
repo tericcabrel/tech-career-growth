@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma from '@/lib/prisma';
 import { UserResponseListData } from '@/types/common';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<UserResponseListData>) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<UserResponseListData>) => {
   const result = await prisma.user.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
@@ -17,4 +18,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   });
 
   return res.status(200).json({ data: result });
-}
+};
+
+export default withSentry(handler);

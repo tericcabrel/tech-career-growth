@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma from '@/lib/prisma';
 import { DashboardSummaryData } from '@/types/common';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<DashboardSummaryData>) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<DashboardSummaryData>) => {
   const category = await prisma.category.count();
   const resource = await prisma.resource.count();
   const pendingRequest = await prisma.request.count({ where: { status: 'PENDING' } });
@@ -16,4 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       totalRequest,
     },
   });
-}
+};
+
+export default withSentry(handler);
