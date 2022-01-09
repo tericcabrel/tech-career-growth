@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import Select from 'react-select';
 
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
 import withPrivateLayout from '@/components/hof/with-private-layout';
@@ -10,7 +11,6 @@ import useRetrieveCategories from '@/hooks/request/query/use-retrieve-categories
 import { DEFAULT_RESOURCE, NETWORK_ERROR_MESSAGE, RESOURCE_DELETED_MESSAGE } from '@/utils/constants';
 import { getErrorMessage } from '@/utils/http-client';
 import PlusIcon from '@/components/icons/plus';
-import SelectInput from '@/components/common/select-input';
 import { excludeCategoryWithChildren, formatCategoryOption } from '@/utils/forms';
 import Pagination from '@/components/pagination/pagination';
 import SearchIcon from '@/components/icons/search';
@@ -70,7 +70,11 @@ const ResourcesList = () => {
     });
   };
 
-  const handleCategoryChange = (value: SelectOption) => {
+  const handleCategoryChange = (value: SelectOption | null) => {
+    if (!value) {
+      return;
+    }
+
     setSearchParams((prevValue) => ({
       ...prevValue,
       page: 1,
@@ -113,12 +117,14 @@ const ResourcesList = () => {
                 </div>
               </div>
 
-              <SelectInput
-                className="w-72"
-                options={formatCategoryOption(excludeCategoryWithChildren(categoryListData || []))}
-                value={searchParams.category}
-                onChange={handleCategoryChange}
-              />
+              <div className="text-sm">
+                <Select
+                  className="w-72 mt-1"
+                  options={formatCategoryOption(excludeCategoryWithChildren(categoryListData || []))}
+                  value={searchParams.category}
+                  onChange={handleCategoryChange}
+                />
+              </div>
             </div>
 
             <Link href="/private/resources/new">

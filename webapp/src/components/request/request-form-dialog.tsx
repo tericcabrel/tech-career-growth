@@ -4,13 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-toastify';
+import Select from 'react-select';
+
 import { SelectOption } from '@/types/common';
 import { FORM_ERRORS, NETWORK_ERROR_MESSAGE, REQUEST_CREATED_MESSAGE } from '@/utils/constants';
 import FormInput from '@/components/common/form-input';
 import TextAreaInput from '@/components/common/textarea-input';
 import Button from '@/components/common/button';
-import SelectInput from '@/components/common/select-input';
-import InfoIcon from '@/components/icons/info';
 import useCreateRequest from '@/hooks/request/mutation/use-create-request';
 import { getErrorMessage } from '@/utils/http-client';
 
@@ -96,10 +96,6 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                       Ask a resource
                     </Dialog.Title>
                     <div className="my-6">
-                      <div className="flex pb-3 items-center text-green-700 text-sm">
-                        <InfoIcon className="mr-1" /> You will receive an email with a link when the resource will be
-                        available.
-                      </div>
                       <FormInput
                         label="What is your last name?"
                         name="userName"
@@ -120,9 +116,7 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                           <Controller
                             name="category"
                             control={formMethods.control}
-                            render={({ field }) => (
-                              <SelectInput className="w-full" options={categoryOptions} {...field} />
-                            )}
+                            render={({ field }) => <Select className="w-full" options={categoryOptions} {...field} />}
                           />
                         </label>
                       </div>
@@ -130,7 +124,7 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                         <TextAreaInput
                           label="Description"
                           name="description"
-                          placeholder="Hi! I need a resource on how improving my resume but, I'm looking for a more detailed resource please"
+                          placeholder="Hi! I need a resource on how to improve my resume but, I'm looking for a more detailed resource please"
                           isRequired
                         />
                       </div>

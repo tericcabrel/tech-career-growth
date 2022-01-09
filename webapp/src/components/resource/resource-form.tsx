@@ -1,6 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form';
-
-import SelectInput from '@/components/common/select-input';
+import Select from 'react-select';
 import FormInput from '@/components/common/form-input';
 import Button from '@/components/common/button';
 import TextAreaInput from '@/components/common/textarea-input';
@@ -25,7 +24,7 @@ const ResourceForm = ({ categoryOptions, isSubmitting, isEditMode = false }: Pro
             <Controller
               name="category"
               control={control}
-              render={({ field }) => <SelectInput className="w-72" options={categoryOptions} {...field} />}
+              render={({ field }) => <Select className="w-72" options={categoryOptions} {...field} />}
             />
           </label>
         </div>
@@ -35,7 +34,7 @@ const ResourceForm = ({ categoryOptions, isSubmitting, isEditMode = false }: Pro
             <Controller
               name="type"
               control={control}
-              render={({ field }) => <SelectInput className="w-44" options={RESOURCE_TYPE_OPTIONS} {...field} />}
+              render={({ field }) => <Select className="w-44" options={RESOURCE_TYPE_OPTIONS} {...field} />}
             />
           </label>
         </div>
