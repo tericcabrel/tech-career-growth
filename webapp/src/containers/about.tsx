@@ -10,7 +10,7 @@ import GoogleplayIcon from '@/components/icons/googleplay';
 const About = () => {
   return (
     <div className="py-2">
-      <div className="w-2/3 p-6 mx-auto">
+      <div className="xl:w-2/3 lg:w-3/4 sm:w-11/12  p-6 mx-auto xs:w-full">
         <h1 className="text-4xl font-bold">About Us</h1>
 
         <p className="text-justify my-8">
@@ -34,7 +34,7 @@ const About = () => {
             <li>
               <b>LinkedIn: </b>
               <Link href="https://www.linkedin.com/company/techcareergrowth">
-                <a target="_blank" className="text-green-500 underline">
+                <a target="_blank" className="text-green-500 underline overflow-ellipsis">
                   https://www.linkedin.com/company/techcareergrowth
                 </a>
               </Link>
@@ -67,8 +67,8 @@ const About = () => {
           personally send you a Slack invite ourselves!
         </p>
         <div className="bg-white mt-10 pb-20">
-          <div className="max-w-screen-xl px-4 md:px-8 mx-auto">
-            <div className="grid grid-cols-8 gap-6">
+          <div className="max-w-screen-xl mx-auto">
+            <div className="grid grid-cols-8 gap-6 xs:grid-cols-1">
               <div className="col-start-1 col-span-4 flex flex-col items-center bg-gray-100 rounded-lg p-4 lg:p-8">
                 <div className="w-24 md:w-32 h-24 md:h-32 bg-gray-200 rounded-full overflow-hidden shadow-lg mb-2 md:mb-4">
                   <Image
@@ -91,7 +91,7 @@ const About = () => {
                     million+ downloads combined.
                   </p>
                   <div className="flex justify-center">
-                    <div className="flex gap-4">
+                    <div className="flex ">
                       <Link href="https://www.linkedin.com/in/alexander-chiou/">
                         <a target="_blank">
                           <LinkedinIcon width={20} height={20} />
@@ -99,7 +99,7 @@ const About = () => {
                       </Link>
 
                       <Link href="https://github.com/Gear61">
-                        <a target="_blank">
+                        <a target="_blank" className="mx-4">
                           <GithubIcon width={20} height={20} />
                         </a>
                       </Link>
@@ -145,7 +145,7 @@ const About = () => {
                       </Link>
 
                       <Link href="https://twitter.com/rpandey1234">
-                        <a target="_blank">
+                        <a target="_blank" className="mx-4">
                           <TwitterIcon width={22} height={22} />
                         </a>
                       </Link>
