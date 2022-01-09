@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import Select from 'react-select';
+
 import { Request, RequestStatus } from '@/types/model';
 import { PaginationChangeEventData, SelectOption } from '@/types/common';
 import useBooleanState from '@/hooks/use-boolean-state';
 import { NETWORK_ERROR_MESSAGE, REQUEST_DELETED_MESSAGE, REQUEST_STATUS_OPTIONS } from '@/utils/constants';
 import { getErrorMessage } from '@/utils/http-client';
 import withPrivateLayout from '@/components/hof/with-private-layout';
-import SelectInput from '@/components/common/select-input';
 import TableRowHeader from '@/components/table/table-row-header';
 import RequestRow from '@/components/request/request-row';
 import TableNoRow from '@/components/table/table-no-row';
@@ -66,7 +67,11 @@ const RequestsList = () => {
     });
   };
 
-  const handleStatusChange = (value: SelectOption) => {
+  const handleStatusChange = (value: SelectOption | null) => {
+    if (!value) {
+      return;
+    }
+
     setSearchParams((prevValue) => ({
       ...prevValue,
       page: 1,
@@ -86,8 +91,13 @@ const RequestsList = () => {
       <div>
         <h1 className="text-2xl font-bold">Requests List</h1>
         <div className="flex flex-col">
-          <div className="py-4 flex justify-between">
-            <SelectInput options={REQUEST_STATUS_OPTIONS} value={searchParams.status} onChange={handleStatusChange} />
+          <div className="py-4 flex justify-between text-sm">
+            <Select
+              className="w-44"
+              options={REQUEST_STATUS_OPTIONS}
+              value={searchParams.status}
+              onChange={handleStatusChange}
+            />
           </div>
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

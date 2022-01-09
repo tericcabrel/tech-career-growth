@@ -7,10 +7,10 @@ import { Request } from '@/types/model';
 import { FORM_ERRORS, NETWORK_ERROR_MESSAGE, REQUEST_STATUS_OPTIONS, REQUEST_UPDATED_MESSAGE } from '@/utils/constants';
 import TextAreaInput from '@/components/common/textarea-input';
 import Button from '@/components/common/button';
-import SelectInput from '@/components/common/select-input';
 import { useRequestReply } from '@/hooks/request/mutation/use-request-reply';
 import { toast } from 'react-toastify';
 import { getErrorMessage } from '@/utils/http-client';
+import Select from 'react-select';
 
 type Props = {
   closeDialog: () => void;
@@ -114,12 +114,12 @@ const RequestReplyFormDialog = ({ request, closeDialog }: Props) => {
                       </div>
                       <div className="w-full">
                         <label className="block text-sm mb-6">
-                          <span className="font-bold text-gray-700">Request status:</span>
+                          <div className="font-bold text-gray-700 mb-1">Request status:</div>
                           <Controller
                             name="status"
                             control={formMethods.control}
                             render={({ field }) => (
-                              <SelectInput className="w-full" options={requestStatusOptions} {...field} />
+                              <Select className="w-full" options={requestStatusOptions} {...field} />
                             )}
                           />
                         </label>

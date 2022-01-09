@@ -1,6 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form';
+import Select from 'react-select';
 
-import SelectInput from '@/components/common/select-input';
 import FormInput from '@/components/common/form-input';
 import Button from '@/components/common/button';
 import { SelectOption } from '@/types/common';
@@ -22,7 +22,7 @@ const UserForm = ({ isSubmitting, isEditMode = false, roleOptions }: Props) => {
           <Controller
             name="role"
             control={control}
-            render={({ field }) => <SelectInput options={roleOptions} {...field} />}
+            render={({ field }) => <Select options={roleOptions} {...field} className="w-44" />}
           />
         </label>
       </div>
