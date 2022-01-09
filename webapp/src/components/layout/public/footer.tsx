@@ -8,8 +8,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-white">
-      <div className="mx-auto flex flex-wrap justify-between p-5 flex-col md:flex-row text-gray-800 text-sm h-16">
-        <div>© Copyright {year} Tech Career Growth.</div>
+      <div className="mx-auto flex flex-wrap text-gray-800 text-sm p-5 sm:justify-between sm:flex-row sm:h-16 xs:flex-col xs:items-center">
+        <div className="xs:pb-5">© Copyright {year} Tech Career Growth.</div>
         <div className="w-40 flex flex-wrap items-center justify-between">
           <Link href="https://github.com/Gear61/Software-Project-Ideas">
             <a className="block w-1/3 text-right" target="_blank" rel="noreferrer nopener" aria-label="Software Ideas">

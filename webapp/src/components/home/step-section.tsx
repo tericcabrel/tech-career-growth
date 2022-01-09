@@ -19,7 +19,7 @@ const StepSection = () => {
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto pb-10 md:pb-12 items-center">
-        <div className="w-full max-w-md mx-auto md:max-w-none md:mx-0 md:w-6/12 flex-shrink-0 relative">
+        <div className="w-full max-w-md mx-auto md:max-w-none md:mx-0 md:w-6/12 flex-shrink-0 relative xs:hidden">
           <Image
             src="/assets/step-illustration.svg"
             className="border rounded shadow"
