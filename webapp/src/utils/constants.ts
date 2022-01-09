@@ -21,7 +21,7 @@ export const RESOURCE_CREATED_MESSAGE = 'The resource created successfully.';
 export const RESOURCE_DELETED_MESSAGE = 'The resource deleted successfully.';
 export const RESOURCE_UPDATED_MESSAGE = 'The resource updated successfully.';
 
-export const CATEGORY_CHOICE_NOT_SELECTED = 'Please select a category to search into.';
+export const CATEGORY_CHOICE_NOT_SELECTED = 'Please select a subcategory to search into.';
 
 export const REQUEST_CREATED_MESSAGE = 'The request created successfully.';
 export const REQUEST_DELETED_MESSAGE = 'The request deleted successfully.';

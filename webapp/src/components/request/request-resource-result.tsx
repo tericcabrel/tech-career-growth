@@ -17,7 +17,7 @@ const RequestResourceResult = ({ data }: Props) => {
   return (
     <div className="mt-6 mb-12">
       <h1 className="text-2xl font-bold">Here is what we got for you:</h1>
-      <div className="space-y-2">
+      <div className="space-y-2 mt-4">
         {data.map((item) => (
           <div key={item.id} className="shadow px-4 py-2 rounded">
             <Link href={item.link}>
