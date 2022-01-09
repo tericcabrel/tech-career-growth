@@ -9,10 +9,11 @@ const Hero = () => {
           Find the right resource to <span className="text-green-500">grow your career in tech</span>
         </h1>
         <p className="my-5 lg:my-8 text-base xl:text-lg">
-          This database only holds official resources from Tech Career Growth Community (TCGC), a 100% free online
-          learning community.
+          This database only holds official resources from Tech Career Growth (TCG), a 100% free online learning
+          community.
           <br />
-          TCGC is run by Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who have 15+ years of experience
+          <br />
+          TCG is run by Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who have 15+ years of experience
           combined, spending many of those years working at top tech companies like Pinterest, Facebook, and Robinhood.
         </p>
         <div className="flex justify-center relative text-center mx-auto">

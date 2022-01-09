@@ -17,7 +17,7 @@ const About = () => {
           Hello! We are Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who are looking to give back. Alex is a
           currently an Android engineer at Robinhood and an ex-Facebook tech lead. He has also built apps for fun that
           have gotten over 2 million installs. Rahul is a tech lead at Facebook who was previously at Pinterest. Rahul
-          also rims a YouTube channel about software engineering that has 15,000, subscribers.
+          also rims a YouTube channel about software engineering that has 25,000, subscribers.
         </p>
         <p className="text-justify mb-8">
           We have created this tightly-knit, open community to help everyone accelerate their career in tech, no matter
@@ -133,7 +133,7 @@ const About = () => {
                   </p>
                   <p className="text-md text-gray-500 dark:text-gray-400 max-w-xs py-4 font-light">
                     Stanford lecturer, and YouTuber with a passion for tech career growth. His YouTube channel has more
-                    than 15,000 subscribers.
+                    than 25,000 subscribers.
                   </p>
 
                   <div className="flex justify-center">
