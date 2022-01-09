@@ -11,7 +11,7 @@ const Header = () => {
             <div className="h-10 w-10 flex justify-center items-center">
               <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
             </div>
-            <span className="ml-3 text-xl">Tech Career Growth Navigator</span>
+            <span className="ml-3 text-xl">Tech Career Growth</span>
           </a>
         </Link>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
@@ -31,7 +31,7 @@ const Header = () => {
             className="inline-flex items-center bg-green-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-green-400 rounded"
             target="_blank"
           >
-            Join the community
+            Join the slack
             <ArrowLeftIcon />
           </a>
         </Link>
