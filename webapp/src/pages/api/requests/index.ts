@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma from '@/lib/prisma';
 import { RequestListParams, RequestListResponseData } from '@/types/common';
 import { PAGE_LIMIT } from '@/utils/constants';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<RequestListResponseData>) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<RequestListResponseData>) => {
   const { page, status } = req.query as unknown as RequestListParams;
 
   const totalItems = await prisma.request.count();
@@ -35,4 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       totalPages,
     },
   });
-}
+};
+
+export default withSentry(handler);

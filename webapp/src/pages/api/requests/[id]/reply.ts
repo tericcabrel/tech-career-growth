@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from '@sentry/nextjs';
 import prisma from '@/lib/prisma';
 import { CommonResponseData, RequestReplyInput } from '@/types/common';
 import { METHOD_NOT_ALLOWED_MESSAGE, REQUEST_UPDATED_MESSAGE } from '@/utils/constants';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<CommonResponseData>) {
+const handler = async (req: NextApiRequest, res: NextApiResponse<CommonResponseData>) => {
   if (req.method === 'PUT') {
     const id = req.query.id as string;
     const input = req.body as RequestReplyInput;
@@ -32,4 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   }
 
   return res.status(405).json({ message: METHOD_NOT_ALLOWED_MESSAGE });
-}
+};
+
+export default withSentry(handler);
