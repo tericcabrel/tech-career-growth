@@ -15,13 +15,13 @@ const Header = () => {
 
   return (
     <header className="text-gray-600 body-font">
-      <div className="mx-auto flex sm:py-5 xs:py-2 xs:px-2 items-center xs:justify-between xs:items-center">
+      <div className="mx-auto flex sm:py-5 sm:px-4 xs:py-2 xs:px-2 items-center xs:justify-between xs:items-center">
         <div>
           <Link href="/">
             <a className="flex items-center title-font font-medium text-gray-900 sm:mb-4 md:mb-0">
               <Image src="/assets/logo.jpg" width={36} height={36} alt="App Logo" />
-              <span className="ml-3 text-xl xs:hidden">Tech Career Growth</span>
-              <span className="ml-3 text-xl sm:hidden">TCG</span>
+              <span className="ml-3 text-xl xs:hidden sm:hidden lg:block">Tech Career Growth</span>
+              <span className="ml-3 text-xl lg:hidden">TCG</span>
             </a>
           </Link>
         </div>

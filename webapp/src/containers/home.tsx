@@ -5,7 +5,7 @@ import Hero from '@/components/home/hero';
 
 const Home = () => {
   return (
-    <div>
+    <div className="xs:px-2">
       <Hero />
       <StepSection />
       <CallToAction />
