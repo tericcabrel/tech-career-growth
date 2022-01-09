@@ -67,7 +67,7 @@ const RequestResource = ({ categories }: Props) => {
   return (
     <>
       <div className="py-2">
-        <div className="w-2/3 p-6 mx-auto">
+        <div className="w-2/3 p-6 mx-auto xs:w-full">
           <h1 className="text-4xl font-bold">Find a resource</h1>
           <div className="mt-4 text-xl">
             Tell us what kind of resources you currently need in your career growth journey and we&apos;ll provide you
@@ -90,7 +90,7 @@ const RequestResource = ({ categories }: Props) => {
           <div className="flex justify-end mt-8 space-x-10">
             <Button
               text="I didn't find a resource"
-              className="bg-gray-500 text-white w-56 hover:bg-gray-600 justify-center"
+              className="bg-gray-500 text-white w-56 hover:bg-gray-600 justify-center xs:w-full xs:mt-6"
               onClick={() => openDialog()}
             />
           </div>
