@@ -88,7 +88,7 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-1/3">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-1/2 xl:w-1/3 xs:w-full">
               <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(handleSubmitRequest)}>
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -130,7 +130,7 @@ const RequestFormDialog = ({ categoryOptions, closeDialog }: Props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gray-50 px-4 py-3 justify-between sm:px-6 sm:flex sm:flex-row-reverse">
+                  <div className="bg-gray-50 px-4 py-3 flex justify-between sm:px-6">
                     <Button
                       bgColor="primary"
                       className="sm:ml-3 sm:w-auto sm:text-sm"
