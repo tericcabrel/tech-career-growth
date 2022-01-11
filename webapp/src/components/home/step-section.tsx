@@ -3,7 +3,7 @@ import Image from 'next/image';
 const steps = [
   {
     heading: 'Browse',
-    description: 'Browse the resources, apply filter to find the most accurate results.',
+    description: 'Browse the resources, using the filter to find the results that work for you.',
   },
   {
     heading: 'Request',

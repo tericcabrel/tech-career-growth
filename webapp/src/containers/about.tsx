@@ -14,10 +14,12 @@ const About = () => {
         <h1 className="text-4xl font-bold">About Us</h1>
 
         <p className="text-justify my-8">
-          Hello! We are Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who are looking to give back. Alex is a
-          currently an Android engineer at Robinhood and an ex-Facebook tech lead. He has also built apps for fun that
-          have gotten over 2 million installs. Rahul is a tech lead at Facebook who was previously at Pinterest. Rahul
-          also rims a YouTube channel about software engineering that has 25,000, subscribers.
+          Hello! We are Alex Chiou and Rahul Pandey, 2 Silicon Valley tech leads who are looking to give back and are
+          now working full-time teaching and growing other people in tech. Alex was a tech lead at Robinhood and
+          Facebook, working at other multi-billion dollar companies like Course Hero and PayPal before that. He has also
+          built apps for fun that have gotten over 2.5 million installs. Rahul was a tech lead at Facebook and was
+          previously at Pinterest. Rahul also runs a YouTube channel about software engineering that has 27,000+
+          subscribers.
         </p>
         <p className="text-justify mb-8">
           We have created this tightly-knit, open community to help everyone accelerate their career in tech, no matter
