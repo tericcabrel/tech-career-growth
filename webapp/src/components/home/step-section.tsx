@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const steps = [
   {
@@ -27,8 +28,13 @@ const StepSection = () => {
             height={365}
             alt="Step picture"
           />
+          <Link href="/resources">
+            <a className="py-4 block w-72 mt-4 ml-20 px-6 bg-green-600 hover:bg-green-700 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+              Browse resources
+            </a>
+          </Link>
         </div>
-        <div className={'md:w-6/12 mt-16 md:mt-0 md:ml-12 lg:ml-16 md:order-last'}>
+        <div className="md:w-6/12 mt-16 md:mt-0 md:ml-12 lg:ml-16 md:order-last xs:mx-4">
           <div className="lg:py-8 text-center md:text-left">
             <h2 className="text-4xl tracking-wide text-center mt-4 text-left font-black text-center md:text-left leading-tight">
               How does this website work?
@@ -46,6 +52,11 @@ const StepSection = () => {
                 </li>
               ))}
             </ul>
+            <Link href="/resources">
+              <a className="py-4 block mt-8 px-6 bg-green-600 hover:bg-green-700 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg sm:hidden">
+                Browse resources
+              </a>
+            </Link>
           </div>
         </div>
       </div>
