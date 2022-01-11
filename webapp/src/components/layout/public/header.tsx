@@ -43,7 +43,7 @@ const Header = () => {
               className="inline-flex items-center bg-green-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-green-400 rounded"
               target="_blank"
             >
-              Join the slack
+              Join the community on Slack
               <ArrowLeftIcon />
             </a>
           </Link>
@@ -81,7 +81,7 @@ const Header = () => {
                 className="text-gray-800 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium"
                 target="_blank"
               >
-                Join the slack
+                Join the community on Slack
               </a>
             </Link>
           </div>
