@@ -1,19 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { withSentry } from '@sentry/nextjs';
-import prisma from '@/lib/prisma';
 import { ResourcesResponseData } from '@/types/common';
+import { Resource } from '@/types/model';
+import prisma from '@/lib/prisma';
+import CacheClient from '@/lib/caching';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<ResourcesResponseData>) => {
-  const search = req.query.search as string;
-
-  if (!search) {
-    return res.status(200).json({ data: [] });
-  }
-
-  const result = await prisma.resource.findMany({
+const findResourcesFromDb = async (categoryId: string): Promise<Resource[]> => {
+  return prisma.resource.findMany({
     where: {
       category: {
-        id: search,
+        id: categoryId,
       },
     },
     include: {
@@ -25,6 +21,38 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ResourcesRespon
       },
     },
   });
+};
+
+const findResources = async (categoryId: string) => {
+  try {
+    const cacheClient = new CacheClient();
+
+    const cachedData = await cacheClient.findData<Resource[]>(categoryId);
+
+    console.log(cachedData);
+
+    if (!cachedData) {
+      const result = await findResourcesFromDb(categoryId);
+
+      await cacheClient.cacheData(categoryId, result);
+    }
+
+    return cachedData;
+  } catch (err) {
+    return await findResourcesFromDb(categoryId);
+  }
+};
+
+const handler = async (req: NextApiRequest, res: NextApiResponse<ResourcesResponseData>) => {
+  const search = req.query.search as string;
+
+  if (!search) {
+    return res.status(200).json({ data: [] });
+  }
+
+  console.log('Search => ', search);
+
+  const result = await findResources(search);
 
   return res.status(200).json({ data: result });
 };
