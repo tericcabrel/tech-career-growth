@@ -41,10 +41,7 @@ class CacheClient {
     const dataAsString = JSON.stringify(data);
 
     await this.httpClient
-      .post<T>(
-        '',
-        `["SET", "${this.cacheKey(key)}", "${dataAsString.replaceAll('"', '"')}", "EX", ${CACHE_EXPIRATION_TIME}]`,
-      )
+      .post<T>(`set/${this.cacheKey(key)}?EX=${CACHE_EXPIRATION_TIME}`, dataAsString)
       .catch((error) => {
         console.log(error);
 
