@@ -26,10 +26,7 @@ const findResourcesFromDb = async (categoryId: string): Promise<Resource[]> => {
 const findResources = async (categoryId: string) => {
   try {
     const cacheClient = new CacheClient();
-
-    const cachedData = await cacheClient.findData<Resource[]>(categoryId);
-
-    console.log(cachedData);
+    const cachedData = await cacheClient.findData<string>(categoryId);
 
     if (!cachedData) {
       const result = await findResourcesFromDb(categoryId);
@@ -37,9 +34,9 @@ const findResources = async (categoryId: string) => {
       await cacheClient.cacheData(categoryId, result);
     }
 
-    return cachedData;
+    return JSON.parse(<string>cachedData) as Resource[];
   } catch (err) {
-    return await findResourcesFromDb(categoryId);
+    return findResourcesFromDb(categoryId);
   }
 };
 
@@ -49,8 +46,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ResourcesRespon
   if (!search) {
     return res.status(200).json({ data: [] });
   }
-
-  console.log('Search => ', search);
 
   const result = await findResources(search);
 
