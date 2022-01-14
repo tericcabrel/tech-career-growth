@@ -36,6 +36,11 @@
     "auth": {},
     "db": {},
     "logs": {},
-    "stats": {}
+    "stats": {},
+    "caching": {},
+    "ui": {},
+    "dashboard": {},
+    "resources": {},
+    "notification": {}
   }
 }
