@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { logToSentry } from '@/lib/sentry';
 
 const APP_ENV = process.env.NODE_ENV;
 const API_BASE_URL = process.env.REDIS_API_URL;
@@ -31,12 +32,13 @@ class CacheClient {
   }
 
   async findData<T>(key: string): Promise<T | null> {
-    const response = await this.httpClient.get<{ result: T | null }>(`/get/${this.cacheKey(key)}`).catch((error) => {
-      // TODO capture exception with sentry
-      console.log(error.message);
+    const response = await this.httpClient
+      .get<{ result: T | null }>(`/get/${this.cacheKey(key)}`)
+      .catch(async (error) => {
+        await logToSentry(error);
 
-      return { data: { result: null } };
-    });
+        return { data: { result: null } };
+      });
 
     return response.data.result;
   }
@@ -46,8 +48,8 @@ class CacheClient {
 
     await this.httpClient
       .post<T>(`set/${this.cacheKey(key)}?EX=${CACHE_EXPIRATION_TIME}`, dataAsString)
-      .catch((error) => {
-        console.log(error);
+      .catch(async (error) => {
+        await logToSentry(error);
 
         throw new Error('Fail to cache the data!');
       });
