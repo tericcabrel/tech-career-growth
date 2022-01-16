@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import LoadAnalytic from '@/components/seo/load-analytic';
 
 class AppDocument extends Document {
   render() {
@@ -10,6 +11,7 @@ class AppDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="/favicon.ico" />
+          <LoadAnalytic />
         </Head>
         <body>
           <Main />
