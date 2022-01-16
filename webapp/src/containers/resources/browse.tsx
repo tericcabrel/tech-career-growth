@@ -23,12 +23,10 @@ const RequestResource = ({ categories }: Props) => {
   const [search, setSearch] = useState<string | null>(null);
   const [searchResult, setSearchResult] = useState<Resource[] | null>(null);
 
-  const { refetch } = useLookupResources(
+  const { refetch, isFetching } = useLookupResources(
     { search },
     {
       enabled: Boolean(search),
-      keepPreviousData: false,
-      cacheTime: 0,
       onSuccess: (data) => {
         setSearchResult(data);
       },
@@ -78,12 +76,19 @@ const RequestResource = ({ categories }: Props) => {
               {error}
             </div>
           )}
+
           <h2 className="font-bold mt-6 mb-2">What do you need help with?</h2>
 
           <CategoryChoiceSelector
             choices={buildCategoryTree(categoryChoices)}
             onChoiceChange={handleCategoryChoiceChange}
           />
+
+          {isFetching && (
+            <div className="py-3 w-full my-10 flex justify-center">
+              <div className="loader ease-linear rounded-full border-4 border-t-4 border-green-500 h-12 w-12 mb-4" />
+            </div>
+          )}
 
           {Boolean(search) && searchResult && <RequestResourceResult data={searchResult} />}
 

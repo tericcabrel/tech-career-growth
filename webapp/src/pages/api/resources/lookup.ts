@@ -32,6 +32,8 @@ const findResources = async (categoryId: string) => {
       const result = await findResourcesFromDb(categoryId);
 
       await cacheClient.cacheData(categoryId, result);
+
+      return result;
     }
 
     return JSON.parse(<string>cachedData) as Resource[];
