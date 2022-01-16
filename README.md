@@ -5,6 +5,7 @@ A web application that allows developers to find useful resources for their grow
   <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=1d4ed8&labelColor=fff" alt="PRs welcome!" />
   <img src="https://img.shields.io/github/license/tericcabrel/tech-career-growth-navigator?label=License&message=License&color=1d4ed8&labelColor=fff" alt="License" />
 </div>
+<br>
 
 [![Website](https://techcareergrowth.co/assets/og.png)](https://techcareergrowth.co)
 
