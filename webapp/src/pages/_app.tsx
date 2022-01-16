@@ -12,7 +12,7 @@ import { pageView } from '@/utils/gtag';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/global.css';
 
-const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } });
+const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0, refetchOnWindowFocus: false } } });
 
 const CustomApp = ({ Component, pageProps: { session, ...pageProps } }: ExtendedAppProps) => {
   useEffect(() => {
