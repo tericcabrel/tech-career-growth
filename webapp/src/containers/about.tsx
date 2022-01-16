@@ -10,7 +10,7 @@ import GoogleplayIcon from '@/components/icons/googleplay';
 const About = () => {
   return (
     <div className="py-2">
-      <div className="xl:w-2/3 lg:w-3/4 sm:w-11/12  p-6 mx-auto xs:w-full">
+      <div className="xl:w-2/3 lg:w-3/4 sm:w-11/12 p-6 mx-auto xs:w-full">
         <h1 className="text-4xl font-bold">About Us</h1>
 
         <p className="text-justify my-8">
@@ -25,7 +25,7 @@ const About = () => {
           We have created this tightly-knit, open community to help everyone accelerate their career in tech, no matter
           what their background is. The main thing we do is host free open, honest, and interactive sessions regularly
           to give you the career growth advice that you can&apos;t easily find online. We want to take the massive
-          amount of resources and !earnings from Silicon Valley and make them free and readily accessible for everybody.
+          amount of resources and learnings from Silicon Valley and make them free and readily accessible for everybody.
           Our mission is to lower barriers in tech for all.
         </p>
         <div className="text-justify mb-8">
@@ -139,7 +139,7 @@ const About = () => {
                   </p>
 
                   <div className="flex justify-center">
-                    <div className="flex gap-4">
+                    <div className="flex">
                       <Link href="https://www.linkedin.com/in/rpandey1234/">
                         <a target="_blank">
                           <LinkedinIcon width={20} height={20} />

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 
 const Hero = () => {
@@ -8,7 +7,7 @@ const Hero = () => {
         <h1 className="font-bold xs:text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight">
           Find the right resource to <span className="text-green-500">grow your career in tech</span>
         </h1>
-        <p className="my-5 lg:my-8 text-base xl:text-lg xs:my-8">
+        <p className="my-5 lg:my-8 xl:text-lg xs:my-8">
           This database only holds official resources from Tech Career Growth (TCG), a 100% free online learning
           community.
           <br />
