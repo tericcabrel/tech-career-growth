@@ -19,7 +19,8 @@ const GlobalSeo = () => {
       additionalMetaTags={[
         { content: 'Alex Chiou and Rahul Pandey', property: 'author' },
         {
-          content: 'tech career growth, improve resume, build side projects, productivity, community',
+          content:
+            'tech career growth, improve resume, build side projects, productivity, community, job search, tech salary, compensation',
           property: 'keywords',
         },
       ]}
@@ -29,7 +30,7 @@ const GlobalSeo = () => {
           {
             alt: 'Homepage image alt',
             height: 575,
-            url: `${baseUrl}/assets/img/og.png`,
+            url: `${baseUrl}/assets/og.png`,
             width: 1245,
           },
         ],
