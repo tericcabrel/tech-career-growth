@@ -124,3 +124,6 @@ dist
 .vercel
 
 notes.txt
+
+# Sentry
+.sentryclirc

@@ -1,10 +1,6 @@
 import classNames from 'classnames';
 import { Category } from '@/types/model';
 import { useCategoryTree } from '@/components/category/category-context';
-import PlusIcon from '@/components/icons/plus';
-import PencilIcon from '@/components/icons/pencil';
-import CrossIcon from '@/components/icons/cross';
-import useHover from '@/hooks/use-hover';
 import CategoryTreeAction from '@/components/category/category-tree-action';
 
 type Props = {
