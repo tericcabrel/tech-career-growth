@@ -3,12 +3,18 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'webapp/**'
+      - 'src/**'
+      - 'prisma/**'
+      - '__tests__/**'
+      - '__mocks__/**'
       - '.github/workflows/webapp.yml'
   pull_request:
     branches: [ main ]
     paths:
-      - 'webapp/**'
+      - 'src/**'
+      - 'prisma/**'
+      - '__tests__/**'
+      - '__mocks__/**'
       - '.github/workflows/webapp.yml'
 
 jobs:
@@ -29,11 +35,11 @@ jobs:
       - name: Install web application dependencies
         uses: bahmutov/npm-install@v1
         with:
-          working-directory: webapp
+          working-directory: .
 
       - run: yarn type:check
       - run: yarn lint
 
       - name: Run unit tests
-        working-directory: webapp
+        working-directory: .
         run: yarn test
