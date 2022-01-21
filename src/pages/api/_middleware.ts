@@ -19,8 +19,15 @@ const urlWithoutQueryStrings = (url: string) => {
   return urlArray.length > 0 ? urlArray[0] : '/';
 };
 
+const extractPathFromURL = (url: string) => {
+  const urlArray = url.split('api');
+  const path = `/api${urlArray[urlArray.length - 1]}`;
+
+  return urlWithoutQueryStrings(path);
+};
+
 export async function middleware(req: NextRequest) {
-  const url = urlWithoutQueryStrings(req.url);
+  const url = extractPathFromURL(req.url);
 
   if (allowedRoutes.includes(url)) {
     return NextResponse.next();
