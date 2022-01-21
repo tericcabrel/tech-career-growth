@@ -1,7 +1,6 @@
 import { getToken } from 'next-auth/jwt';
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest, NextResponse } from 'next/server';
-import { first } from 'lodash';
 import { isProduction } from '@/utils/common';
 
 const allowedRoutes = [
@@ -15,13 +14,15 @@ const allowedRoutes = [
 ];
 
 const urlWithoutQueryStrings = (url: string) => {
-  return first(url.split('?')) || '/';
+  const urlArray = url.split('?');
+
+  return urlArray.length > 0 ? urlArray[0] : '/';
 };
 
 export async function middleware(req: NextRequest) {
   const url = urlWithoutQueryStrings(req.url);
 
-  /*if (allowedRoutes.includes(url)) {
+  if (allowedRoutes.includes(url)) {
     return NextResponse.next();
   }
 
@@ -29,15 +30,13 @@ export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET, secureCookie: isProduction() });
 
   if (!session) {
-    return new Response(JSON.stringify({ message: 'Not authenticated!' }), {
+    return new Response(JSON.stringify({ message: 'Not authenticated!', url: url }), {
       status: 401,
       headers: {
         'Content-Type': 'application/json',
       },
     });
-  }*/
-
-  //return NextResponse.next();
+  }
 
   return NextResponse.next();
 }

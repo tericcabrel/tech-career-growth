@@ -127,3 +127,7 @@ notes.txt
 
 # Sentry
 .sentryclirc
+
+# sitemap
+robots.txt
+sitemap.xml
