@@ -21,7 +21,7 @@ const urlWithoutQueryStrings = (url: string) => {
 export async function middleware(req: NextRequest) {
   const url = urlWithoutQueryStrings(req.url);
 
-  if (allowedRoutes.includes(url)) {
+  /*if (allowedRoutes.includes(url)) {
     return NextResponse.next();
   }
 
@@ -35,7 +35,9 @@ export async function middleware(req: NextRequest) {
         'Content-Type': 'application/json',
       },
     });
-  }
+  }*/
+
+  //return NextResponse.next();
 
   return NextResponse.next();
 }
