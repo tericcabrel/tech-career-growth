@@ -14,7 +14,7 @@ const fetchContentFromGitHub = async (url: string): Promise<string> => {
 
 export async function getStaticProps() {
   const markdownText = await fetchContentFromGitHub(RESOURCE_LINKS_URL);
-  const { data, content } = matter(markdownText);
+  const { content } = matter(markdownText);
 
   const htmlContent: string = await markdownToHtml(content || '');
 

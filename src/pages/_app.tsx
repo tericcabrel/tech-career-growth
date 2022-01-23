@@ -9,7 +9,6 @@ import AuthGuard from '@/components/auth/auth-guard';
 import { GlobalSeo } from '@/components/seo/seo';
 import { pageView } from '@/utils/gtag';
 
-import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/global.css';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0, refetchOnWindowFocus: false } } });

@@ -1,5 +1,7 @@
 @import "tailwind.css";
 @import "loader.css";
+@import "~react-toastify/dist/ReactToastify.min.css";
+
 
 html,
 body {

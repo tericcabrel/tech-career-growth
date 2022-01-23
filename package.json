@@ -76,6 +76,7 @@
     "@commitlint/cli": "15.0.0",
     "@commitlint/config-conventional": "15.0.0",
     "@tailwindcss/forms": "0.4.0",
+    "@tailwindcss/typography": "^0.4.1",
     "@testing-library/dom": "8.11.1",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",

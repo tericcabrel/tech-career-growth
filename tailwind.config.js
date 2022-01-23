@@ -22,5 +22,5 @@ module.exports = {
       ...defaultTheme.screens,
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };
