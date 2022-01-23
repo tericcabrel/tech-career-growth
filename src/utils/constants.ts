@@ -97,3 +97,6 @@ export const USER_ROLE_OPTION: SelectOption[] = [
   { label: 'User', value: 'user' },
   { label: 'Admin', value: 'admin' },
 ];
+
+export const RESOURCE_LINKS_URL =
+  'https://raw.githubusercontent.com/Gear61/Tech-Career-Growth-Learning-Resources-And-Roadmaps/main/README.md';
