@@ -14,12 +14,12 @@ const fetchContentFromGitHub = async (url: string): Promise<string> => {
 
 export async function getStaticProps() {
   const markdownText = await fetchContentFromGitHub(RESOURCE_LINKS_URL);
-  const { content } = matter(markdownText);
+  /*const { content } = matter(markdownText);
 
-  const htmlContent: string = await markdownToHtml(content || '');
+  const htmlContent: string = await markdownToHtml(content || '');*/
 
   return {
-    props: { content: htmlContent },
+    props: { content: markdownText },
     revalidate: 60 * 60 * 24, // revalidate daily
   };
 }
