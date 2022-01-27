@@ -17,3 +17,26 @@ body {
 a {
   cursor: pointer;
 }
+
+h1:first-child {
+  display: flex;
+  align-items: center;
+}
+
+h1:first-child img {
+  margin-right: 10px;
+}
+
+#resource-links h1, #resource-links h2 {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+#resource-links h3 a, #resource-links h1, #resource-links a[href="#-android"] {
+  display: flex;
+  align-items: center;
+}
+
+#resource-links h3 a img, #resource-links h1 img, #resource-links a[href="#-android"] img {
+  margin-right: 10px;
+}
