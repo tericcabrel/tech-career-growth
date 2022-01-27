@@ -18,12 +18,12 @@ a {
   cursor: pointer;
 }
 
-h1:first-child {
+#resource-links h1:first-child {
   display: flex;
   align-items: center;
 }
 
-h1:first-child img {
+#resource-links h1:first-child img {
   margin-right: 10px;
 }
 
