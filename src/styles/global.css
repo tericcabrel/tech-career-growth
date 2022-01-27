@@ -40,3 +40,25 @@ h1:first-child img {
 #resource-links h3 a img, #resource-links h1 img, #resource-links a[href="#-android"] img {
   margin-right: 10px;
 }
+
+#resource-links .toc {
+  position: fixed;
+  width: 300px;
+  border: solid 1px #f1f1f1;
+  right: 250px;
+  top: 100px;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+#resource-links .toc ol, #resource-links .toc ol li {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#resource-links .toc ol li a {
+  font-weight: normal;
+  font-size: 0.9em;
+}
