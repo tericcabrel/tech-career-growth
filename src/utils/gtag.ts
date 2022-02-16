@@ -12,8 +12,6 @@ export const pageView = (url: string) => {
 
   const canLogAnalytic = isProduction() && TRACKABLE_PATH.includes(url);
 
-  console.log(url);
-
   if (!canLogAnalytic) {
     return;
   }
