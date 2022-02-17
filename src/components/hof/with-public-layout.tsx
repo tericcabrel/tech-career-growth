@@ -23,7 +23,7 @@ function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: Props) {
     return (
       <PublicLayout>
         <Head>
-          <title>{title} | Tech Career Growth Navigator</title>
+          <title>{title} | Tech Career Growth</title>
         </Head>
         <div className="min-h-[calc(100vh-144px)]">
           <WrappedComponent {...wrappedComponentProps} />
