@@ -20,7 +20,7 @@ const ResourceLinks = ({ content }: Props) => {
 
   return (
     <div className="py-2">
-      <div className="w-2/3 p-6 mb-6 mx-auto xs:w-full" id="resource-links">
+      <div className="lg:w-2/3 p-6 mb-6 mx-auto lg:mx-0 xl:mx-auto md:w-11/12 xs:w-full" id="resource-links">
         <div className="prose prose:max-w-full prose-h3:flex prose-img:my-0">
           <ReactMarkdown
             rehypePlugins={[

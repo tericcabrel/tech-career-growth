@@ -45,7 +45,6 @@ a {
   position: fixed;
   width: 300px;
   border: solid 1px #f1f1f1;
-  right: 250px;
   top: 100px;
   height: calc(100vh - 200px);
   overflow-y: auto;
@@ -61,4 +60,22 @@ a {
 #resource-links .toc ol li a {
   font-weight: normal;
   font-size: 0.9em;
+}
+
+@media (max-width: 1023px) {
+  #resource-links .toc {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  #resource-links .toc {
+    right: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  #resource-links .toc {
+    right: 95px;
+  }
 }

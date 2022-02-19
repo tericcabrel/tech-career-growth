@@ -6,9 +6,9 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeExternalLinks from 'rehype-external-links';
 import emoji from 'node-emoji';
+import Head from 'next/head';
 
 import withPublicLayout from '@/components/hof/with-public-layout';
-import Head from 'next/head';
 import ChevronUpIcon from '@/components/icons/chevron-up';
 
 type Props = {
@@ -44,7 +44,7 @@ const PostView = ({ content, title }: Props) => {
       </div>
       <div
         onClick={handleScrollUp}
-        className="w-12 h-12 rounded fixed bottom-12 right-1/4 bg-green-500 text-white cursor-pointer flex justify-center items-center"
+        className="w-12 h-12 rounded fixed bottom-12 xs:right-6 sm:right-12 xl:right-1/4 bg-green-500 text-white cursor-pointer flex justify-center items-center"
       >
         <ChevronUpIcon />
       </div>
@@ -52,4 +52,4 @@ const PostView = ({ content, title }: Props) => {
   );
 };
 
-export default withPublicLayout(PostView, { title: 'View a thread' });
+export default withPublicLayout(PostView, { title: 'View the post' });
