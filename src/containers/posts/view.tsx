@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -8,6 +9,7 @@ import emoji from 'node-emoji';
 
 import withPublicLayout from '@/components/hof/with-public-layout';
 import Head from 'next/head';
+import ChevronUpIcon from '@/components/icons/chevron-up';
 
 type Props = {
   content: string;
@@ -15,12 +17,18 @@ type Props = {
 };
 
 const PostView = ({ content, title }: Props) => {
+  const scrollUpRef = useRef<any>();
+
   const onEmojiMissing = (name: string) => {
     return name;
   };
 
+  const handleScrollUp = () => {
+    scrollUpRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="py-2">
+    <div className="py-2" ref={scrollUpRef}>
       <Head>
         <title>{title} | Tech Career Growth</title>
       </Head>
@@ -33,6 +41,12 @@ const PostView = ({ content, title }: Props) => {
             {emoji.emojify(content, onEmojiMissing)}
           </ReactMarkdown>
         </div>
+      </div>
+      <div
+        onClick={handleScrollUp}
+        className="w-12 h-12 rounded fixed bottom-12 right-1/4 bg-green-500 text-white cursor-pointer flex justify-center items-center"
+      >
+        <ChevronUpIcon />
       </div>
     </div>
   );
