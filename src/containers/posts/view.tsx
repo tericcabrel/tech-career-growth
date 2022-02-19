@@ -14,7 +14,7 @@ type Props = {
   title: string;
 };
 
-const ThreadView = ({ content, title }: Props) => {
+const PostView = ({ content, title }: Props) => {
   const onEmojiMissing = (name: string) => {
     return name;
   };
@@ -38,4 +38,4 @@ const ThreadView = ({ content, title }: Props) => {
   );
 };
 
-export default withPublicLayout(ThreadView, { title: 'View a thread' });
+export default withPublicLayout(PostView, { title: 'View a thread' });
