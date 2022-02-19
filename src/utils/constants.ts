@@ -100,3 +100,5 @@ export const USER_ROLE_OPTION: SelectOption[] = [
 
 export const RESOURCE_LINKS_URL =
   'https://raw.githubusercontent.com/Gear61/Tech-Career-Growth-Learning-Resources-And-Roadmaps/main/README.md';
+
+export const MARKDOWN_CONTENT_FALLBACK = '## No content for the moment.';

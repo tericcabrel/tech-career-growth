@@ -26,4 +26,6 @@ export const padZero = (value: number) => (value < 10 ? `0${value}` : value.toSt
 
 export const isProduction = () => process.env.NODE_ENV === 'production';
 
-// export const isDevelopment = () => process.env.NODE_ENV === 'development';
+export const isNotProduction = () => !isProduction();
+
+export const capitalize = (str: string): string => `${str.toLowerCase().charAt(0).toUpperCase()}${str.slice(1)}`;

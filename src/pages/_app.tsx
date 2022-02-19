@@ -10,6 +10,7 @@ import { GlobalSeo } from '@/components/seo/seo';
 import { pageView } from '@/utils/gtag';
 
 import '@/styles/global.css';
+import { isNotProduction } from '@/utils/common';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0, refetchOnWindowFocus: false } } });
 
@@ -42,7 +43,7 @@ const CustomApp = ({ Component, pageProps: { session, ...pageProps } }: Extended
             <Component {...pageProps} />
           )}
         </MainLayout>
-        {process.env.NODE_ENV !== 'production' && <ReactQueryDevtools initialIsOpen />}
+        {isNotProduction() && <ReactQueryDevtools initialIsOpen />}
       </QueryClientProvider>
     </SessionProvider>
   );
