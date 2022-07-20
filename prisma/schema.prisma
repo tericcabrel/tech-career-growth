@@ -3,18 +3,15 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider             = "mysql"
+  provider             = "mongodb"
   url                  = env("DATABASE_URL")
-  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-  referentialIntegrity = "prisma"
 }
 
 model Role {
-  id          String   @id @default(cuid())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String   @unique @db.VarChar(50)
   level       Int      @db.Int
   description String?  @db.VarChar(200)
@@ -26,7 +23,7 @@ model Role {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
   userId             String  @map("user_id")
   type               String
   provider           String
@@ -49,7 +46,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
   expires      DateTime
@@ -59,7 +56,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
   password      String?   @db.VarChar(100)
@@ -86,7 +83,7 @@ model VerificationToken {
 }
 
 model Category {
-  id            String     @id @default(cuid())
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String     @db.VarChar(50)
   value         String     @unique @db.VarChar(50)
   description   String?    @db.VarChar(255)
@@ -112,17 +109,17 @@ enum ResourceType {
 }
 
 model Resource {
-  id          String       @id @default(cuid())
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
   name        String       @unique @db.VarChar(255)
   type        ResourceType @default(WEBPAGE)
   link        String       @db.VarChar(255)
   description String?      @db.Text
   picture     String?      @db.VarChar(255)
-  categoryId  String       @map("category_id")
+  categoryId  String
   extra       Json?        @db.Json
-  clickCount  Int          @default(0) @map("click_count") @db.Int
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt @map("updated_at")
+  clickCount  Int          @default(0) @db.Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   category    Category     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@map("resources")
@@ -135,14 +132,14 @@ enum RequestStatus {
 }
 
 model Request {
-  id          String        @id @default(cuid())
-  userName    String        @db.VarChar(50) @map("user_name")
-  userEmail   String        @db.VarChar(50) @map("user_email")
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  userName    String        @db.VarChar(50)
+  userEmail   String        @db.VarChar(50)
   status      RequestStatus @default(PENDING)
   description String?       @db.Text
-  categoryId  String?       @map("category_id")
-  createdAt   DateTime      @default(now()) @map("created_at")
-  updatedAt   DateTime      @updatedAt @map("updated_at")
+  categoryId  String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   category    Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   replies     Reply[]
 
@@ -150,11 +147,11 @@ model Request {
 }
 
 model Reply {
-  id        String   @id @default(cuid())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   message   String   @db.Text
-  requestId String   @map("request_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  requestId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
 
   @@map("replies")
