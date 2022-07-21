@@ -2,21 +2,21 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mongodb"
-  url                  = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model Role {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String   @unique @db.VarChar(50)
+  name        String   @unique
   level       Int      @db.Int
-  description String?  @db.VarChar(200)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   User        User[]
 
   @@map("roles")
@@ -24,10 +24,10 @@ model Role {
 
 model Account {
   id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String  @map("user_id")
+  userId             String
   type               String
   provider           String
-  providerAccountId  String  @map("provider_account_id")
+  providerAccountId  String
   refresh_token      String?
   access_token       String?
   expires_at         Int?
@@ -40,15 +40,14 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
+  sessionToken String   @unique
+  userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -59,13 +58,13 @@ model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
-  password      String?   @db.VarChar(100)
-  isEnabled     Boolean   @default(true) @map("is_enabled") @db.TinyInt
-  emailVerified DateTime? @map("email_verified")
+  password      String?
+  isEnabled     Boolean   @default(true)
+  emailVerified DateTime?
   image         String?
-  roleId        String    @map("role_id")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+  roleId        String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   role          Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
   accounts      Account[]
   sessions      Session[]
@@ -74,6 +73,7 @@ model User {
 }
 
 model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
@@ -84,12 +84,12 @@ model VerificationToken {
 
 model Category {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String     @db.VarChar(50)
-  value         String     @unique @db.VarChar(50)
-  description   String?    @db.VarChar(255)
-  parentId      String?    @map("parent_id")
-  createdAt     DateTime   @default(now()) @map("created_at")
-  updatedAt     DateTime   @updatedAt @map("updated_at")
+  name          String
+  value         String     @unique
+  description   String?
+  parentId      String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   parent        Category?  @relation(name: "parent_category", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   subCategories Category[] @relation("parent_category")
   resources     Resource[]
@@ -110,11 +110,11 @@ enum ResourceType {
 
 model Resource {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  name        String       @unique @db.VarChar(255)
+  name        String       @unique
   type        ResourceType @default(WEBPAGE)
-  link        String       @db.VarChar(255)
-  description String?      @db.Text
-  picture     String?      @db.VarChar(255)
+  link        String
+  description String?
+  picture     String?
   categoryId  String
   extra       Json?        @db.Json
   clickCount  Int          @default(0) @db.Int
@@ -133,10 +133,10 @@ enum RequestStatus {
 
 model Request {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  userName    String        @db.VarChar(50)
-  userEmail   String        @db.VarChar(50)
+  userName    String
+  userEmail   String
   status      RequestStatus @default(PENDING)
-  description String?       @db.Text
+  description String?
   categoryId  String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -148,7 +148,7 @@ model Request {
 
 model Reply {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  message   String   @db.Text
+  message   String
   requestId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
