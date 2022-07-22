@@ -5,6 +5,13 @@ import { ResourceType } from '@/types/model';
 
 const prisma = new PrismaClient({ errorFormat: 'pretty' });
 
+const wait = (time: number) =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true);
+    }, time),
+  );
+
 type CreateRoleInput = {
   name: string;
   level: number;
@@ -484,7 +491,7 @@ const createUser = async (input: CreateUserInput) => {
 };
 
 const createCategoryResources = async (categoryId: string, resourcesInput: CreateResourceInput[]) => {
-  const promises = resourcesInput.map(async (input) => {
+  for (const input of resourcesInput) {
     const resource = await prisma.resource.findFirst({ where: { name: input.name } });
 
     if (!resource) {
@@ -495,9 +502,9 @@ const createCategoryResources = async (categoryId: string, resourcesInput: Creat
         },
       });
     }
-  });
 
-  return Promise.all(promises);
+    await wait(200);
+  }
 };
 
 const createCategoryAndRelatedResources = async (input: CategoryInput, parentId: string | null) => {
@@ -513,11 +520,15 @@ const createCategoryAndRelatedResources = async (input: CategoryInput, parentId:
       },
     });
 
+    await wait(200);
+
     await createCategoryResources(parentCategoryCreated.id, input.resources);
 
-    const promises = input.children.map((child) => createCategoryAndRelatedResources(child, parentCategoryCreated.id));
+    for (const subCategory of input.children) {
+      await createCategoryAndRelatedResources(subCategory, parentCategoryCreated.id);
 
-    await Promise.all(promises);
+      await wait(200);
+    }
   }
 };
 
@@ -552,9 +563,13 @@ export const main = async () => {
     password: bcrypt.hashSync('qwerty'),
   });
 
-  const promiseCategories = categories.map((category) => createCategoryAndRelatedResources(category, null));
+  for (const category of categories) {
+    await createCategoryAndRelatedResources(category, null);
+    await wait(200);
+  }
+  /*const promiseCategories = categories.map((category) => createCategoryAndRelatedResources(category, null));
 
-  await Promise.all(promiseCategories);
+  await Promise.all(promiseCategories);*/
 };
 
 main()
