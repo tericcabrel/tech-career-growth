@@ -3,14 +3,12 @@ import { withSentry } from '@sentry/nextjs';
 import { ResourcesResponseData } from '@/types/common';
 import { Resource } from '@/types/model';
 import prisma from '@/lib/prisma';
-import CacheClient from '@/lib/caching';
+// import CacheClient from '@/lib/caching';
 
 const findResourcesFromDb = async (categoryId: string): Promise<Resource[]> => {
   return prisma.resource.findMany({
     where: {
-      category: {
-        id: categoryId,
-      },
+      categoryId,
     },
     include: {
       category: {
@@ -24,8 +22,7 @@ const findResourcesFromDb = async (categoryId: string): Promise<Resource[]> => {
 };
 
 const findResources = async (categoryId: string) => {
-  try {
-    const cacheClient = new CacheClient();
+  /*const cacheClient = new CacheClient();
     const cachedData = await cacheClient.findData<string>(categoryId);
 
     if (!cachedData) {
@@ -36,10 +33,9 @@ const findResources = async (categoryId: string) => {
       return result;
     }
 
-    return JSON.parse(<string>cachedData) as Resource[];
-  } catch (err) {
-    return findResourcesFromDb(categoryId);
-  }
+    return JSON.parse(<string>cachedData) as Resource[];*/
+
+  return findResourcesFromDb(categoryId);
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<ResourcesResponseData>) => {
